@@ -1,24 +1,24 @@
 #chessBoard{
   display: inline-block;
-  border: 2px outset lightGray;
+  border: 1px outset lightGray;
 }
 
-#chessBoard div{
+#chessBoard tr{
   line-height: 1px;
 }
 
-#chessBoard span{
+#chessBoard td{
   display: inline-block;
   outline: 1px solid black;
-  width: 32px;
-  height: 32px;
+  width: 70px;
+  height: 70px;
 }
 
-#chessBoard div:nth-child(odd) span:nth-child(even),
-#chessBoard div:nth-child(even) span:nth-child(odd){
+#chessBoard td:nth-child(odd) tr:nth-child(even),
+#chessBoard td:nth-child(even) tr:nth-child(odd){
   background-color: snow;
 }
-#chessBoard div:nth-child(even) span:nth-child(even),
-#chessBoard div:nth-child(odd) span:nth-child(odd){
+#chessBoard td:nth-child(even) tr:nth-child(even),
+#chessBoard td:nth-child(odd) tr:nth-child(odd){
   background-color: snow;
 }
