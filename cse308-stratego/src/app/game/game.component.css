@@ -14,11 +14,11 @@
   height: 70px;
 }
 
-#chessBoard td:nth-child(odd) tr:nth-child(even),
-#chessBoard td:nth-child(even) tr:nth-child(odd){
-  background-color: snow;
+#chessBoard tr:nth-child(odd) td:nth-child(even),
+#chessBoard tr:nth-child(even) td:nth-child(odd){
+  background-color: mediumpurple;
 }
-#chessBoard td:nth-child(even) tr:nth-child(even),
-#chessBoard td:nth-child(odd) tr:nth-child(odd){
-  background-color: snow;
+#chessBoard tr:nth-child(even) td:nth-child(even),
+#chessBoard tr:nth-child(odd) td:nth-child(odd){
+  background-color: mediumpurple;
 }
