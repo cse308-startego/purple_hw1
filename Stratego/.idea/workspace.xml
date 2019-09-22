@@ -2,11 +2,8 @@
 <project version="4">
   <component name="ChangeListManager">
     <list default="true" id="7172cc4b-986c-4fb4-b481-862409b923a6" name="Default" comment="">
-      <change afterPath="$PROJECT_DIR$/../cse308-stratego/src/app/game/game-models.ts" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/../cse308-stratego/src/app/game/game.component.css" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/../cse308-stratego/src/app/game/game.component.html" beforeDir="false" afterPath="$PROJECT_DIR$/../cse308-stratego/src/app/game/game.component.html" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/../cse308-stratego/src/app/game/game.component.ts" beforeDir="false" afterPath="$PROJECT_DIR$/../cse308-stratego/src/app/game/game.component.ts" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../cse308-stratego/src/app/game/game.component.css" beforeDir="false" afterPath="$PROJECT_DIR$/../cse308-stratego/src/app/game/game.component.css" afterDir="false" />
     </list>
     <option name="EXCLUDED_CONVERTED_TO_IGNORED" value="true" />
     <option name="SHOW_DIALOG" value="false" />
@@ -119,7 +116,7 @@
       <option name="number" value="Default" />
       <option name="presentableId" value="Default" />
       <updated>1568666360982</updated>
-      <workItem from="1568833052235" duration="1242000" />
+      <workItem from="1568833052235" duration="1724000" />
     </task>
     <servers />
   </component>

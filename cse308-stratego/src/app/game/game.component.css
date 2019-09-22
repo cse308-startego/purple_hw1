@@ -9,13 +9,14 @@
 
 #chessBoard span{
   display: inline-block;
+  outline: 1px solid black;
   width: 32px;
   height: 32px;
 }
 
 #chessBoard div:nth-child(odd) span:nth-child(even),
 #chessBoard div:nth-child(even) span:nth-child(odd){
-  background-color: black;
+  background-color: snow;
 }
 #chessBoard div:nth-child(even) span:nth-child(even),
 #chessBoard div:nth-child(odd) span:nth-child(odd){
