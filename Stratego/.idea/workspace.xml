@@ -3,7 +3,7 @@
   <component name="ChangeListManager">
     <list default="true" id="7172cc4b-986c-4fb4-b481-862409b923a6" name="Default" comment="">
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/../cse308-stratego/src/app/game/game.component.css" beforeDir="false" afterPath="$PROJECT_DIR$/../cse308-stratego/src/app/game/game.component.css" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../cse308-stratego/src/app/game/game.component.ts" beforeDir="false" afterPath="$PROJECT_DIR$/../cse308-stratego/src/app/game/game.component.ts" afterDir="false" />
     </list>
     <option name="EXCLUDED_CONVERTED_TO_IGNORED" value="true" />
     <option name="SHOW_DIALOG" value="false" />
