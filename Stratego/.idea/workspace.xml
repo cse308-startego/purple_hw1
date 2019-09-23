@@ -2,7 +2,10 @@
 <project version="4">
   <component name="ChangeListManager">
     <list default="true" id="7172cc4b-986c-4fb4-b481-862409b923a6" name="Default" comment="">
+      <change afterPath="$PROJECT_DIR$/../cse308-stratego/src/assets/red.png" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../cse308-stratego/package-lock.json" beforeDir="false" afterPath="$PROJECT_DIR$/../cse308-stratego/package-lock.json" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../cse308-stratego/src/app/game/game-models.ts" beforeDir="false" afterPath="$PROJECT_DIR$/../cse308-stratego/src/app/game/game-models.ts" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/../cse308-stratego/src/app/game/game.component.css" beforeDir="false" afterPath="$PROJECT_DIR$/../cse308-stratego/src/app/game/game.component.css" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/../cse308-stratego/src/app/game/game.component.html" beforeDir="false" afterPath="$PROJECT_DIR$/../cse308-stratego/src/app/game/game.component.html" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/../cse308-stratego/src/app/game/game.component.ts" beforeDir="false" afterPath="$PROJECT_DIR$/../cse308-stratego/src/app/game/game.component.ts" afterDir="false" />
