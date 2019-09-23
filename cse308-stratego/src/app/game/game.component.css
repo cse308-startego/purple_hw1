@@ -1,24 +1,32 @@
 #chessBoard{
-  display: inline-block;
-  border: 1px outset lightGray;
+  border: 7px outset lightGray;
+  margin: 0 auto;
 }
+
 
 #chessBoard tr{
   line-height: 1px;
+
 }
 
 #chessBoard td{
   display: inline-block;
-  outline: 1px solid black;
-  width: 70px;
-  height: 70px;
+  outline: 2px solid black;
+  width: 60px;
+  height: 60px;
 }
 
 #chessBoard tr:nth-child(odd) td:nth-child(even),
 #chessBoard tr:nth-child(even) td:nth-child(odd){
-  background-color: mediumpurple;
+  background-color: #65C4AE;
 }
+
 #chessBoard tr:nth-child(even) td:nth-child(even),
 #chessBoard tr:nth-child(odd) td:nth-child(odd){
-  background-color: mediumpurple;
+  background-color: #488A7A;
+}
+
+table.center {
+  margin-left:auto;
+  margin-right:auto;
 }
