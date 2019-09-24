@@ -12,7 +12,7 @@ import {GameComponent} from './game/game.component';
   declarations: [
     AppComponent,
     LoginPageComponent,
-    GameComponent
+    GameComponent,
   ],
   imports: [
     BrowserModule,
