@@ -17,14 +17,8 @@ export class GameComponent {
 
 
   ngOnInit() {
-    let gridSize = 10;
-    for (let i = 0; i < gridSize; i++) {
-      this.columns.push(String.fromCharCode(65 + i));
-    }
-    for (let i = 0; i < gridSize; i++) {
-      this.rows.push(i);
-    }
     this.initializeCards();
+    this.setupGameBoard();
 
   }
 
@@ -41,9 +35,10 @@ export class GameComponent {
   initializePlayers(color: string) {
 
     for (let i = 1; i <= 12; i++) {
-      let card: Card = {};
-
+      let card: Card = new Card();
+      console.log(i);
       if (i == 1 || i == 2 || i == 10 || i == 12) {
+        console.log(i, "CHUTIYA ");
         card.color = color;
         card.value = i;
         if (color == "red")
@@ -64,15 +59,14 @@ export class GameComponent {
         this.initializerHelper(6, color, i)
       }
 
-
     }
 
   }
 
   initializerHelper(NOC, color: string, val) {
 
-    for (let i = 0; i < NOC; i++) {
-      let temp: Card = {};
+    for (let j = 0; j < NOC; j++) {
+      let temp: Card = new Card();
       temp.color = color;
       temp.value = val;
       if (color == "red")
@@ -81,6 +75,27 @@ export class GameComponent {
         this.blueArr.push(temp);
 
     }
+  }
+
+  setupGameBoard() {
+    this.gameBoard.push(this.redArr.splice(0,10));
+    this.gameBoard.push(this.redArr.splice(0,10));
+    this.gameBoard.push(this.redArr.splice(0,10));
+    this.gameBoard.push(this.redArr.splice(0,10));
+
+    for(let i = 0; i < 2; i++) {
+      let cd = new Card();
+      cd.color="purple";
+      cd.value= 0;
+      this.gameBoard.push([cd, cd, cd, cd, cd, cd, cd, cd, cd, cd])
+    }
+
+    this.gameBoard.push(this.blueArr.splice(0,10));
+    this.gameBoard.push(this.blueArr.splice(0,10));
+    this.gameBoard.push(this.blueArr.splice(0,10));
+    this.gameBoard.push(this.blueArr.splice(0,10));
+
+    console.log(this.gameBoard);
   }
 
   trClick(row, columns) {
