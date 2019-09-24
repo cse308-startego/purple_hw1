@@ -1,6 +1,11 @@
-import { Component } from '@angular/core';
+import {Component, NgModule} from '@angular/core';
 import {Router} from '@angular/router';
 import {ApiService} from '../service/api.service';
+
+@NgModule({
+  providers: [
+    ApiService,
+  ]})
 
 @Component({
   // tslint:disable-next-line:component-selector
