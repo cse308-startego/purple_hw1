@@ -1,21 +1,66 @@
-<div class="container-fluid" style="width: 700px">
+<!--<div class="container-fluid" style="width: 700px">-->
 
-  <form class="text-center border border-light p-5">
-    <h1 class="h1"> STRATEGO </h1>
-    <h4 class="h4 mb-4">Sign in</h4>
-    <!-- Email -->
-    <input type="username" id="defaultLoginFormEmail" class="form-control mb-4" placeholder="Username">
+<!--  <form class="text-center border border-light p-5">-->
+<!--    <h1 class="h1"> STRATEGO </h1>-->
+<!--    <h4 class="h4 mb-4">Sign in</h4>-->
+<!--    &lt;!&ndash; Email &ndash;&gt;-->
+<!--    <input type="username" id="defaultLoginFormEmail" class="form-control mb-4" placeholder="Username">-->
 
-    <!-- Password -->
-    <input type="password" id="defaultLoginFormPassword" class="form-control mb-4" placeholder="Password">
+<!--    &lt;!&ndash; Password &ndash;&gt;-->
+<!--    <input type="password" id="defaultLoginFormPassword" class="form-control mb-4" placeholder="Password">-->
 
-    <!-- Sign in button -->
-    <button class="btn btn-outline-primary" type="submit" (click)="onLogin()">Sign in</button>
+<!--    &lt;!&ndash; Sign in button &ndash;&gt;-->
+<!--    <button class="btn btn-outline-primary" type="submit" (click)="onLogin()">Sign in</button>-->
 
-    <!-- Register -->
-    <p>Not a member?
-      <a href="">Register</a>
-    </p>
+<!--    &lt;!&ndash; Register &ndash;&gt;-->
+<!--    <p>Not a member?-->
+<!--      <a href="">Register</a>-->
+<!--    </p>-->
 
-  </form>
+<!--  </form>-->
+<!--</div>-->
+
+<div class="bg-blue-400 h-screen w-screen">
+  <div class="flex flex-col items-center flex-1 h-full justify-center px-4 sm:px-0">
+    <div class="flex rounded-lg shadow-lg w-full sm:w-3/4 lg:w-1/2 bg-white sm:mx-0" style="height: 500px">
+      <div class="flex flex-col w-full md:w-1/2 p-4">
+        <div class="flex flex-col flex-1 justify-center mb-8">
+          <h1 class="text-5xl text-center font-thick font-serif">Welcome to Stratego</h1>
+          <div class="w-full">
+            <form class="form-horizontal w-3/4 mx-auto" method="POST" action="#">
+              <div class="flex flex-col mt-4">
+                <input id="email" type="text" class="flex-grow h-8 px-2 border rounded border-grey-400" name="email"
+                       value="" placeholder="Email">
+              </div>
+              <div class="flex flex-col mt-4">
+                <input id="password" type="password" class="flex-grow h-8 px-2 rounded border border-grey-400"
+                       name="password" required placeholder="Password">
+              </div>
+              <div class="flex items-center mt-4">
+                <input type="checkbox" name="remember" id="remember" class="mr-2"> <label for="remember"
+                                                                                          class="text-sm text-grey-dark">Remember
+                Me</label>
+              </div>
+              <div class="flex flex-col mt-8">
+                <button type="submit"
+                        class="bg-blue-500 hover:bg-blue-700 text-white text-sm font-bold py-2 px-4 rounded"
+                        (click)="onLogin()">
+                  Login
+                </button>
+              </div>
+            </form>
+
+            <div class="text-center mt-4">
+              <a class="no-underline hover:underline text-blue-dark text-xs cursor-pointer" href="/signUp">
+                Sign Up?
+              </a>
+            </div>
+
+          </div>
+        </div>
+      </div>
+      <div class=" md:block md:w-1/2 m-2 rounded-sm"
+           style="background: url('https://s1.mzstatic.com/us/r1000/083/Purple/v4/3c/e0/1b/3ce01b78-4114-f175-b78a-812ea1b32c86/mzl.ucksqmgs.png'); background-size: 400px; background-position: center; background-repeat: no-repeat; "></div>
+    </div>
+  </div>
 </div>

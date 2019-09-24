@@ -12,5 +12,4 @@ export class LoginPageComponent {
   onLogin() {
     this.router.navigateByUrl('/game');
   }
-
 }
