@@ -1,6 +1,7 @@
 export class Card {
   color: string;
   value: number;
+  path: string;
 }
 
 export class Board {

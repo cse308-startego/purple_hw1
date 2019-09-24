@@ -38,9 +38,9 @@ export class GameComponent {
       let card: Card = new Card();
       console.log(i);
       if (i == 1 || i == 2 || i == 10 || i == 12) {
-        console.log(i, "CHUTIYA ");
         card.color = color;
         card.value = i;
+        card.path = "../assets/"
         if (color == "red")
           this.redArr.push(card);
         else
