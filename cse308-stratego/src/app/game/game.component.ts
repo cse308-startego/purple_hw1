@@ -20,8 +20,6 @@ export class GameComponent {
     this.populateImageMap();
     this.initializeCards();
     this.setupGameBoard();
-
-
   }
 
   populateImageMap() {
