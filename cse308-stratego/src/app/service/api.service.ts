@@ -11,7 +11,7 @@ export class ApiService {
   baseUrl: string = 'http://localhost:8080/stratego/';
 
   login(){
-    return this.http.get(this.baseUrl + "login");
+    return this.http.get(this.baseUrl + "login", {responseType: 'text'});
   }
 
 

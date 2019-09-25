@@ -2,7 +2,8 @@
 <project version="4">
   <component name="ChangeListManager">
     <list default="true" id="7172cc4b-986c-4fb4-b481-862409b923a6" name="Default" comment="Spring">
-      <change beforePath="$PROJECT_DIR$/../cse308-stratego/src/app/app.module.ts" beforeDir="false" afterPath="$PROJECT_DIR$/../cse308-stratego/src/app/app.module.ts" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/Application/Controllers/Hello.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/Application/Controllers/Hello.java" afterDir="false" />
     </list>
     <option name="EXCLUDED_CONVERTED_TO_IGNORED" value="true" />
     <option name="SHOW_DIALOG" value="false" />
@@ -118,7 +119,7 @@
       <option name="number" value="Default" />
       <option name="presentableId" value="Default" />
       <updated>1568666360982</updated>
-      <workItem from="1568833052235" duration="7018000" />
+      <workItem from="1568833052235" duration="7162000" />
     </task>
     <task id="LOCAL-00001" summary="Spring">
       <created>1569366442832</created>
@@ -134,7 +135,14 @@
       <option name="project" value="LOCAL" />
       <updated>1569373215417</updated>
     </task>
-    <option name="localTasksCounter" value="3" />
+    <task id="LOCAL-00003" summary="Spring">
+      <created>1569373492772</created>
+      <option name="number" value="00003" />
+      <option name="presentableId" value="LOCAL-00003" />
+      <option name="project" value="LOCAL" />
+      <updated>1569373492772</updated>
+    </task>
+    <option name="localTasksCounter" value="4" />
     <servers />
   </component>
   <component name="TypeScriptGeneratedFilesManager">
