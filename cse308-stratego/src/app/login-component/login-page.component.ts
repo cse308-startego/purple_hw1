@@ -21,5 +21,4 @@ export class LoginPageComponent {
     });
     this.router.navigateByUrl('/game');
   }
-
 }
