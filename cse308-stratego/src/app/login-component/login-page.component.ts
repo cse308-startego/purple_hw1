@@ -19,6 +19,6 @@ export class LoginPageComponent {
     this.service.login().subscribe((data: string) => {
       console.log(data)
     });
-    this.router.navigateByUrl('/game');  
+    this.router.navigateByUrl('/game');
   }
 }
