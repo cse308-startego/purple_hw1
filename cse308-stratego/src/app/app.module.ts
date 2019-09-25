@@ -7,20 +7,23 @@ import {LoginPageComponent} from './login-component/login-page.component';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 import {MatCheckboxModule} from "@angular/material/checkbox";
 import {GameComponent} from './game/game.component';
-import {SignUpComponent} from "./sign-up/sign-up.component";
+import {SignUpComponent} from './sign-up/sign-up.component';
+import {RouterModule} from "@angular/router";
+import {HttpClientModule} from '@angular/common/http';
 
 @NgModule({
   declarations: [
     AppComponent,
     LoginPageComponent,
     GameComponent,
-    SignUpComponent,
+    SignUpComponent
   ],
   imports: [
     BrowserModule,
     AppRoutingModule,
     BrowserAnimationsModule,
-    MatCheckboxModule
+    MatCheckboxModule,
+    HttpClientModule,
   ],
   providers: [],
   bootstrap: [AppComponent]
