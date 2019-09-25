@@ -2,8 +2,10 @@
 <project version="4">
   <component name="ChangeListManager">
     <list default="true" id="c85f458d-abd3-48cc-9f42-3efba92ae66a" name="Default Changelist" comment="">
+      <change afterPath="$PROJECT_DIR$/cse308-stratego/browserslist" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Stratego/pom.xml" beforeDir="false" afterPath="$PROJECT_DIR$/Stratego/pom.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/cse308-stratego/src/app/app.module.ts" beforeDir="false" afterPath="$PROJECT_DIR$/cse308-stratego/src/app/app.module.ts" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/cse308-stratego/src/app/service/api.service.ts" beforeDir="false" afterPath="$PROJECT_DIR$/cse308-stratego/src/app/service/api.service.ts" afterDir="false" />
     </list>
     <option name="EXCLUDED_CONVERTED_TO_IGNORED" value="true" />
     <option name="SHOW_DIALOG" value="false" />
@@ -29,6 +31,7 @@
     <ConfirmationsSetting value="2" id="Add" />
   </component>
   <component name="PropertiesComponent">
+    <property name="ASKED_ADD_EXTERNAL_FILES" value="true" />
     <property name="WebServerToolWindowFactoryState" value="false" />
     <property name="aspect.path.notification.shown" value="true" />
     <property name="last_opened_file_path" value="$PROJECT_DIR$" />
@@ -43,6 +46,7 @@
     <property name="project.structure.proportion" value="0.0" />
     <property name="project.structure.side.proportion" value="0.0" />
     <property name="settings.editor.selected.configurable" value="Errors" />
+    <property name="ts.external.directory.path" value="$PROJECT_DIR$/cse308-stratego/node_modules/typescript/lib" />
   </component>
   <component name="RunDashboard">
     <option name="ruleStates">
@@ -89,6 +93,7 @@
       <workItem from="1569191068263" duration="30000" />
       <workItem from="1569359295160" duration="269000" />
       <workItem from="1569362036198" duration="2121000" />
+      <workItem from="1569372964849" duration="365000" />
     </task>
     <task id="LOCAL-00001" summary="pulled kishore repo">
       <created>1569367056157</created>
@@ -117,6 +122,7 @@
     </option>
   </component>
   <component name="VcsManagerConfiguration">
+    <option name="ADD_EXTERNAL_FILES_SILENTLY" value="true" />
     <MESSAGE value="pulled kishore repo" />
     <option name="LAST_COMMIT_MESSAGE" value="pulled kishore repo" />
   </component>
