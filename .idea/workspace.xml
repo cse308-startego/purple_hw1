@@ -1,18 +1,18 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <project version="4">
   <component name="ChangeListManager">
-    <list default="true" id="c85f458d-abd3-48cc-9f42-3efba92ae66a" name="Default Changelist" comment="pulled kishore repo">
-      <change beforePath="$PROJECT_DIR$/.idea/inspectionProfiles/Project_Default.xml" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/.idea/misc.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/misc.xml" afterDir="false" />
+    <list default="true" id="c85f458d-abd3-48cc-9f42-3efba92ae66a" name="Default Changelist" comment="">
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/cse308-stratego/src/app/game/game.component.html" beforeDir="false" afterPath="$PROJECT_DIR$/cse308-stratego/src/app/game/game.component.html" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/cse308-stratego/src/app/game/game.component.ts" beforeDir="false" afterPath="$PROJECT_DIR$/cse308-stratego/src/app/game/game.component.ts" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Stratego/pom.xml" beforeDir="false" afterPath="$PROJECT_DIR$/Stratego/pom.xml" afterDir="false" />
     </list>
     <option name="EXCLUDED_CONVERTED_TO_IGNORED" value="true" />
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
     <option name="HIGHLIGHT_NON_ACTIVE_CHANGELIST" value="false" />
     <option name="LAST_RESOLUTION" value="IGNORE" />
+  </component>
+  <component name="FavoritesManager">
+    <favorites_list name="purple_hw1" />
   </component>
   <component name="Git.Settings">
     <option name="RECENT_GIT_ROOT_PATH" value="$PROJECT_DIR$" />
@@ -88,8 +88,16 @@
       <updated>1569191065262</updated>
       <workItem from="1569191068263" duration="30000" />
       <workItem from="1569359295160" duration="269000" />
-      <workItem from="1569362036198" duration="1151000" />
+      <workItem from="1569362036198" duration="2121000" />
     </task>
+    <task id="LOCAL-00001" summary="pulled kishore repo">
+      <created>1569367056157</created>
+      <option name="number" value="00001" />
+      <option name="presentableId" value="LOCAL-00001" />
+      <option name="project" value="LOCAL" />
+      <updated>1569367056157</updated>
+    </task>
+    <option name="localTasksCounter" value="2" />
     <servers />
   </component>
   <component name="TypeScriptGeneratedFilesManager">
