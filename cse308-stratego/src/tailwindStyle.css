@@ -594,6 +594,7 @@ object {
  * https://github.com/mozdevs/cssremedy/issues/14
  */
 
+/*editted max width to show the image in div*/
 img,
 video {
   max-width: 100%;

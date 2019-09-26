@@ -2,8 +2,11 @@
   border: 7px outset black;
 }
 #chessBoard td{
-  width: 10px;
-  height: 60px;
+
+}
+#chessBoard tr{
+  width: 32px;
+  height: 32px;
 }
 
 #chessBoard tr:nth-child(odd) td:nth-child(even),
@@ -30,3 +33,7 @@ containsEverything{
 }
 
 
+.imageSizeinsidetd{
+
+
+}
