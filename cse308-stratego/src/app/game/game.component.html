@@ -1,3 +1,57 @@
+
+
+
+<script>
+
+    createTable(){
+
+        var  id = 0;
+
+        function createTable(){
+
+            let table = document.getElementById("table");
+
+            for(let i=0;i<10;i++){
+
+                let eachRow = document.getElementById("tr");
+                for(let j=0;j<10;j++){
+
+                    let eachCol = document.getElementById("td");
+                    eachCol.width = "20px";
+                    eachCol.height = "20px";
+                    eachCol.id++;
+
+                    if(eachCol.id%2==0){
+                        eachCol.style.backgroundColor = "grey";
+                        eachc
+                    }
+
+                    eachRow.appendChild(eachCol);
+                    eachCol.innerHTML=id;
+                }
+
+                table.appendChild(eachRow);
+            }
+
+        }
+
+
+    }
+</script>
+
+<body onload = "createTable()">
+<table id="tb" border="2px"></table>
+</body>>
+
+
+
+
+
+
+
+
+
+
 <div class="container mx-auto px-4">
   <div class="flex items-center justify-center py-6 ">
     <a href="#" class="text-gray-800 text-sm font-bold hover:text-purple-600 mx-4 ">Home</a>
@@ -9,6 +63,17 @@
 
     <div class="container content-center ">
       <div class="table border-black border-4 rounded shadow-2xl">
+
+<!--        <div class="table-row">-->
+<!--          <div class="table-cell">-->
+
+<!--            <div *ngFor="let image of imagePaths">-->
+<!--              <img src="{{image}}">-->
+<!--            </div>-->
+
+<!--          </div>-->
+<!--        </div>-->
+
         <div class="table-row  ">
           <div class="table-cell bg-green-200 text-gray-700 px-6 py-6 text-sm border-2 border-black m-4 "></div>
           <div class="table-cell bg-green-500 text-gray-700 px-6 py-6 text-sm border-2 border-black m-4 "></div>
@@ -147,8 +212,15 @@
           <div class="table-cell bg-green-200 text-gray-700 px-6 py-6 text-sm border-2 border-black m-4 "></div>
 
         </div>
+
+
+
+
       </div>
     </div>
+
+
+
     <div class="flex flex-row px-4 py-2 m-2">
 
       <li class="list-none px-2"> Bomb<img class="imageSize" src="../assets/bomb.png" alt="bomb" draggable="true"></li>
@@ -176,6 +248,7 @@
     </section>
 
   </div>
+</div>
 
   <!--
 

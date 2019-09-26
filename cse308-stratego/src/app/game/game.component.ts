@@ -7,22 +7,22 @@ import {Block, Card} from './game-models';
   styleUrls: ['game.component.css']
 
 })
-export class GameComponent {
+export class GameComponent implements OnInit{
   columns: string[] = [];
   rows: number[] = [];
 
   private gameBoard: Card[][] = [];
   private redArr: Card[] = [];
   private blueArr: Card[] = [];
-  private imageMap: Map<number, string>;
+  private imageMap: Map<number, string> = new Map();
+  private imagePaths: String[] = [];
 
   ngOnInit() {
     this.populateImageMap();
     this.initializeCards();
     this.setupGameBoard();
-
-
   }
+
 
   populateImageMap() {
 
@@ -32,32 +32,34 @@ export class GameComponent {
       let name = ""
       if (i == 1)
         name = "marshal.png";
-      else if (i = 2)
+      else if (i == 2)
         name = "general.png";
-      else if (i = 3)
+      else if (i == 3)
         name = "colonel.png";
-      else if (i = 4)
+      else if (i == 4)
         name = "major.png";
-      else if (i = 5)
+      else if (i == 5)
         name = "captain.png";
-      else if (i = 6)
+      else if (i == 6)
         name = "lieutenant.png";
-      else if (i = 7)
+      else if (i == 7)
         name = "sergeant.png";
-      else if (i = 8)
+      else if (i == 8)
         name = "miner.png";
-      else if (i = 9)
+      else if (i == 9)
         name = "scout.png";
-      else if (i = 10)
+      else if (i == 10)
         name = "spy.png";
-      else if (i = 11)
+      else if (i == 11)
         name = "bomb.png";
-      else if (i = 12)
+      else if (i == 12)
         name = "flag.png";
 
-      this.imageMap.set(i, basePath + name)
+      this.imageMap.set(i, basePath + name);
+      this.imagePaths.push(basePath+name);
     }
     console.log(this.imageMap);
+    console.log(this.imagePaths);
   }
 
   initializeCards() {
