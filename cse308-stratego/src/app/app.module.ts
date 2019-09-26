@@ -9,6 +9,7 @@ import {MatCheckboxModule} from "@angular/material/checkbox";
 import {GameComponent} from './game/game.component';
 import {SignUpComponent} from './sign-up/sign-up.component';
 import {RouterModule} from "@angular/router";
+import {HttpClientModule} from '@angular/common/http';
 
 @NgModule({
   declarations: [
@@ -22,6 +23,7 @@ import {RouterModule} from "@angular/router";
     AppRoutingModule,
     BrowserAnimationsModule,
     MatCheckboxModule,
+    HttpClientModule,
   ],
   providers: [],
   bootstrap: [AppComponent]
