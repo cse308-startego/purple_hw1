@@ -7,14 +7,14 @@ import {Block, Card} from './game-models';
   styleUrls: ['game.component.css']
 
 })
-export class GameComponent {
-  columns: string[] = [];
-  rows: number[] = [];
+export class GameComponent implements OnInit {
+  columns: string[] = ['a', 'b', 'c', 'd', 'e', 'f', 'g', 'h', 'i'];
+  rows: number[] = [0, 1, 2, 3, 4, 5, 6, 7, 8, 9, 10];
 
-  private gameBoard: Card[][] = [];
-  private redArr: Card[] = [];
-  private blueArr: Card[] = [];
-  private imageMap: Map<number, string>;
+  public gameBoard: Card[][] = [];
+   private redArr: Card[] = [];
+   private blueArr: Card[] = [];
+  public imageMap: Map<number, string> = new Map<number, string>();
 
   ngOnInit() {
     this.populateImageMap();
@@ -24,37 +24,51 @@ export class GameComponent {
 
   populateImageMap() {
 
-    let basePath = "../asset/";
+    const basePath = '../assets/';
 
     for (let i = 1; i <= 12; i++) {
-      let name = ""
-      if (i == 1)
-        name = "marshal.png";
-      else if (i = 2)
-        name = "general.png";
-      else if (i = 3)
-        name = "colonel.png";
-      else if (i = 4)
-        name = "major.png";
-      else if (i = 5)
-        name = "captain.png";
-      else if (i = 6)
-        name = "lieutenant.png";
-      else if (i = 7)
-        name = "sergeant.png";
-      else if (i = 8)
-        name = "miner.png";
-      else if (i = 9)
-        name = "scout.png";
-      else if (i = 10)
-        name = "spy.png";
-      else if (i = 11)
-        name = "bomb.png";
-      else if (i = 12)
-        name = "flag.png";
+      let name = ''
+      // tslint:disable-next-line:triple-equals
+      if (i == 1) {
+        name = 'marshal.png';
+        // tslint:disable-next-line:triple-equals
+      } else if (i == 2) {
+        name = 'general.png';
+        // tslint:disable-next-line:triple-equals
+      } else if (i == 3) {
+        name = 'colonel.png';
+        // tslint:disable-next-line:triple-equals
+      } else if (i == 4) {
+        name = 'major.png';
+        // tslint:disable-next-line:triple-equals
+      } else if (i == 5) {
+        name = 'captain.png';
+        // tslint:disable-next-line:triple-equals
+      } else if (i == 6) {
+        name = 'lieutenant.png';
+        // tslint:disable-next-line:triple-equals
+      } else if (i == 7) {
+        name = 'sergeant.png';
+        // tslint:disable-next-line:triple-equals
+      } else if (i == 8) {
+        name = 'miner.png';
+        // tslint:disable-next-line:triple-equals
+      } else if (i == 9) {
+        name = 'scout.png';
+        // tslint:disable-next-line:triple-equals
+      } else if (i == 10) {
+        name = 'spy.png';
+        // tslint:disable-next-line:triple-equals
+      } else if (i == 11) {
+        name = 'bomb.png';
+        // tslint:disable-next-line:triple-equals
+      } else if (i == 12) {
+        name = 'flag.png';
+      }
 
-      this.imageMap.set(i, basePath + name)
+      this.imageMap.set(i, basePath + name);
     }
+
     console.log(this.imageMap);
   }
 
@@ -62,7 +76,15 @@ export class GameComponent {
 
     this.initializePlayers("red");
     this.initializePlayers("Blue");
-    console.log(this.redArr);
+    // const  i = 0;
+    // // tslint:disable-next-line:forin triple-equals
+    // while (i == this.redArr.length ) {
+    //
+    // console.log(this.redArr[i] + '\n');
+    // // @ts-ignore
+    //   i++;
+    // }
+
     console.log(this.blueArr);
 
   }
@@ -78,26 +100,27 @@ export class GameComponent {
       card.y = 0;
 
       console.log(i);
+
       if (i == 1 || i == 2 || i == 10 || i == 12) {
         card.color = color;
         card.value = i;
-        card.path = "../assets/"
+        card.path = this.imageMap.get(i);
         if (color == "red")
           this.redArr.push(card);
         else
           this.blueArr.push(card);
       } else if (i == 3) {
-        this.initializerHelper(2, color, i)
+        this.initializerHelper(2, color, i);
       } else if (i == 4) {
-        this.initializerHelper(3, color, i)
+        this.initializerHelper(3, color, i);
       } else if (i == 5 || i == 6 || i == 7) {
-        this.initializerHelper(4, color, i)
+        this.initializerHelper(4, color, i);
       } else if (i == 8) {
-        this.initializerHelper(5, color, i)
+        this.initializerHelper(5, color, i);
       } else if (i == 9) {
-        this.initializerHelper(8, color, i)
+        this.initializerHelper(8, color, i);
       } else if (i == 11) {
-        this.initializerHelper(6, color, i)
+        this.initializerHelper(6, color, i);
       }
 
     }
@@ -108,9 +131,11 @@ export class GameComponent {
 
     for (let j = 0; j < NOC; j++) {
       let temp: Card = new Card();
-      temp=this.setPos(temp, 0, 0);
+      temp = this.setPos(temp, 0, 0);
       temp.color = color;
       temp.value = val;
+      temp.path = this.imageMap.get(val);
+      console.log(temp.path);
       if (color == "red")
         this.redArr.push(temp);
       else
@@ -128,8 +153,9 @@ export class GameComponent {
     for (let i = 0; i < 2; i++) {
       let cd = new Card();
       cd.color = "purple";
+      cd.path ="";
       cd.value = 0;
-      cd = this.setPos(cd,0, 0);
+      cd = this.setPos(cd, 0, 0);
       this.gameBoard.push([cd, cd, cd, cd, cd, cd, cd, cd, cd, cd])
     }
 
@@ -138,7 +164,7 @@ export class GameComponent {
       this.gameBoard.push(this.blueArr.splice(0, 10));
       s--;
     }
-      console.log(this.gameBoard);
+    console.log(this.gameBoard);
   }
 
   setPos(tcard: Card, x: number, y: number) {
@@ -149,7 +175,11 @@ export class GameComponent {
   }
 
   trClick(row, columns) {
-    console.log(row, columns)
+    console.log(row, columns);
+  }
+
+  populatePlayers() {
+
   }
 
 }

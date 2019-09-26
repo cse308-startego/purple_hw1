@@ -22,9 +22,11 @@ ul {
 }
 
 .imageSize {
-  width: 35px;
-  height: 35px;
-  margin: 0px;
+  height: 50px;
+
+}
+containsEverything{
+  height: 100%;
 }
 
 

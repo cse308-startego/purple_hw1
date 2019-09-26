@@ -17,7 +17,7 @@ export class LoginPageComponent {
   constructor(private router: Router, private service: ApiService) { }
   onLogin() {
     this.service.login().subscribe((data: string) => {
-      console.log(data)
+      console.log(data);
     });
     this.router.navigateByUrl('/game');
   }
