@@ -1,7 +1,7 @@
 import { Injectable } from '@angular/core';
-import { HttpClient } from '@angular/common/http';
+import {HttpClient, HttpHeaders, HttpParams} from '@angular/common/http';
 import {Observable} from "rxjs/index";
-import {Card} from '../game/game-models';
+import {Board, Card} from '../game/game-models';
 
 @Injectable({
   providedIn: 'root',
@@ -15,8 +15,9 @@ export class ApiService {
     return this.http.get(this.baseUrl + "login", {responseType: 'text'});
   }
 
-  arrayManipulation(gameBoard: Card[][]) {
-    return this.http.get(this.baseUrl + "array?arr=" + gameBoard, {responseType: 'text'});
+  arrayManipulation(gameBoard: Board) {
+    let json = JSON.stringify(gameBoard);
+    return this.http.post(this.baseUrl + "array", json,{responseType: 'text'});
   }
 
 

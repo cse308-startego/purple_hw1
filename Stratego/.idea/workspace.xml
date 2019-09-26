@@ -4,6 +4,10 @@
     <list default="true" id="7172cc4b-986c-4fb4-b481-862409b923a6" name="Default" comment="Spring">
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/main/java/Application/Controllers/Hello.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/Application/Controllers/Hello.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/target/classes/Application/Controllers/Hello.class" beforeDir="false" afterPath="$PROJECT_DIR$/target/classes/Application/Controllers/Hello.class" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../cse308-stratego/src/app/game/game-models.ts" beforeDir="false" afterPath="$PROJECT_DIR$/../cse308-stratego/src/app/game/game-models.ts" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../cse308-stratego/src/app/game/game.component.html" beforeDir="false" afterPath="$PROJECT_DIR$/../cse308-stratego/src/app/game/game.component.html" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../cse308-stratego/src/app/game/game.component.ts" beforeDir="false" afterPath="$PROJECT_DIR$/../cse308-stratego/src/app/game/game.component.ts" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/../cse308-stratego/src/app/service/api.service.ts" beforeDir="false" afterPath="$PROJECT_DIR$/../cse308-stratego/src/app/service/api.service.ts" afterDir="false" />
     </list>
     <option name="EXCLUDED_CONVERTED_TO_IGNORED" value="true" />
@@ -121,6 +125,7 @@
       <option name="presentableId" value="Default" />
       <updated>1568666360982</updated>
       <workItem from="1568833052235" duration="8399000" />
+      <workItem from="1569473133257" duration="6241000" />
     </task>
     <task id="LOCAL-00001" summary="Spring">
       <created>1569366442832</created>
@@ -154,7 +159,9 @@
       <map>
         <entry key="MAIN">
           <value>
-            <State />
+            <State>
+              <option name="COLUMN_ORDER" />
+            </State>
           </value>
         </entry>
       </map>
