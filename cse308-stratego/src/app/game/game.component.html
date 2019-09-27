@@ -10,7 +10,7 @@
         <table id="chessBoard">
           <tr class="" *ngFor="let row of columns">
             <td class=" p-4 border-2 border-black "
-                *ngFor="let cell of rows" (click)="trClick(row,columns)" id='{{row}}{{cell}}'>
+                *ngFor="let cell of rows" (click)="trClick(row,cell)" id='{{row}}{{cell}}'>
               <img class=" max-w-lg w-6 " src="{{gameBoard[row][cell].path}}">
             </td>
           </tr>

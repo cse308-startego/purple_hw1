@@ -12,7 +12,7 @@ export class GameComponent implements OnInit {
   columns: number[] = [0, 1, 2, 3, 4, 5, 6, 7, 8, 9];
   rows: number[] = [0, 1, 2, 3, 4, 5, 6, 7, 8, 9];
 
-  selectedCard: Card = new Card();
+
 
   private gameBoard: Card[][] = [];
   private redArr: Card[] = [];
@@ -176,6 +176,7 @@ export class GameComponent implements OnInit {
     return tcard;
   }
 
+  private selectedCard: Card = new Card();
   onSelection() {
 
 
@@ -185,8 +186,14 @@ export class GameComponent implements OnInit {
 
   }
 
-  trClick(row, columns) {
-    console.log(row, columns)
+  trClick(row, column) {
+    if(this.gameBoard[row][column].value != 0) {
+      this.selectedCard = this.gameBoard[row][column];
+      this.gameBoard[row][column] = new Card();
+    }
+    else {
+      this.gameBoard[row][column] = this.selectedCard;
+    }
   }
 
   populatePlayers(){
