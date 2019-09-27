@@ -8,9 +8,9 @@ import {ApiService} from '../service/api.service';
   styleUrls: ['game.component.css']
 
 })
-export class GameComponent implements OnInit{
-  columns: string[] = [];
-  rows: number[] = [];
+export class GameComponent implements OnInit {
+  columns: number[] = [0, 1, 2, 3, 4, 5, 6, 7, 8, 9];
+  rows: number[] = [0, 1, 2, 3, 4, 5, 6, 7, 8, 9];
 
   selectedCard: Card = new Card();
 
@@ -187,6 +187,12 @@ export class GameComponent implements OnInit{
 
   trClick(row, columns) {
     console.log(row, columns)
+  trClick(row, columns) {
+    console.log(row, columns);
+  }
+
+  populatePlayers() {
+
   }
 
 }

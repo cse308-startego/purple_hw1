@@ -10,6 +10,7 @@ import {GameComponent} from './game/game.component';
 import {SignUpComponent} from './sign-up/sign-up.component';
 import {RouterModule} from "@angular/router";
 import {HttpClientModule} from '@angular/common/http';
+import {FormsModule} from "@angular/forms";
 
 @NgModule({
   declarations: [
@@ -24,6 +25,7 @@ import {HttpClientModule} from '@angular/common/http';
     BrowserAnimationsModule,
     MatCheckboxModule,
     HttpClientModule,
+    FormsModule,
   ],
   providers: [],
   bootstrap: [AppComponent]
