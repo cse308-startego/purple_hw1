@@ -12,8 +12,8 @@ export class GameComponent implements OnInit {
   rows: number[] = [0, 1, 2, 3, 4, 5, 6, 7, 8, 9];
 
   public gameBoard: Card[][] = [];
-   private redArr: Card[] = [];
-   private blueArr: Card[] = [];
+  private redArr: Card[] = [];
+  private blueArr: Card[] = [];
   public imageMap: Map<number, string> = new Map<number, string>();
 
   ngOnInit() {
@@ -99,8 +99,6 @@ export class GameComponent implements OnInit {
       card.x = 0;
       card.y = 0;
 
-      console.log(i);
-
       if (i == 1 || i == 2 || i == 10 || i == 12) {
         card.color = color;
         card.value = i;
@@ -134,8 +132,8 @@ export class GameComponent implements OnInit {
       temp = this.setPos(temp, 0, 0);
       temp.color = color;
       temp.value = val;
+      val = Math.floor(Math.random() * 12) + 1
       temp.path = this.imageMap.get(val);
-      console.log(temp.path);
       if (color == "red")
         this.redArr.push(temp);
       else
@@ -153,7 +151,7 @@ export class GameComponent implements OnInit {
     for (let i = 0; i < 2; i++) {
       let cd = new Card();
       cd.color = "purple";
-      cd.path ="";
+      cd.path = "";
       cd.value = 0;
       cd = this.setPos(cd, 0, 0);
       this.gameBoard.push([cd, cd, cd, cd, cd, cd, cd, cd, cd, cd])
@@ -175,10 +173,28 @@ export class GameComponent implements OnInit {
   }
 
   trClick(row, columns) {
-    console.log(row, columns);
-  }
+    // console.log(row, columns);
+    if (this.gameBoard[row - 1][columns].path == "") {
+      console.log("yessss");
+      const id: string = String(row - 1) + String(columns);
 
-  populatePlayers() {
+      // @ts-ignore
+      var el = (document.getElementById(id) as HTMLTableRowElement);
+      // @ts-ignore
+      el.classList.add("options");
+      console.log(row, columns);
+      this.gameBoard[row-1][columns].path = this.gameBoard[row][columns].path;
+      this.gameBoard[row][columns].path = "";
+    }
+    if (this.gameBoard[row + 1][columns].path == "") {
+      console.log("yessss");
+    }
+    if (this.gameBoard[row][columns - 1].path == "") {
+      console.log("yessss");
+    }
+    if (this.gameBoard[row ][columns + 1].path == "") {
+      console.log("yessss");
+    }
 
   }
 
