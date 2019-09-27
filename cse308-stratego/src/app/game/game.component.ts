@@ -177,13 +177,14 @@ export class GameComponent implements OnInit {
   }
 
   private selectedCard: Card = new Card();
+
   onSelection() {
-
-
   }
 
   onMove() {
+  }
 
+  populatePlayers(){
   }
 
   trClick(row, column) {
@@ -196,7 +197,5 @@ export class GameComponent implements OnInit {
     }
   }
 
-  populatePlayers(){
-  }
 
 }
