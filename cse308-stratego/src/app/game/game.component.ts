@@ -41,7 +41,7 @@ export class GameComponent implements OnInit {
 
   populateImageMap() {
 
-    let basePath = "../asset/";
+    let basePath = "../assets/";
 
     for (let i = 1; i <= 12; i++) {
       let name = "";
@@ -128,7 +128,7 @@ export class GameComponent implements OnInit {
       temp=this.setPos(temp, 0, 0);
       temp.color = color;
       temp.value = val;
-      temp.path = this.imageMap.get(j);
+      temp.path = this.imageMap.get(val);
       if (color == "red")
         this.redArr.push(temp);
       else
