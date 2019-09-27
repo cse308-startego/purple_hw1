@@ -187,12 +187,9 @@ export class GameComponent implements OnInit {
 
   trClick(row, columns) {
     console.log(row, columns)
-  trClick(row, columns) {
-    console.log(row, columns);
   }
 
-  populatePlayers() {
-
+  populatePlayers(){
   }
 
 }
