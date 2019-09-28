@@ -176,7 +176,6 @@ export class GameComponent implements OnInit {
     return tcard;
   }
 
-  private selectedCard: Card = new Card();
 
   onSelection() {
   }
@@ -186,6 +185,7 @@ export class GameComponent implements OnInit {
 
   populatePlayers(){
   }
+  private selectedCard: Card = new Card();
 
   trClick(row, column) {
     if(this.gameBoard[row][column].value != 0) {
