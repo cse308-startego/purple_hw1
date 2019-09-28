@@ -12,14 +12,13 @@ export class GameComponent implements OnInit {
   columns: number[] = [0, 1, 2, 3, 4, 5, 6, 7, 8, 9];
   rows: number[] = [0, 1, 2, 3, 4, 5, 6, 7, 8, 9];
 
-
-
   private gameBoard: Card[][] = [];
   private redArr: Card[] = [];
   private blueArr: Card[] = [];
-  private imageMap: Map<number, string> = new Map<number,string>();
+  private imageMap: Map<number, string> = new Map<number, string>();
 
-  constructor(private service: ApiService) {}
+  constructor(private service: ApiService) {
+  }
 
 
   ngOnInit() {
@@ -125,7 +124,7 @@ export class GameComponent implements OnInit {
 
     for (let j = 0; j < NOC; j++) {
       let temp: Card = new Card();
-      temp=this.setPos(temp, 0, 0);
+      temp = this.setPos(temp, 0, 0);
       temp.color = color;
       temp.value = val;
       temp.path = this.imageMap.get(val);
@@ -134,10 +133,15 @@ export class GameComponent implements OnInit {
       else
         this.blueArr.push(temp);
     }
+    // this.shuffleElements(this.redArr);
+    this.shuffle(this.redArr);
+    this.shuffle(this.blueArr);
+    // this.shuffleElements(this.blueArr);
   }
 
   setupGameBoard() {
     let s = 4;
+    let random = Math.floor((Math.random() * 11) + 1);
     while (s > 0) {
       this.gameBoard.push(this.redArr.splice(0, 10));
       s--;
@@ -148,7 +152,7 @@ export class GameComponent implements OnInit {
       cd.color = "purple";
       cd.value = 0;
       cd.path = "";
-      cd = this.setPos(cd,0, 0);
+      cd = this.setPos(cd, 0, 0);
       this.gameBoard.push([cd, cd, cd, cd, cd, cd, cd, cd, cd, cd])
     }
 
@@ -161,8 +165,8 @@ export class GameComponent implements OnInit {
   }
 
   setPositions() {
-    for(let i = 0; i < this.gameBoard.length; i++) {
-      for(let j = 0; j < this.gameBoard[0].length; j++) {
+    for (let i = 0; i < this.gameBoard.length; i++) {
+      for (let j = 0; j < this.gameBoard[0].length; j++) {
         this.gameBoard[i][j].x = i;
         this.gameBoard[i][j].y = j;
       }
@@ -178,24 +182,106 @@ export class GameComponent implements OnInit {
 
   private selectedCard: Card = new Card();
 
-  onSelection() {
-  }
-
-  onMove() {
-  }
-
-  populatePlayers(){
-  }
 
   trClick(row, column) {
-    if(this.gameBoard[row][column].value != 0) {
+    let num =0;
+    if (this.gameBoard[row][column].value != 0) {
+      while(num !=4)
+      {
+        let x =0;
+        let y = 0;
+        if (this.gameBoard[row - 1][column].path == "") {
+          console.log("yessss");
+          x =row-1;
+          y = column;
+        }
+        else if (this.gameBoard[row + 1][column].path == "") {
+          console.log("yessss");
+          x =row+1;
+          y = column;
+        }
+        else  if (this.gameBoard[row][column - 1].path == "") {
+          console.log("yessss");
+          x =row;
+          y = column-1;
+        }
+        else  if (this.gameBoard[row][column + 1].path == "") {
+          console.log("yessss");
+          x =row;
+          y = column+1;
+        }
+
+        const id: string = String(x) + String(y);
+        const el = (document.getElementById(id) as HTMLTableRowElement);
+        console.log(x,y);
+        el.classList.add("options");
+        // this.gameBoard[x][y].path = this.gameBoard[x][y].path;
+        //this.gameBoard[x][y].path = "";
+
+        num= num +1;
+
+      }
+
       this.selectedCard = this.gameBoard[row][column];
       this.gameBoard[row][column] = new Card();
-    }
-    else {
+    } else {
       this.gameBoard[row][column] = this.selectedCard;
     }
+
+
+    if ((this.gameBoard[row][column].value = 0)) {
+
+    }
+
   }
 
+  shuffle(array: Card[]) {
+    var currentIndex = array.length, temporaryValue, randomIndex;
+
+    // While there remain elements to shuffle...
+    while (0 !== currentIndex) {
+
+      // Pick a remaining element...
+      randomIndex = Math.floor(Math.random() * currentIndex);
+      currentIndex -= 1;
+
+      // And swap it with the current element.
+      temporaryValue = array[currentIndex];
+      array[currentIndex] = array[randomIndex];
+      array[randomIndex] = temporaryValue;
+    }
+
+    return array;
+  }
 
 }
+
+
+
+
+
+
+
+
+
+// private selectedCard: Card = new Card();
+//
+// trClick(row, column) {
+//   if(this.gameBoard[row][column].value != 0) {
+//     this.selectedCard = this.gameBoard[row][column];
+//     this.gameBoard[row][column] = new Card();
+//     this.emptyCard(this.gameBoard[row][column], row, column)
+//   }
+//   else {
+//     this.gameBoard[row][column] = this.selectedCard;
+//     this.selectedCard = new Card();
+//   }
+// }
+//
+// emptyCard(cd, row, column) {
+//   cd.color = "purple";
+//   cd.value = 0;
+//   cd.path = "";
+//   cd = this.setPos(cd,row, column);
+//   return cd;
+// }
