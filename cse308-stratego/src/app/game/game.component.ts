@@ -185,16 +185,27 @@ export class GameComponent implements OnInit {
 
   populatePlayers(){
   }
+
   private selectedCard: Card = new Card();
 
   trClick(row, column) {
     if(this.gameBoard[row][column].value != 0) {
       this.selectedCard = this.gameBoard[row][column];
       this.gameBoard[row][column] = new Card();
+      this.emptyCard(this.gameBoard[row][column], row, column)
     }
     else {
       this.gameBoard[row][column] = this.selectedCard;
+      this.selectedCard = new Card();
     }
+  }
+
+  emptyCard(cd, row, column) {
+    cd.color = "purple";
+    cd.value = 0;
+    cd.path = "";
+    cd = this.setPos(cd,row, column);
+    return cd;
   }
 
 
