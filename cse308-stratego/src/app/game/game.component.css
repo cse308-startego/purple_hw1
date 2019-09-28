@@ -1,3 +1,41 @@
+/*#chessBoard{*/
+/*  border: 7px outset black;*/
+/*}*/
+/*#chessBoard td{*/
+
+/*}*/
+/*#chessBoard tr{*/
+/*  width: 32px;*/
+/*  height: 32px;*/
+/*}*/
+
+/*#chessBoard tr:nth-child(odd) td:nth-child(even),*/
+/*#chessBoard tr:nth-child(even) td:nth-child(odd){*/
+/*  background-color: #65C4AE;*/
+/*}*/
+
+/*#chessBoard tr:nth-child(even) td:nth-child(even),*/
+/*#chessBoard tr:nth-child(odd) td:nth-child(odd){*/
+/*  background-color: #488A7A;*/
+/*}*/
+
+/*ul {*/
+/*  flex-direction: row;*/
+/*  justify-content: center;*/
+/*}*/
+
+/*.imageSize {*/
+/*  height: 50px;*/
+
+/*}*/
+/*containsEverything{*/
+/*  height: 100%;*/
+/*}*/
+
+
+/*.imageSizeinsidetd{*/
+/*}*/
+
 table {
   margin-left:auto;
   margin-right:auto;
@@ -37,5 +75,5 @@ ul {
 }
 
 #effect:hover td{
-background-color: #1b959a;
+  background-color: #1b959a;
 }

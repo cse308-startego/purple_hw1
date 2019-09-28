@@ -133,10 +133,10 @@ export class GameComponent implements OnInit {
       else
         this.blueArr.push(temp);
     }
-   // this.shuffleElements(this.redArr);
+    // this.shuffleElements(this.redArr);
     this.shuffle(this.redArr);
     this.shuffle(this.blueArr);
-   // this.shuffleElements(this.blueArr);
+    // this.shuffleElements(this.blueArr);
   }
 
   setupGameBoard() {
@@ -200,7 +200,7 @@ export class GameComponent implements OnInit {
           x =row+1;
           y = column;
         }
-       else  if (this.gameBoard[row][column - 1].path == "") {
+        else  if (this.gameBoard[row][column - 1].path == "") {
           console.log("yessss");
           x =row;
           y = column-1;
@@ -215,7 +215,7 @@ export class GameComponent implements OnInit {
         const el = (document.getElementById(id) as HTMLTableRowElement);
         console.log(x,y);
         el.classList.add("options");
-       // this.gameBoard[x][y].path = this.gameBoard[x][y].path;
+        // this.gameBoard[x][y].path = this.gameBoard[x][y].path;
         //this.gameBoard[x][y].path = "";
 
         num= num +1;
@@ -255,3 +255,33 @@ export class GameComponent implements OnInit {
   }
 
 }
+
+
+
+
+
+
+
+
+
+// private selectedCard: Card = new Card();
+//
+// trClick(row, column) {
+//   if(this.gameBoard[row][column].value != 0) {
+//     this.selectedCard = this.gameBoard[row][column];
+//     this.gameBoard[row][column] = new Card();
+//     this.emptyCard(this.gameBoard[row][column], row, column)
+//   }
+//   else {
+//     this.gameBoard[row][column] = this.selectedCard;
+//     this.selectedCard = new Card();
+//   }
+// }
+//
+// emptyCard(cd, row, column) {
+//   cd.color = "purple";
+//   cd.value = 0;
+//   cd.path = "";
+//   cd = this.setPos(cd,row, column);
+//   return cd;
+// }
