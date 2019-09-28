@@ -30,14 +30,15 @@ export class SignUpComponent implements OnInit {
       errors.push("Passwords do not match")
     }
 
-    // if(errors.length > 0) {
-    //   this.service.login().subscribe((data: string) => {
-    //     console.log(data);
-    //     if(data.success) {
-    //       this.router.navigateByUrl('/game');
-    //     }
-    //   });
-    // }
+
+    if(errors.length > 0) {
+      this.service.login().subscribe((data: string) => {
+        console.log(data);
+        if(data.success) {
+          this.router.navigateByUrl('/game');
+        }
+      });
+    }
     console.log(email, password)
   }
 }
