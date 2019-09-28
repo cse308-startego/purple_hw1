@@ -26,7 +26,7 @@ export class GameComponent implements OnInit{
 
   populateImageMap() {
 
-    let basePath = "../asset/";
+    let basePath = "../assets/";
 
     for (let i = 1; i <= 12; i++) {
       let name = ""
