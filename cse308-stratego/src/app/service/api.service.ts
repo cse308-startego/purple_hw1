@@ -11,8 +11,8 @@ export class ApiService {
   constructor(private http: HttpClient) { }
   baseUrl: string = 'http://localhost:8080/stratego/';
 
-  login(){
-    return this.http.get(this.baseUrl + "login", {responseType: 'text'});
+  login(){  //pass username & passwrd here jay
+    return this.http.get(this.baseUrl + "login", {responseType: 'text'}); //paper padh rohit ka question mark
   }
 
   arrayManipulation(gameBoard: Board) {
