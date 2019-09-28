@@ -116,9 +116,7 @@ export class GameComponent implements OnInit {
       } else if (i == 11) {
         this.initializerHelper(6, color, i)
       }
-
     }
-
   }
 
   initializerHelper(NOC, color: string, val) {
@@ -129,6 +127,7 @@ export class GameComponent implements OnInit {
       temp.color = color;
       temp.value = val;
       temp.path = this.imageMap.get(val);
+
       if (color == "red")
         this.redArr.push(temp);
       else
@@ -162,7 +161,7 @@ export class GameComponent implements OnInit {
 
   setPositions() {
     for(let i = 0; i < this.gameBoard.length; i++) {
-      for(let j = 0; j < this.gameBoard[0].length; j++) {
+      for(let j = 0; j < this.gameBoard[i].length; j++) {
         this.gameBoard[i][j].x = i;
         this.gameBoard[i][j].y = j;
       }
@@ -172,7 +171,6 @@ export class GameComponent implements OnInit {
   setPos(tcard: Card, x: number, y: number) {
     tcard.x = x;
     tcard.y = y;
-
     return tcard;
   }
 
@@ -185,9 +183,12 @@ export class GameComponent implements OnInit {
   }
 
   populatePlayers(){
+
+
   }
 
   trClick(row, column) {
+
     if(this.gameBoard[row][column].value != 0) {
       this.selectedCard = this.gameBoard[row][column];
       this.gameBoard[row][column] = new Card();
