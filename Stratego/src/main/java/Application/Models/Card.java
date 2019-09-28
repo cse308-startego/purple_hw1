@@ -1,4 +1,4 @@
-package Models;
+package Application.Models;
 
 public class Card {
     private int value;

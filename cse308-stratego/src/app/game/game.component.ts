@@ -1,5 +1,6 @@
 import {Component, OnInit} from '@angular/core';
-import {Block, Card} from './game-models';
+import {Block, Board, Card} from './game-models';
+import {ApiService} from '../service/api.service';
 
 @Component({
   selector: 'game-page',
@@ -7,29 +8,43 @@ import {Block, Card} from './game-models';
   styleUrls: ['game.component.css']
 
 })
-export class GameComponent implements OnInit{
-  columns: string[] = [];
-  rows: number[] = [];
+export class GameComponent implements OnInit {
+  columns: number[] = [0, 1, 2, 3, 4, 5, 6, 7, 8, 9];
+  rows: number[] = [0, 1, 2, 3, 4, 5, 6, 7, 8, 9];
+
+
 
   private gameBoard: Card[][] = [];
   private redArr: Card[] = [];
   private blueArr: Card[] = [];
-  private imageMap: Map<number, string> = new Map();
-  private imagePaths: String[] = [];
+  private imageMap: Map<number, string> = new Map<number,string>();
+
+  constructor(private service: ApiService) {}
+
 
   ngOnInit() {
     this.populateImageMap();
     this.initializeCards();
     this.setupGameBoard();
-  }
+    this.setPositions();
+    console.log(this.gameBoard);
 
+    let board = new Board();
+    board.board = this.gameBoard;
+
+    this.service.arrayManipulation(board).subscribe((data: string) => {
+      console.log(data)
+    });
+
+
+  }
 
   populateImageMap() {
 
     let basePath = "../assets/";
 
     for (let i = 1; i <= 12; i++) {
-      let name = ""
+      let name = "";
       if (i == 1)
         name = "marshal.png";
       else if (i == 2)
@@ -55,11 +70,9 @@ export class GameComponent implements OnInit{
       else if (i == 12)
         name = "flag.png";
 
-      this.imageMap.set(i, basePath + name);
-      this.imagePaths.push(basePath+name);
+      this.imageMap.set(i, basePath + name)
     }
     console.log(this.imageMap);
-    console.log(this.imagePaths);
   }
 
   initializeCards() {
@@ -85,7 +98,7 @@ export class GameComponent implements OnInit{
       if (i == 1 || i == 2 || i == 10 || i == 12) {
         card.color = color;
         card.value = i;
-        card.path = "../assets/"
+        card.path = this.imageMap.get(i);
         if (color == "red")
           this.redArr.push(card);
         else
@@ -115,6 +128,7 @@ export class GameComponent implements OnInit{
       temp=this.setPos(temp, 0, 0);
       temp.color = color;
       temp.value = val;
+      temp.path = this.imageMap.get(val);
       if (color == "red")
         this.redArr.push(temp);
       else
@@ -133,6 +147,7 @@ export class GameComponent implements OnInit{
       let cd = new Card();
       cd.color = "purple";
       cd.value = 0;
+      cd.path = "";
       cd = this.setPos(cd,0, 0);
       this.gameBoard.push([cd, cd, cd, cd, cd, cd, cd, cd, cd, cd])
     }
@@ -142,7 +157,16 @@ export class GameComponent implements OnInit{
       this.gameBoard.push(this.blueArr.splice(0, 10));
       s--;
     }
-      console.log(this.gameBoard);
+    console.log(this.gameBoard);
+  }
+
+  setPositions() {
+    for(let i = 0; i < this.gameBoard.length; i++) {
+      for(let j = 0; j < this.gameBoard[0].length; j++) {
+        this.gameBoard[i][j].x = i;
+        this.gameBoard[i][j].y = j;
+      }
+    }
   }
 
   setPos(tcard: Card, x: number, y: number) {
@@ -152,8 +176,26 @@ export class GameComponent implements OnInit{
     return tcard;
   }
 
-  trClick(row, columns) {
-    console.log(row, columns)
+  private selectedCard: Card = new Card();
+
+  onSelection() {
   }
+
+  onMove() {
+  }
+
+  populatePlayers(){
+  }
+
+  trClick(row, column) {
+    if(this.gameBoard[row][column].value != 0) {
+      this.selectedCard = this.gameBoard[row][column];
+      this.gameBoard[row][column] = new Card();
+    }
+    else {
+      this.gameBoard[row][column] = this.selectedCard;
+    }
+  }
+
 
 }

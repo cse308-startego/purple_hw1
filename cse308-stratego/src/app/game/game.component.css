@@ -2,8 +2,11 @@
   border: 7px outset black;
 }
 #chessBoard td{
-  width: 10px;
-  height: 60px;
+
+}
+#chessBoard tr{
+  width: 32px;
+  height: 32px;
 }
 
 #chessBoard tr:nth-child(odd) td:nth-child(even),
@@ -22,9 +25,15 @@ ul {
 }
 
 .imageSize {
-  width: 35px;
-  height: 35px;
-  margin: 0px;
+  height: 50px;
+
+}
+containsEverything{
+  height: 100%;
 }
 
 
+.imageSizeinsidetd{
+
+
+}
