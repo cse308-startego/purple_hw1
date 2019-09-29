@@ -180,56 +180,119 @@ export class GameComponent implements OnInit {
     return tcard;
   }
 
-  private selectedCard: Card = this.emptyCard(0,0);
+  private selectedCard: Card = this.emptyCard(0, 0);
 
 
   trClick(row, column) {
-    if(this.gameBoard[row][column].value != 0 && this.selectedCard.value != 0) {
+    if (this.gameBoard[row][column].value != 0 && this.selectedCard.value != 0) {
       this.validateMove(row, column);
 
-    }
-    else if (this.gameBoard[row][column].value != 0) {
+    } else if (this.gameBoard[row][column].value != 0) {
       this.addGreen(row, column);
       this.selectedCard = this.gameBoard[row][column];
       this.gameBoard[row][column] = this.emptyCard(row, column)
-    }else
-     {
-      this.removeGreen(this.selectedCard.x,this.selectedCard.y);
+    } else {
+      this.removeGreen(this.selectedCard.x, this.selectedCard.y);
       this.gameBoard[row][column] = this.selectedCard;
       this.gameBoard[row][column].x = row;
       this.gameBoard[row][column].y = column;
-      this.selectedCard = this.emptyCard(0,0);
+      this.selectedCard = this.emptyCard(0, 0);
 
     }
 
   }
 
   validateMove(row, column) {
-    if(this.selectedCard.color != this.gameBoard[row][column].color) {
+    if (this.selectedCard.color != this.gameBoard[row][column].color) {
 
-      if(this.selectedCard.value < this.gameBoard[row][column].value){
+      if (this.selectedCard.value < this.gameBoard[row][column].value) {
         this.gameBoard[row][column] = this.selectedCard;
-        this.selectedCard = this.emptyCard(0,0);
+        this.selectedCard = this.emptyCard(0, 0);
       }
-      if(true){}
-      if(true){}
-      if(true){}
-      if(true){}
-      if(true){}
-      if(true){}
-      if(true){}
+      if (true) {
+      }
+      if (true) {
+      }
+      if (true) {
+      }
+      if (true) {
+      }
+      if (true) {
+      }
+      if (true) {
+      }
+      if (true) {
+      }
 
 
-
-    }
-    else {
+    } else {
       this.gameBoard[this.selectedCard.x][this.selectedCard.y] = this.selectedCard;
-      this.removeGreen(this.selectedCard.x,this.selectedCard.y);
-      this.selectedCard = this.emptyCard(0,0);
+      this.removeGreen(this.selectedCard.x, this.selectedCard.y);
+      this.selectedCard = this.emptyCard(0, 0);
     }
   }
 
+  showOptions(x, y) {
+    const id: string = String(x) + String(y);
+    const el = (document.getElementById(id) as HTMLTableRowElement);
+    console.log(x, y);
+    el.classList.add("options");
+  }
+
+  showAttackPossibility(x, y) {
+    const id: string = String(x) + String(y);
+    const el = (document.getElementById(id) as HTMLTableRowElement);
+    console.log(x, y);
+    el.classList.add("attack_possibility");
+  }
+
   addGreen(row, column) {
+    let x = 0;
+    let y = 0;
+
+    if ((row - 1) >= 0 && this.gameBoard[row - 1][column].path == "") {
+      x = row - 1;
+      y = column;
+      this.showOptions(x, y);
+    } else if (this.gameBoard[row - 1][column].color != this.gameBoard[row][column].color) {
+      x = row - 1;
+      y = column;
+      this.showAttackPossibility(x, y);
+    }
+
+    if ((row + 1) <= 9 && this.gameBoard[row + 1][column].path == "") {
+      x = row + 1;
+      y = column;
+      this.showOptions(x, y);
+    } else if ((row + 1) <= 9 && this.gameBoard[row + 1][column].color != this.gameBoard[row][column].color) {
+      x = row + 1;
+      y = column;
+      this.showAttackPossibility(x, y);
+    }
+
+    if ((column - 1) >= 0 && this.gameBoard[row][column - 1].path == "") {
+      x = row;
+      y = column - 1;
+      this.showOptions(x, y);
+    } else if ((column - 1) >= 0 && this.gameBoard[row][column - 1].color != this.gameBoard[row][column].color) {
+      x = row;
+      y = column - 1;
+      this.showAttackPossibility(x, y);
+    }
+
+    if ((column + 1) <= 9 && this.gameBoard[row][column + 1].path == "") {
+      x = row;
+      y = column + 1;
+      this.showOptions(x, y);
+    } else if ((column + 1) <= 9 && this.gameBoard[row][column + 1].color != this.gameBoard[row][column].color) {
+      x = row;
+      y = column + 1;
+      this.showAttackPossibility(x, y);
+    }
+  }
+
+
+  removeGreen(row, column) {
     let x = 0;
     let y = 0;
     if ((row - 1) >= 0 && this.gameBoard[row - 1][column].path == "") {
@@ -239,19 +302,9 @@ export class GameComponent implements OnInit {
       const id: string = String(x) + String(y);
       const el = (document.getElementById(id) as HTMLTableRowElement);
       console.log(x, y);
-      el.classList.add("options");
+      el.classList.remove("options");
 
-    } else {
-      if (this.gameBoard[row - 1][column].color != this.gameBoard[row][column].color) {
-        x = row - 1;
-        y = column;
-        const id: string = String(x) + String(y);
-        const el = (document.getElementById(id) as HTMLTableRowElement);
-        console.log(x, y);
-        el.classList.add("attack_possibility");
-      }
     }
-
     if ((row + 1) <= 9 && this.gameBoard[row + 1][column].path == "") {
       console.log("yessss");
       x = row + 1;
@@ -259,16 +312,7 @@ export class GameComponent implements OnInit {
       const id: string = String(x) + String(y);
       const el = (document.getElementById(id) as HTMLTableRowElement);
       console.log(x, y);
-      el.classList.add("options");
-    } else {
-      if ((row + 1) <= 9 && this.gameBoard[row + 1][column].color != this.gameBoard[row][column].color) {
-        x = row + 1;
-        y = column;
-        const id: string = String(x) + String(y);
-        const el = (document.getElementById(id) as HTMLTableRowElement);
-        console.log(x, y);
-        el.classList.add("attack_possibility");
-      }
+      el.classList.remove("options");
     }
     if ((column - 1) >= 0 && this.gameBoard[row][column - 1].path == "") {
       console.log("yessss");
@@ -277,75 +321,15 @@ export class GameComponent implements OnInit {
       const id: string = String(x) + String(y);
       const el = (document.getElementById(id) as HTMLTableRowElement);
       console.log(x, y);
-      el.classList.add("options");
-    } else {
-      if ((column - 1) >=0 && this.gameBoard[row][column - 1].color != this.gameBoard[row][column].color) {
-        x = row;
-        y = column - 1;
-        const id: string = String(x) + String(y);
-        const el = (document.getElementById(id) as HTMLTableRowElement);
-        console.log(x, y);
-        el.classList.add("attack_possibility");
-      }
-      if ((column + 1) <= 9 && this.gameBoard[row][column + 1].path == "") {
-        console.log("yessss");
-        x = row;
-        y = column + 1;
-        const id: string = String(x) + String(y);
-        const el = (document.getElementById(id) as HTMLTableRowElement);
-        console.log(x, y);
-        el.classList.add("options");
-      } else {
-        if ((column + 1) <= 9 && this.gameBoard[row][column + 1].color != this.gameBoard[row][column].color) {
-          x = row;
-          y = column +1;
-          const id: string = String(x) + String(y);
-          const el = (document.getElementById(id) as HTMLTableRowElement);
-          console.log(x, y);
-          el.classList.add("attack_possibility");
-        }
-      }
-    }
-  }
-
-  removeGreen(row, column) {
-    let x =0;
-    let y = 0;
-    if ((row-1) >= 0 && this.gameBoard[row - 1][column].path == "") {
-      console.log("yessss");
-      x =row-1;
-      y = column;
-      const id: string = String(x) + String(y);
-      const el = (document.getElementById(id) as HTMLTableRowElement);
-      console.log(x,y);
-      el.classList.remove("options");
-
-    }
-    if ((row+1) <= 9 && this.gameBoard[row + 1][column].path == "") {
-      console.log("yessss");
-      x =row+1;
-      y = column;
-      const id: string = String(x) + String(y);
-      const el = (document.getElementById(id) as HTMLTableRowElement);
-      console.log(x,y);
       el.classList.remove("options");
     }
-    if ((column-1) >= 0 && this.gameBoard[row][column - 1].path == "") {
+    if ((row + 1) <= 9 && this.gameBoard[row][column + 1].path == "") {
       console.log("yessss");
-      x =row;
-      y = column-1;
+      x = row;
+      y = column + 1;
       const id: string = String(x) + String(y);
       const el = (document.getElementById(id) as HTMLTableRowElement);
-      console.log(x,y);
-      el.classList.remove("options");
-    }
-    if ((row+1) <= 9 && this.gameBoard[row][column + 1].path == "") {
-      console.log("yessss");
-      x =row;
-      y = column+1;
-      const id: string = String(x) + String(y);
-      const el = (document.getElementById(id) as HTMLTableRowElement);
-      console.log(x,y);
+      console.log(x, y);
       el.classList.remove("options");
     }
   }
@@ -373,18 +357,11 @@ export class GameComponent implements OnInit {
     cd.color = "purple";
     cd.value = 0;
     cd.path = "";
-    cd = this.setPos(cd,row, column);
+    cd = this.setPos(cd, row, column);
     return cd;
   }
 
 }
-
-
-
-
-
-
-
 
 
 // private selectedCard: Card = new Card();
