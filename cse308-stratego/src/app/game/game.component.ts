@@ -279,7 +279,7 @@ export class GameComponent implements OnInit {
       console.log(x, y);
       el.classList.add("options");
     } else {
-      if ((column - 1) >=0 && this.gameBoard[row][column - 1].color != this.gameBoard[row][column].color) {
+      if ((column - 1) >= 0 && this.gameBoard[row][column - 1].color != this.gameBoard[row][column].color) {
         x = row;
         y = column - 1;
         const id: string = String(x) + String(y);
@@ -287,6 +287,7 @@ export class GameComponent implements OnInit {
         console.log(x, y);
         el.classList.add("attack_possibility");
       }
+    }
       if ((column + 1) <= 9 && this.gameBoard[row][column + 1].path == "") {
         console.log("yessss");
         x = row;
@@ -305,7 +306,6 @@ export class GameComponent implements OnInit {
           el.classList.add("attack_possibility");
         }
       }
-    }
   }
 
   removeGreen(row, column) {

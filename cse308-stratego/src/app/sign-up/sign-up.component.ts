@@ -39,7 +39,7 @@ export class SignUpComponent implements OnInit {
     //     }
     //   });
     // }
-    
+
     console.log(email, password)
   }
 }
