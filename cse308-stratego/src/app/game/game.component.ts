@@ -180,59 +180,174 @@ export class GameComponent implements OnInit {
     return tcard;
   }
 
-  private selectedCard: Card = new Card();
+  private selectedCard: Card = this.emptyCard(0,0);
 
 
   trClick(row, column) {
-    let num =0;
-    if (this.gameBoard[row][column].value != 0) {
-      while(num !=4)
-      {
-        let x =0;
-        let y = 0;
-        if (this.gameBoard[row - 1][column].path == "") {
-          console.log("yessss");
-          x =row-1;
-          y = column;
-        }
-        else if (this.gameBoard[row + 1][column].path == "") {
-          console.log("yessss");
-          x =row+1;
-          y = column;
-        }
-        else  if (this.gameBoard[row][column - 1].path == "") {
-          console.log("yessss");
-          x =row;
-          y = column-1;
-        }
-        else  if (this.gameBoard[row][column + 1].path == "") {
-          console.log("yessss");
-          x =row;
-          y = column+1;
-        }
+    if(this.gameBoard[row][column].value != 0 && this.selectedCard.value != 0) {
+      this.validateMove(row, column);
 
+    }
+    else if (this.gameBoard[row][column].value != 0) {
+      this.addGreen(row, column);
+      this.selectedCard = this.gameBoard[row][column];
+      this.gameBoard[row][column] = this.emptyCard(row, column)
+    }else
+     {
+      this.removeGreen(this.selectedCard.x,this.selectedCard.y);
+      this.gameBoard[row][column] = this.selectedCard;
+      this.gameBoard[row][column].x = row;
+      this.gameBoard[row][column].y = column;
+      this.selectedCard = this.emptyCard(0,0);
+
+    }
+
+  }
+
+  validateMove(row, column) {
+    if(this.selectedCard.color != this.gameBoard[row][column].color) {
+
+      if(this.selectedCard.value < this.gameBoard[row][column].value){
+        this.gameBoard[row][column] = this.selectedCard;
+        this.selectedCard = this.emptyCard(0,0);
+      }
+      if(true){}
+      if(true){}
+      if(true){}
+      if(true){}
+      if(true){}
+      if(true){}
+      if(true){}
+
+
+
+    }
+    else {
+      this.gameBoard[this.selectedCard.x][this.selectedCard.y] = this.selectedCard;
+      this.removeGreen(this.selectedCard.x,this.selectedCard.y);
+      this.selectedCard = this.emptyCard(0,0);
+    }
+  }
+
+  addGreen(row, column) {
+    let x = 0;
+    let y = 0;
+    if ((row - 1) >= 0 && this.gameBoard[row - 1][column].path == "") {
+      console.log("yessss");
+      x = row - 1;
+      y = column;
+      const id: string = String(x) + String(y);
+      const el = (document.getElementById(id) as HTMLTableRowElement);
+      console.log(x, y);
+      el.classList.add("options");
+
+    } else {
+      if (this.gameBoard[row - 1][column].color != this.gameBoard[row][column].color) {
+        x = row - 1;
+        y = column;
         const id: string = String(x) + String(y);
         const el = (document.getElementById(id) as HTMLTableRowElement);
-        console.log(x,y);
-        el.classList.add("options");
-        // this.gameBoard[x][y].path = this.gameBoard[x][y].path;
-        //this.gameBoard[x][y].path = "";
-
-        num= num +1;
-
+        console.log(x, y);
+        el.classList.add("attack_possibility");
       }
+    }
 
-      this.selectedCard = this.gameBoard[row][column];
-      this.gameBoard[row][column] = new Card();
+    if ((row + 1) <= 9 && this.gameBoard[row + 1][column].path == "") {
+      console.log("yessss");
+      x = row + 1;
+      y = column;
+      const id: string = String(x) + String(y);
+      const el = (document.getElementById(id) as HTMLTableRowElement);
+      console.log(x, y);
+      el.classList.add("options");
     } else {
-      this.gameBoard[row][column] = this.selectedCard;
+      if ((row + 1) <= 9 && this.gameBoard[row + 1][column].color != this.gameBoard[row][column].color) {
+        x = row + 1;
+        y = column;
+        const id: string = String(x) + String(y);
+        const el = (document.getElementById(id) as HTMLTableRowElement);
+        console.log(x, y);
+        el.classList.add("attack_possibility");
+      }
     }
+    if ((column - 1) >= 0 && this.gameBoard[row][column - 1].path == "") {
+      console.log("yessss");
+      x = row;
+      y = column - 1;
+      const id: string = String(x) + String(y);
+      const el = (document.getElementById(id) as HTMLTableRowElement);
+      console.log(x, y);
+      el.classList.add("options");
+    } else {
+      if ((column - 1) >=0 && this.gameBoard[row][column - 1].color != this.gameBoard[row][column].color) {
+        x = row;
+        y = column - 1;
+        const id: string = String(x) + String(y);
+        const el = (document.getElementById(id) as HTMLTableRowElement);
+        console.log(x, y);
+        el.classList.add("attack_possibility");
+      }
+      if ((column + 1) <= 9 && this.gameBoard[row][column + 1].path == "") {
+        console.log("yessss");
+        x = row;
+        y = column + 1;
+        const id: string = String(x) + String(y);
+        const el = (document.getElementById(id) as HTMLTableRowElement);
+        console.log(x, y);
+        el.classList.add("options");
+      } else {
+        if ((column + 1) <= 9 && this.gameBoard[row][column + 1].color != this.gameBoard[row][column].color) {
+          x = row;
+          y = column +1;
+          const id: string = String(x) + String(y);
+          const el = (document.getElementById(id) as HTMLTableRowElement);
+          console.log(x, y);
+          el.classList.add("attack_possibility");
+        }
+      }
+    }
+  }
 
-
-    if ((this.gameBoard[row][column].value = 0)) {
+  removeGreen(row, column) {
+    let x =0;
+    let y = 0;
+    if ((row-1) >= 0 && this.gameBoard[row - 1][column].path == "") {
+      console.log("yessss");
+      x =row-1;
+      y = column;
+      const id: string = String(x) + String(y);
+      const el = (document.getElementById(id) as HTMLTableRowElement);
+      console.log(x,y);
+      el.classList.remove("options");
 
     }
-
+    if ((row+1) <= 9 && this.gameBoard[row + 1][column].path == "") {
+      console.log("yessss");
+      x =row+1;
+      y = column;
+      const id: string = String(x) + String(y);
+      const el = (document.getElementById(id) as HTMLTableRowElement);
+      console.log(x,y);
+      el.classList.remove("options");
+    }
+    if ((column-1) >= 0 && this.gameBoard[row][column - 1].path == "") {
+      console.log("yessss");
+      x =row;
+      y = column-1;
+      const id: string = String(x) + String(y);
+      const el = (document.getElementById(id) as HTMLTableRowElement);
+      console.log(x,y);
+      el.classList.remove("options");
+    }
+    if ((row+1) <= 9 && this.gameBoard[row][column + 1].path == "") {
+      console.log("yessss");
+      x =row;
+      y = column+1;
+      const id: string = String(x) + String(y);
+      const el = (document.getElementById(id) as HTMLTableRowElement);
+      console.log(x,y);
+      el.classList.remove("options");
+    }
   }
 
   shuffle(array: Card[]) {
@@ -240,7 +355,6 @@ export class GameComponent implements OnInit {
 
     // While there remain elements to shuffle...
     while (0 !== currentIndex) {
-
       // Pick a remaining element...
       randomIndex = Math.floor(Math.random() * currentIndex);
       currentIndex -= 1;
@@ -252,6 +366,15 @@ export class GameComponent implements OnInit {
     }
 
     return array;
+  }
+
+  emptyCard(row, column) {
+    let cd = new Card();
+    cd.color = "purple";
+    cd.value = 0;
+    cd.path = "";
+    cd = this.setPos(cd,row, column);
+    return cd;
   }
 
 }
@@ -278,10 +401,4 @@ export class GameComponent implements OnInit {
 //   }
 // }
 //
-// emptyCard(cd, row, column) {
-//   cd.color = "purple";
-//   cd.value = 0;
-//   cd.path = "";
-//   cd = this.setPos(cd,row, column);
-//   return cd;
-// }
+

@@ -64,6 +64,10 @@ table {
   background-color: #82d39b;
 }
 
+.attack_possibility{
+  background-color: #FF7373;
+}
+
 ul {
   flex-direction: row;
   justify-content: center;
