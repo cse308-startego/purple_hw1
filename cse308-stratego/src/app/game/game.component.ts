@@ -155,11 +155,14 @@ export class GameComponent implements OnInit {
       if (i == 1 || i == 2 || i == 10 || i == 12) {
         card.color = color;
         card.value = i;
-        card.path = this.imageMapred.get(i);
-        if (color == "red")
+
+        if (color == "red") {
+          card.path = this.imageMapred.get(i);
           this.redArr.push(card);
-        else
+        }else {
+          card.path = this.imageMapblue.get(i);
           this.blueArr.push(card);
+        }
       } else if (i == 3) {
         this.initializerHelper(2, color, i)
       } else if (i == 4) {
@@ -260,11 +263,12 @@ export class GameComponent implements OnInit {
     if ( this.gameBoard[row][column].value == 11 ||  this.gameBoard[row][column].value == 12)
       return;
 
-    // if(this.selectedCard.value != 9 && this.selectedCard.value != 0){
-    //    if (this.validatePosition(this.gameBoard[row][column].x, this.gameBoard[row][column].y) == false)
-    //      // this.trClick( row, column);
-    //    return;
-    // }
+    if(this.gameBoard[row][column].value != 9 && this.selectedCard.value == 0){
+      if (this.validatePosition(this.gameBoard[row][column].x, this.gameBoard[row][column].y) == false)
+        this.validateMove(row, column);
+      // this.trClick( row, column);
+        return;
+    }
 
     // this is where the attacks on the other cards happen.
     if (this.gameBoard[row][column].value != 0 && this.selectedCard.value != 0) {
@@ -310,8 +314,7 @@ export class GameComponent implements OnInit {
 
     if (this.selectedCard.color != this.gameBoard[row][column].color) {
 
-
-      if (this.selectedCard.value < this.gameBoard[row][column].value) {            // if the card in hand is
+      if (this.selectedCard.value > this.gameBoard[row][column].value) {            // if the card in hand is
         console.log("in validate move, if", this.selectedCard, this.gameBoard[row][column]);
 
         this.removeGreen(this.selectedCard.x, this.selectedCard.y);
@@ -385,7 +388,7 @@ export class GameComponent implements OnInit {
     let x = 0;
     let y = 0;
 
-    if ((row - 1) >= 0 && this.gameBoard[row - 1][column].path == "") {
+    if ((row - 1) >= 0 && this.gameBoard[row - 1][column].value == 0) {
       x = row - 1;
       y = column;
       this.showOptions(x, y, 1);
@@ -395,7 +398,7 @@ export class GameComponent implements OnInit {
       this.showAttackPossibility(x, y, 1);
     }
 
-    if ((row + 1) <= 9 && this.gameBoard[row + 1][column].path == "") {
+    if ((row + 1) <= 9 && this.gameBoard[row + 1][column].value == 0) {
       x = row + 1;
       y = column;
       this.showOptions(x, y, 1);
@@ -405,7 +408,7 @@ export class GameComponent implements OnInit {
       this.showAttackPossibility(x, y, 1);
     }
 
-    if ((column - 1) >= 0 && this.gameBoard[row][column - 1].path == "") {
+    if ((column - 1) >= 0 && this.gameBoard[row][column - 1].value == 0) {
       x = row;
       y = column - 1;
       this.showOptions(x, y, 1);
@@ -415,7 +418,7 @@ export class GameComponent implements OnInit {
       this.showAttackPossibility(x, y, 1);
     }
 
-    if ((column + 1) <= 9 && this.gameBoard[row][column + 1].path == "") {
+    if ((column + 1) <= 9 && this.gameBoard[row][column + 1].value == 0) {
       x = row;
       y = column + 1;
       this.showOptions(x, y, 1);
@@ -430,7 +433,7 @@ export class GameComponent implements OnInit {
     let x = 0;
     let y = 0;
 
-    if ((row - 1) >= 0 && this.gameBoard[row - 1][column].path == "") {
+    if ((row - 1) >= 0 && this.gameBoard[row - 1][column].value == 0) {
       x = row - 1;
       y = column;
       this.showOptions(x, y, 0);
@@ -440,7 +443,7 @@ export class GameComponent implements OnInit {
       this.showAttackPossibility(x, y, 0);
     }
 
-    if ((row + 1) <= 9 && this.gameBoard[row + 1][column].path == "") {
+    if ((row + 1) <= 9 && this.gameBoard[row + 1][column].value == 0) {
       x = row + 1;
       y = column;
       this.showOptions(x, y, 0);
@@ -450,7 +453,7 @@ export class GameComponent implements OnInit {
       this.showAttackPossibility(x, y, 0);
     }
 
-    if ((column - 1) >= 0 && this.gameBoard[row][column - 1].path == "") {
+    if ((column - 1) >= 0 && this.gameBoard[row][column - 1].value == 0) {
       x = row;
       y = column - 1;
       this.showOptions(x, y, 0);
@@ -460,7 +463,7 @@ export class GameComponent implements OnInit {
       this.showAttackPossibility(x, y, 0);
     }
 
-    if ((column + 1) <= 9 && this.gameBoard[row][column + 1].path == "") {
+    if ((column + 1) <= 9 && this.gameBoard[row][column + 1].value == 0) {
       x = row;
       y = column + 1;
       this.showOptions(x, y, 0);
@@ -494,7 +497,7 @@ export class GameComponent implements OnInit {
     let cd = new Card();
     cd.color = "Blank Baba bakchod";
     cd.value = 0;
-    cd.path = "";
+    cd.path = "../assets/2.png";
     cd = this.setPos(cd, row, column);
     return cd;
   }
