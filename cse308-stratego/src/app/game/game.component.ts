@@ -260,19 +260,12 @@ export class GameComponent implements OnInit {
 
 
     // flag and the bomb isn't moved.
-    if ( this.gameBoard[row][column].value == 11 ||  this.gameBoard[row][column].value == 12)
-      return;
-
-    if(this.gameBoard[row][column].value != 9 && this.selectedCard.value == 0){
-      if (this.validatePosition(this.gameBoard[row][column].x, this.gameBoard[row][column].y) == false)
-        this.validateMove(row, column);
-      // this.trClick( row, column);
-        return;
-    }
 
     // this is where the attacks on the other cards happen.
     if (this.gameBoard[row][column].value != 0 && this.selectedCard.value != 0) {
-      this.validateMove(row, column);
+      if(this.validatePosition(row, column) == true) {
+        this.validateMove(row, column);
+      }
     }
 
     else if (this.gameBoard[row][column].value != 0) {                                                // this is where the control comes just before attacking some card or moving (basically when you select a card).
@@ -286,27 +279,35 @@ export class GameComponent implements OnInit {
     else {
 
       console.log("Inside TrClick, else part", this.selectedCard, this.gameBoard[row][column]);
-
-      // this.validatePosition(this.selectedCard.x, this.selectedCard.y);
-      this.removeGreen(this.selectedCard.x, this.selectedCard.y);
-      this.gameBoard[row][column] = this.selectedCard;
-      this.gameBoard[row][column].x = row;
-      this.gameBoard[row][column].y = column;
-      this.selectedCard = this.emptyCard(0, 0);
+      if(this.validatePosition(row, column) == true) {
+        this.removeGreen(this.selectedCard.x, this.selectedCard.y);
+        this.gameBoard[row][column] = this.selectedCard;
+        this.gameBoard[row][column].x = row;
+        this.gameBoard[row][column].y = column;
+        this.selectedCard = this.emptyCard(0, 0);
+      }
 
     }
 
   }
 
+  initiallySelecting(row, column) {
+    if ( this.gameBoard[row][column].value == 11 ||  this.gameBoard[row][column].value == 12 || this.gameBoard[row][column].value == 0)
+      return;
+
+
+  }
+
   validatePosition(row, col){
 
-    if(((row+1) == this.selectedCard.x || (row - 1) == this.selectedCard.x)
-        && ((col+1) == this.selectedCard.y || (col-1) == this.selectedCard.y))
+    if((((row+1) == this.selectedCard.x || (row - 1) == this.selectedCard.x) && col == this.selectedCard.y)
+      || (((col+1) == this.selectedCard.y || (col-1) == this.selectedCard.y) && row == this.selectedCard.x))
       return true;
 
     console.log("Card can only move one block away");
     return false;
   }
+
 
   validateMove(row, column) {
     console.log("in validate move", this.selectedCard, this.gameBoard[row][column]);
