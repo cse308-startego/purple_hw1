@@ -40,7 +40,7 @@ export class SignUpComponent implements OnInit {
     }
     else {
       this.service.signUp(fullname, email, password).subscribe((data: string) => {
-        this.router.navigateByUrl('/game');
+        this.router.navigateByUrl('/login');
       })
     }
   }
