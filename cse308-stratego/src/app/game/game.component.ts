@@ -33,7 +33,6 @@ export class GameComponent implements OnInit {
     this.initializeCards();
     this.setupGameBoard();
     this.setPositions();
-    console.log(this.gameBoard);
 
     let board = new Board();
     board.board = this.gameBoard;
@@ -151,15 +150,17 @@ export class GameComponent implements OnInit {
       card.x = 0;
       card.y = 0;
 
-      (i);
       if (i == 1 || i == 2 || i == 10 || i == 12) {
         card.color = color;
         card.value = i;
-        card.path = this.imageMapred.get(i);
-        if (color == "red")
-          this.redArr.push(card);
-        else
+        if (color == "red") {
+          card.path = this.imageMapred.get(i);
+        this.redArr.push(card);
+      }
+        else {
+          card.path = this.imageMapblue.get(i);
           this.blueArr.push(card);
+        }
       } else if (i == 3) {
         this.initializerHelper(2, color, i)
       } else if (i == 4) {
@@ -205,25 +206,32 @@ export class GameComponent implements OnInit {
       this.gameBoard.push(this.redArr.splice(0, 10));
       s--;
     }
+    // @ts-ignore
+
 
     for (let i = 0; i < 2; i++) {
-      let cd = new Card();
-      cd.color = "purple";
-      cd.value = 0;
-      cd.path = "";
-      cd = this.setPos(cd, 0, 0);
-      // @ts-ignore
-      const temp = [cd, cd, cd, cd, cd, cd, cd, cd, cd, cd];
-      if (i==0) {
-        temp[2].path = this.imagelake.get(1);
-        temp[3].path = this.imagelake.get(2);
-        temp[6].path = this.imagelake.get(1);
-        temp[7].path = this.imagelake.get(2);
-      }else {
-        temp[2].path = this.imagelake.get(3);
-        temp[3].path = this.imagelake.get(4);
-        temp[6].path = this.imagelake.get(3);
-        temp[7].path = this.imagelake.get(4);
+      let temp = new Array<Card>(10);
+      console.log("hello", temp);
+      let cd_1;
+      for(let j=0; j<10;j++)
+      {
+         cd_1= new Card();
+        cd_1.color = "purple";
+        cd_1.value = 0;
+        cd_1.path = "";
+
+        if (j == 2) {
+          cd_1.path = this.imagelake.get(1);
+        } else if (j == 3) {
+          cd_1.path = this.imagelake.get(2);
+        } else if (j == 6) {
+          cd_1.path = this.imagelake.get(3);
+        } else if (j == 7) {
+          cd_1.path = this.imagelake.get(4);
+        }
+        console.log(cd_1);
+        cd_1 = this.setPos(cd_1, 0, 0);
+        temp[j]=cd_1;
       }
       console.log(temp);
       this.gameBoard.push(temp);
