@@ -15,9 +15,9 @@ export class GameComponent implements OnInit {
   private gameBoard: Card[][] = [];
   private redArr: Card[] = [];
   private blueArr: Card[] = [];
-  private imageMapred: Map<number, string> = new Map<number, string>();
-  private imageMapblue: Map<number, string> = new Map<number, string>();
-  private imagelake: Map<number, string> = new Map<number, string>();
+  private imageMap: Map<number, string> = new Map<number, string>();
+  private selectedCard: Card = this.emptyCard(0, 0);
+
 
   constructor(private service: ApiService) {
   }
@@ -25,19 +25,16 @@ export class GameComponent implements OnInit {
 
   ngOnInit() {
     this.populateImageMap();
-    this.populateImageMap_red();
-    this.populateImagelake();
     this.initializeCards();
     this.setupGameBoard();
     this.setPositions();
-
-    //this.setimage();
+    console.log(this.gameBoard);
 
     let board = new Board();
     board.board = this.gameBoard;
 
     this.service.arrayManipulation(board).subscribe((data: string) => {
-      (data)
+      console.log(data)
     });
 
 
@@ -74,68 +71,17 @@ export class GameComponent implements OnInit {
       else if (i == 12)
         name = "flag.png";
 
-      this.imageMapblue.set(i, basePath + name)
+      this.imageMap.set(i, basePath + name)
     }
-  }
-
-  populateImageMap_red() {
-
-    let basePath = "../assets/";
-
-    for (let i = 1; i <= 12; i++) {
-      let name = "";
-      if (i == 1)
-        name = "redmarshal.png";
-      else if (i == 2)
-        name = "redgeneral.png";
-      else if (i == 3)
-        name = "redcolonel.png";
-      else if (i == 4)
-        name = "redmajor.png";
-      else if (i == 5)
-        name = "redcaptain.png";
-      else if (i == 6)
-        name = "redlieutenant.png";
-      else if (i == 7)
-        name = "redsergeant.png";
-      else if (i == 8)
-        name = "redminer.png";
-      else if (i == 9)
-        name = "redscout.png";
-      else if (i == 10)
-        name = "redspy.png";
-      else if (i == 11)
-        name = "redbomb.png";
-      else if (i == 12)
-        name = "redflag.png";
-
-      this.imageMapred.set(i, basePath + name)
-    }
-  }
-
-  populateImagelake() {
-
-    let basePath = "../assets/";
-
-    for (let i = 1; i <= 4; i++) {
-      let name = "";
-      if (i == 1)
-        name = "1.png";
-      else if (i == 2)
-        name = "2.png";
-      else if (i == 3)
-        name = "3.png";
-      else if (i == 4)
-        name = "4.png";
-
-      this.imagelake.set(i, basePath + name)
-    }
+    console.log(this.imageMap);
   }
 
   initializeCards() {
 
     this.initializePlayers("red");
     this.initializePlayers("Blue");
+    console.log(this.redArr);
+    console.log(this.blueArr);
 
   }
 
@@ -149,11 +95,11 @@ export class GameComponent implements OnInit {
       card.x = 0;
       card.y = 0;
 
-      (i);
+      console.log(i);
       if (i == 1 || i == 2 || i == 10 || i == 12) {
         card.color = color;
         card.value = i;
-        card.path = this.imageMapred.get(i);
+        card.path = this.imageMap.get(i);
         if (color == "red")
           this.redArr.push(card);
         else
@@ -171,9 +117,7 @@ export class GameComponent implements OnInit {
       } else if (i == 11) {
         this.initializerHelper(6, color, i)
       }
-
     }
-
   }
 
   initializerHelper(NOC, color: string, val) {
@@ -183,18 +127,15 @@ export class GameComponent implements OnInit {
       temp = this.setPos(temp, 0, 0);
       temp.color = color;
       temp.value = val;
-      if (color == "red") {
-        temp.path = this.imageMapred.get(val);
+      temp.path = this.imageMap.get(val);
+      if (color == "red")
         this.redArr.push(temp);
-      } else {
-        temp.path = this.imageMapblue.get(val);
+      else
         this.blueArr.push(temp);
-      }
     }
     // this.shuffleElements(this.redArr);
     this.shuffle(this.redArr);
     this.shuffle(this.blueArr);
-
     // this.shuffleElements(this.blueArr);
   }
 
@@ -212,21 +153,7 @@ export class GameComponent implements OnInit {
       cd.value = 0;
       cd.path = "";
       cd = this.setPos(cd, 0, 0);
-      // @ts-ignore
-      const temp = [cd, cd, cd, cd, cd, cd, cd, cd, cd, cd];
-      if (i==0) {
-        temp[2].path = this.imagelake.get(1);
-        temp[3].path = this.imagelake.get(2);
-        temp[6].path = this.imagelake.get(1);
-        temp[7].path = this.imagelake.get(2);
-      }else {
-        temp[2].path = this.imagelake.get(3);
-        temp[3].path = this.imagelake.get(4);
-        temp[6].path = this.imagelake.get(3);
-        temp[7].path = this.imagelake.get(4);
-      }
-      console.log(temp);
-      this.gameBoard.push(temp);
+      this.gameBoard.push([cd, cd, cd, cd, cd, cd, cd, cd, cd, cd])
     }
 
     s = 4;
@@ -234,6 +161,7 @@ export class GameComponent implements OnInit {
       this.gameBoard.push(this.blueArr.splice(0, 10));
       s--;
     }
+    console.log(this.gameBoard);
   }
 
   setPositions() {
@@ -252,18 +180,38 @@ export class GameComponent implements OnInit {
     return tcard;
   }
 
-  private selectedCard: Card = this.emptyCard(0, 0);
-
 
   trClick(row, column) {
+
+
+    // flag and the bomb isn't moved.
+    if ( this.gameBoard[row][column].value == 11 ||  this.gameBoard[row][column].value == 12)
+      return;
+
+    // if(this.selectedCard.value != 9 && this.selectedCard.value != 0){
+    //    if (this.validatePosition(this.gameBoard[row][column].x, this.gameBoard[row][column].y) == false)
+    //      // this.trClick( row, column);
+    //    return;
+    // }
+
+    // this is where the attacks on the other cards happen.
     if (this.gameBoard[row][column].value != 0 && this.selectedCard.value != 0) {
       this.validateMove(row, column);
+    }
 
-    } else if (this.gameBoard[row][column].value != 0) {
+    else if (this.gameBoard[row][column].value != 0) {                                                // this is where the control comes just before attacking some card or moving (basically when you select a card).
+      console.log("Inside TrClick, else if part", this.selectedCard, this.gameBoard[row][column]);
       this.addGreen(row, column);
       this.selectedCard = this.gameBoard[row][column];
       this.gameBoard[row][column] = this.emptyCard(row, column)
-    } else {
+    }
+
+    // this else part deals with moving the card to another empty space.
+    else {
+
+      console.log("Inside TrClick, else part", this.selectedCard, this.gameBoard[row][column]);
+
+      // this.validatePosition(this.selectedCard.x, this.selectedCard.y);
       this.removeGreen(this.selectedCard.x, this.selectedCard.y);
       this.gameBoard[row][column] = this.selectedCard;
       this.gameBoard[row][column].x = row;
@@ -274,13 +222,47 @@ export class GameComponent implements OnInit {
 
   }
 
+  validatePosition(row, col){
+
+    if(((row+1) == this.selectedCard.x || (row - 1) == this.selectedCard.x)
+        && ((col+1) == this.selectedCard.y || (col-1) == this.selectedCard.y))
+      return true;
+
+    console.log("Card can only move one block away");
+    return false;
+  }
+
   validateMove(row, column) {
+    console.log("in validate move", this.selectedCard, this.gameBoard[row][column]);
+
+
     if (this.selectedCard.color != this.gameBoard[row][column].color) {
 
-      if (this.selectedCard.value < this.gameBoard[row][column].value) {
+
+      if (this.selectedCard.value < this.gameBoard[row][column].value) {            // if the card in hand is
+        console.log("in validate move, if", this.selectedCard, this.gameBoard[row][column]);
+
+        this.removeGreen(this.selectedCard.x, this.selectedCard.y);
         this.gameBoard[row][column] = this.selectedCard;
         this.selectedCard = this.emptyCard(0, 0);
       }
+
+      else if (this.selectedCard.value == this.gameBoard[row][column].value) {    // if the card values are equal destroy both.
+        console.log("in validate move, else if", this.selectedCard, this.gameBoard[row][column]);
+
+        this.removeGreen(this.selectedCard.x, this.selectedCard.y);
+        this.selectedCard = this.emptyCard(0, 0);
+        this.gameBoard[row][column] = this.emptyCard(0, 0);
+      }
+
+      else {
+        console.log("in validate move, else", this.selectedCard, this.gameBoard[row][column]);
+
+        this.removeGreen(this.selectedCard.x, this.selectedCard.y);
+        this.selectedCard = this.emptyCard(0, 0);
+      }
+
+
       if (true) {
       }
       if (true) {
@@ -304,17 +286,27 @@ export class GameComponent implements OnInit {
     }
   }
 
-  showOptions(x, y) {
+  showOptions(x, y, yes) {
     const id: string = String(x) + String(y);
     const el = (document.getElementById(id) as HTMLTableRowElement);
+    console.log(x, y)
 
-    el.classList.add("options");
+    if (yes)
+      el.classList.add("options");
+
+    else
+      el.classList.remove("options")
   }
 
-  showAttackPossibility(x, y) {
+  showAttackPossibility(x, y, yes) {
     const id: string = String(x) + String(y);
     const el = (document.getElementById(id) as HTMLTableRowElement);
-    el.classList.add("attack_possibility");
+    console.log(x, y);
+
+    if (yes)
+      el.classList.add("attack_possibility");
+    else
+      el.classList.remove("attack_possibility");
   }
 
   addGreen(row, column) {
@@ -324,82 +316,87 @@ export class GameComponent implements OnInit {
     if ((row - 1) >= 0 && this.gameBoard[row - 1][column].path == "") {
       x = row - 1;
       y = column;
-      this.showOptions(x, y);
+      this.showOptions(x, y, 1);
     } else if (this.gameBoard[row - 1][column].color != this.gameBoard[row][column].color) {
       x = row - 1;
       y = column;
-      this.showAttackPossibility(x, y);
+      this.showAttackPossibility(x, y, 1);
     }
 
     if ((row + 1) <= 9 && this.gameBoard[row + 1][column].path == "") {
       x = row + 1;
       y = column;
-      this.showOptions(x, y);
+      this.showOptions(x, y, 1);
     } else if ((row + 1) <= 9 && this.gameBoard[row + 1][column].color != this.gameBoard[row][column].color) {
       x = row + 1;
       y = column;
-      this.showAttackPossibility(x, y);
+      this.showAttackPossibility(x, y, 1);
     }
 
     if ((column - 1) >= 0 && this.gameBoard[row][column - 1].path == "") {
       x = row;
       y = column - 1;
-      this.showOptions(x, y);
+      this.showOptions(x, y, 1);
     } else if ((column - 1) >= 0 && this.gameBoard[row][column - 1].color != this.gameBoard[row][column].color) {
       x = row;
       y = column - 1;
-      this.showAttackPossibility(x, y);
+      this.showAttackPossibility(x, y, 1);
     }
 
     if ((column + 1) <= 9 && this.gameBoard[row][column + 1].path == "") {
       x = row;
       y = column + 1;
-      this.showOptions(x, y);
+      this.showOptions(x, y, 1);
     } else if ((column + 1) <= 9 && this.gameBoard[row][column + 1].color != this.gameBoard[row][column].color) {
       x = row;
       y = column + 1;
-      this.showAttackPossibility(x, y);
+      this.showAttackPossibility(x, y, 1);
     }
   }
 
   removeGreen(row, column) {
     let x = 0;
     let y = 0;
+
     if ((row - 1) >= 0 && this.gameBoard[row - 1][column].path == "") {
       x = row - 1;
       y = column;
-      const id: string = String(x) + String(y);
-      const el = (document.getElementById(id) as HTMLTableRowElement);
-
-      el.classList.remove("options");
-
+      this.showOptions(x, y, 0);
+    } else if ((row - 1) >= 0 && this.gameBoard[row - 1][column].color != this.gameBoard[row][column].color) {
+      x = row - 1;
+      y = column;
+      this.showAttackPossibility(x, y, 0);
     }
-    if ((row + 1) <= 9 && this.gameBoard[row + 1][column].path == "") {
 
+    if ((row + 1) <= 9 && this.gameBoard[row + 1][column].path == "") {
       x = row + 1;
       y = column;
-      const id: string = String(x) + String(y);
-      const el = (document.getElementById(id) as HTMLTableRowElement);
-
-      el.classList.remove("options");
+      this.showOptions(x, y, 0);
+    } else if ((row + 1) <= 9 && this.gameBoard[row + 1][column].color != this.gameBoard[row][column].color) {
+      x = row + 1;
+      y = column;
+      this.showAttackPossibility(x, y, 0);
     }
-    if ((column - 1) >= 0 && this.gameBoard[row][column - 1].path == "") {
 
+    if ((column - 1) >= 0 && this.gameBoard[row][column - 1].path == "") {
       x = row;
       y = column - 1;
-      const id: string = String(x) + String(y);
-      const el = (document.getElementById(id) as HTMLTableRowElement);
-
-      el.classList.remove("options");
+      this.showOptions(x, y, 0);
+    } else if ((column - 1) >= 0 && this.gameBoard[row][column - 1].color != this.gameBoard[row][column].color) {
+      x = row;
+      y = column - 1;
+      this.showAttackPossibility(x, y, 0);
     }
-    if ((row + 1) <= 9 && this.gameBoard[row][column + 1].path == "") {
 
+    if ((column + 1) <= 9 && this.gameBoard[row][column + 1].path == "") {
       x = row;
       y = column + 1;
-      const id: string = String(x) + String(y);
-      const el = (document.getElementById(id) as HTMLTableRowElement);
-
-      el.classList.remove("options");
+      this.showOptions(x, y, 0);
+      this.showAttackPossibility(x, y, 0);
+    } else if ((column + 1) <= 9 && this.gameBoard[row][column + 1].color != this.gameBoard[row][column].color) {
+      x = row;
+      y = column + 1;
+      this.showAttackPossibility(x, y, 0);
     }
   }
 
@@ -423,62 +420,13 @@ export class GameComponent implements OnInit {
 
   emptyCard(row, column) {
     let cd = new Card();
-    cd.color = "purple";
+    cd.color = "Blank Baba bakchod";
     cd.value = 0;
     cd.path = "";
     cd = this.setPos(cd, row, column);
     return cd;
   }
 
-  hide() {
-
-    let i = 0;
-    for (i = 0; i < 10; i++) {
-      const id: string = String(0) + String(i);
-
-      const el = (document.getElementById(id) as HTMLTableRowElement);
-
-      el.classList.add("displayNone");
-    }
-  }
-
-  unhide() {
-
-    let i = 0;
-    for (i = 0; i < 10; i++) {
-      const id: string = String(0) + String(i);
-
-      const el = (document.getElementById(id) as HTMLTableRowElement);
-
-      el.classList.remove("displayNone");
-    }
-  }
-
-  // setimage(){
-  //
-  //   this.gameBoard[4][2].path=this.imagelake.get(1);
-  //   this.gameBoard[4][3].path=this.imagelake.get(2);
-  //   this.gameBoard[5][2].path=this.imagelake.get(3);
-  //   this.gameBoard[5][3].path=this.imagelake.get(4);
-  //
-  // }
-
-
 }
 
-
-// private selectedCard: Card = new Card();
-//
-// trClick(row, column) {
-//   if(this.gameBoard[row][column].value != 0) {
-//     this.selectedCard = this.gameBoard[row][column];
-//     this.gameBoard[row][column] = new Card();
-//     this.emptyCard(this.gameBoard[row][column], row, column)
-//   }
-//   else {
-//     this.gameBoard[row][column] = this.selectedCard;
-//     this.selectedCard = new Card();
-//   }
-// }
-//
 
