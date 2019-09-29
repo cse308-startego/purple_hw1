@@ -1,7 +1,14 @@
 export class Card {
+  get path(): string {
+    return this._path;
+  }
+
+  set path(value: string) {
+    this._path = value;
+  }
   color: string;
   value: number;
-  path: string;
+  private _path: string;
   x: number;
   y: number;
 

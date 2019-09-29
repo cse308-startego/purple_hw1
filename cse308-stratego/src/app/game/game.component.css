@@ -47,9 +47,10 @@ table {
 
 }
 #chessBoard tr{
-  width: 32px;
-  height: 32px;
+  width: 50px;
+  height: 50px;
 }
+
 /*tr:nth-child(odd) td:nth-child(even),*/
 /*tr:nth-child(even) td:nth-child(odd){*/
 /*  background-color: #FFA5A2;*/
@@ -63,6 +64,14 @@ table {
 .options{
   background-color: #82d39b;
 }
+.displayNone{
+  display: none;
+  /*background-image: url('/cse308-stratego/src/black.jpg');*/
+
+}
+
+.putback{
+}
 
 .attack_possibility{
   background-color: #FF7373;
@@ -74,7 +83,7 @@ ul {
 }
 
 .imageSize {
-  height: 50px;
+  height: 75px;
 
 }
 
