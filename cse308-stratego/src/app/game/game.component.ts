@@ -16,6 +16,8 @@ export class GameComponent implements OnInit {
   private redArr: Card[] = [];
   private blueArr: Card[] = [];
   private imageMap: Map<number, string> = new Map<number, string>();
+  private selectedCard: Card = this.emptyCard(0, 0);
+
 
   constructor(private service: ApiService) {
   }
@@ -178,13 +180,14 @@ export class GameComponent implements OnInit {
     return tcard;
   }
 
-  private selectedCard: Card = this.emptyCard(0, 0);
 
 
   trClick(row, column) {
+
+    console.log("Inside TrClick", this.selectedCard, this.gameBoard[row][column]);
+
     if (this.gameBoard[row][column].value != 0 && this.selectedCard.value != 0) {
       this.validateMove(row, column);
-
     } else if (this.gameBoard[row][column].value != 0) {
       this.addGreen(row, column);
       this.selectedCard = this.gameBoard[row][column];
@@ -200,10 +203,30 @@ export class GameComponent implements OnInit {
 
   }
 
+  // validatePosition(row, col){
+  //
+  //   this.selectedCard
+  //
+  // }
+
   validateMove(row, column) {
 
     let selectedCard = this.selectedCard;
-    let otherCard = this.gameBoard[row][column];
+
+    let cardInHand = this.gameBoard[row][column];
+    console.log("in validate move", this.selectedCard, cardInHand);
+
+
+    // if the position selected is not in one of the four positions then the move is considered to be invalid.
+    if((selectedCard.x != row-1 ||  selectedCard.x != row+1) && (selectedCard.y != column+1 || selectedCard.y != column-1))
+      return;
+
+    // flag and the bomb isn't moved.
+    if(selectedCard.value == 11 || selectedCard.value == 12)
+      return;
+
+
+
 
     if (selectedCard.color != otherCard.color) {
 
@@ -309,36 +332,38 @@ export class GameComponent implements OnInit {
   removeGreen(row, column) {
     let x = 0;
     let y = 0;
+
     if ((row - 1) >= 0 && this.gameBoard[row - 1][column].path == "") {
       x = row - 1;
       y = column;
       this.showOptions(x, y, 0);
-    } else if (this.gameBoard[row - 1][column].color != this.gameBoard[row][column].color) {
+    } else if ((row - 1) >= 0 && this.gameBoard[row - 1][column].color != this.gameBoard[row][column].color) {
       x = row - 1;
       y = column;
       this.showAttackPossibility(x, y, 0);
     }
+
     if ((row + 1) <= 9 && this.gameBoard[row + 1][column].path == "") {
       x = row + 1;
       y = column;
       this.showOptions(x, y, 0);
-
     }else if ((row + 1) <= 9 && this.gameBoard[row + 1][column].color != this.gameBoard[row][column].color) {
       x = row + 1;
       y = column;
       this.showAttackPossibility(x, y, 0);
     }
+
     if ((column - 1) >= 0 && this.gameBoard[row][column - 1].path == "") {
       x = row;
       y = column - 1;
       this.showOptions(x, y, 0);
-
     } else if ((column - 1) >= 0 && this.gameBoard[row][column - 1].color != this.gameBoard[row][column].color) {
       x = row;
       y = column - 1;
       this.showAttackPossibility(x, y, 0);
     }
-    if ((row + 1) <= 9 && this.gameBoard[row][column + 1].path == "") {
+
+    if ((column + 1) <= 9 && this.gameBoard[row][column + 1].path == "") {
       x = row;
       y = column + 1;
       this.showOptions(x, y, 0);
@@ -370,7 +395,7 @@ export class GameComponent implements OnInit {
 
   emptyCard(row, column) {
     let cd = new Card();
-    cd.color = "purple";
+    cd.color = "Blank Baba bakchod";
     cd.value = 0;
     cd.path = "";
     cd = this.setPos(cd, row, column);
@@ -379,19 +404,4 @@ export class GameComponent implements OnInit {
 
 }
 
-
-// private selectedCard: Card = new Card();
-//
-// trClick(row, column) {
-//   if(this.gameBoard[row][column].value != 0) {
-//     this.selectedCard = this.gameBoard[row][column];
-//     this.gameBoard[row][column] = new Card();
-//     this.emptyCard(this.gameBoard[row][column], row, column)
-//   }
-//   else {
-//     this.gameBoard[row][column] = this.selectedCard;
-//     this.selectedCard = new Card();
-//   }
-// }
-//
 
