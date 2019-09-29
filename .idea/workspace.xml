@@ -1,9 +1,10 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <project version="4">
   <component name="ChangeListManager">
-    <list default="true" id="c85f458d-abd3-48cc-9f42-3efba92ae66a" name="Default Changelist" comment="">
-      <change afterPath="$PROJECT_DIR$/cse308-stratego/src/assets/grass.png" afterDir="false" />
+    <list default="true" id="c85f458d-abd3-48cc-9f42-3efba92ae66a" name="Default Changelist" comment="September 28, 5.25PM">
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/cse308-stratego/src/app/game/game.component.html" beforeDir="false" afterPath="$PROJECT_DIR$/cse308-stratego/src/app/game/game.component.html" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/cse308-stratego/src/app/game/game.component.ts" beforeDir="false" afterPath="$PROJECT_DIR$/cse308-stratego/src/app/game/game.component.ts" afterDir="false" />
     </list>
     <option name="EXCLUDED_CONVERTED_TO_IGNORED" value="true" />
     <option name="SHOW_DIALOG" value="false" />
@@ -93,7 +94,7 @@
       <workItem from="1569359295160" duration="269000" />
       <workItem from="1569362036198" duration="2121000" />
       <workItem from="1569372964849" duration="811000" />
-      <workItem from="1569389940027" duration="55058000" />
+      <workItem from="1569389940027" duration="41119000" />
     </task>
     <task id="LOCAL-00001" summary="pulled kishore repo">
       <created>1569367056157</created>
@@ -158,49 +159,7 @@
       <option name="project" value="LOCAL" />
       <updated>1569705940680</updated>
     </task>
-    <task id="LOCAL-00010" summary="September 28, 11.04PM">
-      <created>1569726301898</created>
-      <option name="number" value="00010" />
-      <option name="presentableId" value="LOCAL-00010" />
-      <option name="project" value="LOCAL" />
-      <updated>1569726301898</updated>
-    </task>
-    <task id="LOCAL-00011" summary="Nice UI now">
-      <created>1569738955234</created>
-      <option name="number" value="00011" />
-      <option name="presentableId" value="LOCAL-00011" />
-      <option name="project" value="LOCAL" />
-      <updated>1569738955234</updated>
-    </task>
-    <task id="LOCAL-00012" summary="added background">
-      <created>1569739233930</created>
-      <option name="number" value="00012" />
-      <option name="presentableId" value="LOCAL-00012" />
-      <option name="project" value="LOCAL" />
-      <updated>1569739233930</updated>
-    </task>
-    <task id="LOCAL-00013" summary="Nice UI now updated">
-      <created>1569785017245</created>
-      <option name="number" value="00013" />
-      <option name="presentableId" value="LOCAL-00013" />
-      <option name="project" value="LOCAL" />
-      <updated>1569785017245</updated>
-    </task>
-    <task id="LOCAL-00014" summary="Nice UI now updated">
-      <created>1569785517134</created>
-      <option name="number" value="00014" />
-      <option name="presentableId" value="LOCAL-00014" />
-      <option name="project" value="LOCAL" />
-      <updated>1569785517134</updated>
-    </task>
-    <task id="LOCAL-00015" summary="Nice UI now updated, added lakes in middle">
-      <created>1569787312433</created>
-      <option name="number" value="00015" />
-      <option name="presentableId" value="LOCAL-00015" />
-      <option name="project" value="LOCAL" />
-      <updated>1569787312433</updated>
-    </task>
-    <option name="localTasksCounter" value="16" />
+    <option name="localTasksCounter" value="10" />
     <servers />
   </component>
   <component name="TypeScriptGeneratedFilesManager">
@@ -228,11 +187,6 @@
     <MESSAGE value="front end seems ok" />
     <MESSAGE value="I changed color" />
     <MESSAGE value="September 28, 5.25PM" />
-    <MESSAGE value="September 28, 11.04PM" />
-    <MESSAGE value="Nice UI now" />
-    <MESSAGE value="added background" />
-    <MESSAGE value="Nice UI now updated" />
-    <MESSAGE value="Nice UI now updated, added lakes in middle" />
-    <option name="LAST_COMMIT_MESSAGE" value="Nice UI now updated, added lakes in middle" />
+    <option name="LAST_COMMIT_MESSAGE" value="September 28, 5.25PM" />
   </component>
 </project>

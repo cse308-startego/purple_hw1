@@ -8,6 +8,7 @@ import {ApiService} from "../service/api.service";
   styleUrls: ['./sign-up.component.css']
 })
 export class SignUpComponent implements OnInit {
+
   public password;
   public confirm_password;
   ngOnInit() {
@@ -20,7 +21,6 @@ export class SignUpComponent implements OnInit {
     const errors = [];
     const target = event.target;
     const fullname = target.querySelector('#fullname').value;
-    console.log(fullname);
     const email = target.querySelector('#email').value;
     const password = target.querySelector('#password').value;
     const cpassword = target.querySelector('#confirm_password').value;
@@ -29,18 +29,19 @@ export class SignUpComponent implements OnInit {
       confirm("Passwords do not match. Try Again.")
       errors.push("Passwords do not match")
     }
-
-
-    // if(errors.length > 0) {
-    //   this.service.login().subscribe((data: string) => {
-    //     console.log(data);
-    //     if(data.success) {
-    //       this.router.navigateByUrl('/game');
-    //     }
-    //   });
-    // }
-
-
-    console.log(email, password)
+    else if(fullname == "") {
+      confirm("Full Name cannot be empty.")
+    }
+    else if(email == "") {
+      confirm("Email cannot be empty.")
+    }
+    else if(password == "") {
+      confirm("Password cannot be empty.")
+    }
+    else {
+      this.service.signUp(fullname, email, password).subscribe((data: string) => {
+        this.router.navigateByUrl('/login');
+      })
+    }
   }
 }

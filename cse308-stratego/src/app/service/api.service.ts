@@ -11,14 +11,18 @@ export class ApiService {
   constructor(private http: HttpClient) { }
   baseUrl: string = 'http://localhost:8080/stratego/';
 
-  login(){  //pass username & passwrd here jay
-    return this.http.get(this.baseUrl + "login", {responseType: 'text'}); //paper padh rohit ka question mark
+  login(email, password){
+    return this.http.get(this.baseUrl + "login?email="+email+"&password="+password, {responseType: 'text'});
   }
 
-  arrayManipulation(gameBoard: Board) {
-    let json = JSON.stringify(gameBoard);
-    return this.http.post(this.baseUrl + "array", json,{responseType: 'text'});
+  signUp(fullname, email, password){
+    return this.http.post(this.baseUrl + "signUp?fullname="+fullname+"&email="+email+"&password="+password, {responseType: 'text'});
   }
+
+  // arrayManipulation(gameBoard: Board) {
+  //   let json = JSON.stringify(gameBoard);
+  //   return this.http.post(this.baseUrl + "array", json,{responseType: 'text'});
+  // }
 
 
 }
