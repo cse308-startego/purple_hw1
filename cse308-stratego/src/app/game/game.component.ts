@@ -15,6 +15,9 @@ export class GameComponent implements OnInit {
   private gameBoard: Card[][] = [];
   private redArr: Card[] = [];
   private blueArr: Card[] = [];
+  private imageMapred: Map<number, string> = new Map<number, string>();
+  private imageMapblue: Map<number, string> = new Map<number, string>();
+  private imagelake: Map<number, string> = new Map<number, string>();
   private imageMap: Map<number, string> = new Map<number, string>();
   private selectedCard: Card = this.emptyCard(0, 0);
 
@@ -25,6 +28,8 @@ export class GameComponent implements OnInit {
 
   ngOnInit() {
     this.populateImageMap();
+    this.populateImageMap_red();
+    this.populateImagelake();
     this.initializeCards();
     this.setupGameBoard();
     this.setPositions();
@@ -71,17 +76,68 @@ export class GameComponent implements OnInit {
       else if (i == 12)
         name = "flag.png";
 
-      this.imageMap.set(i, basePath + name)
+      this.imageMapblue.set(i, basePath + name)
     }
-    console.log(this.imageMap);
+  }
+
+  populateImageMap_red() {
+
+    let basePath = "../assets/";
+
+    for (let i = 1; i <= 12; i++) {
+      let name = "";
+      if (i == 1)
+        name = "redmarshal.png";
+      else if (i == 2)
+        name = "redgeneral.png";
+      else if (i == 3)
+        name = "redcolonel.png";
+      else if (i == 4)
+        name = "redmajor.png";
+      else if (i == 5)
+        name = "redcaptain.png";
+      else if (i == 6)
+        name = "redlieutenant.png";
+      else if (i == 7)
+        name = "redsergeant.png";
+      else if (i == 8)
+        name = "redminer.png";
+      else if (i == 9)
+        name = "redscout.png";
+      else if (i == 10)
+        name = "redspy.png";
+      else if (i == 11)
+        name = "redbomb.png";
+      else if (i == 12)
+        name = "redflag.png";
+
+      this.imageMapred.set(i, basePath + name)
+    }
+  }
+
+  populateImagelake() {
+
+    let basePath = "../assets/";
+
+    for (let i = 1; i <= 4; i++) {
+      let name = "";
+      if (i == 1)
+        name = "1.png";
+      else if (i == 2)
+        name = "2.png";
+      else if (i == 3)
+        name = "3.png";
+      else if (i == 4)
+        name = "4.png";
+
+      this.imagelake.set(i, basePath + name)
+    }
   }
 
   initializeCards() {
 
     this.initializePlayers("red");
     this.initializePlayers("Blue");
-    console.log(this.redArr);
-    console.log(this.blueArr);
 
   }
 
@@ -95,11 +151,11 @@ export class GameComponent implements OnInit {
       card.x = 0;
       card.y = 0;
 
-      console.log(i);
+      (i);
       if (i == 1 || i == 2 || i == 10 || i == 12) {
         card.color = color;
         card.value = i;
-        card.path = this.imageMap.get(i);
+        card.path = this.imageMapred.get(i);
         if (color == "red")
           this.redArr.push(card);
         else
@@ -127,15 +183,18 @@ export class GameComponent implements OnInit {
       temp = this.setPos(temp, 0, 0);
       temp.color = color;
       temp.value = val;
-      temp.path = this.imageMap.get(val);
-      if (color == "red")
+      if (color == "red") {
+        temp.path = this.imageMapred.get(val);
         this.redArr.push(temp);
-      else
+      } else {
+        temp.path = this.imageMapblue.get(val);
         this.blueArr.push(temp);
+      }
     }
     // this.shuffleElements(this.redArr);
     this.shuffle(this.redArr);
     this.shuffle(this.blueArr);
+
     // this.shuffleElements(this.blueArr);
   }
 
@@ -153,7 +212,21 @@ export class GameComponent implements OnInit {
       cd.value = 0;
       cd.path = "";
       cd = this.setPos(cd, 0, 0);
-      this.gameBoard.push([cd, cd, cd, cd, cd, cd, cd, cd, cd, cd])
+      // @ts-ignore
+      const temp = [cd, cd, cd, cd, cd, cd, cd, cd, cd, cd];
+      if (i==0) {
+        temp[2].path = this.imagelake.get(1);
+        temp[3].path = this.imagelake.get(2);
+        temp[6].path = this.imagelake.get(1);
+        temp[7].path = this.imagelake.get(2);
+      }else {
+        temp[2].path = this.imagelake.get(3);
+        temp[3].path = this.imagelake.get(4);
+        temp[6].path = this.imagelake.get(3);
+        temp[7].path = this.imagelake.get(4);
+      }
+      console.log(temp);
+      this.gameBoard.push(temp);
     }
 
     s = 4;
@@ -161,7 +234,6 @@ export class GameComponent implements OnInit {
       this.gameBoard.push(this.blueArr.splice(0, 10));
       s--;
     }
-    console.log(this.gameBoard);
   }
 
   setPositions() {
@@ -427,6 +499,55 @@ export class GameComponent implements OnInit {
     return cd;
   }
 
+  hide() {
+
+    let i = 0;
+    for (i = 0; i < 10; i++) {
+      const id: string = String(0) + String(i);
+
+      const el = (document.getElementById(id) as HTMLTableRowElement);
+
+      el.classList.add("displayNone");
+    }
+  }
+
+  unhide() {
+
+    let i = 0;
+    for (i = 0; i < 10; i++) {
+      const id: string = String(0) + String(i);
+
+      const el = (document.getElementById(id) as HTMLTableRowElement);
+
+      el.classList.remove("displayNone");
+    }
+  }
+
+  // setimage(){
+  //
+  //   this.gameBoard[4][2].path=this.imagelake.get(1);
+  //   this.gameBoard[4][3].path=this.imagelake.get(2);
+  //   this.gameBoard[5][2].path=this.imagelake.get(3);
+  //   this.gameBoard[5][3].path=this.imagelake.get(4);
+  //
+  // }
+
+
 }
 
+
+// private selectedCard: Card = new Card();
+//
+// trClick(row, column) {
+//   if(this.gameBoard[row][column].value != 0) {
+//     this.selectedCard = this.gameBoard[row][column];
+//     this.gameBoard[row][column] = new Card();
+//     this.emptyCard(this.gameBoard[row][column], row, column)
+//   }
+//   else {
+//     this.gameBoard[row][column] = this.selectedCard;
+//     this.selectedCard = new Card();
+//   }
+// }
+//
 
