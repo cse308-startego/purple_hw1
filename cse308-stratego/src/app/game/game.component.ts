@@ -285,12 +285,6 @@ export class GameComponent implements OnInit {
     }
   }
 
-  // initiallySelecting(row, column) {
-  //   if ( this.gameBoard[row][column].value == 11 ||  this.gameBoard[row][column].value == 12 || this.gameBoard[row][column].value == 0)
-  //     return;
-  //
-  //
-  // }
 
   validatePosition(row, col){
 
