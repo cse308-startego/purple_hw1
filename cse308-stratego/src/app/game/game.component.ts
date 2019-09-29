@@ -181,18 +181,37 @@ export class GameComponent implements OnInit {
   }
 
 
-
   trClick(row, column) {
 
-    console.log("Inside TrClick", this.selectedCard, this.gameBoard[row][column]);
 
+    // flag and the bomb isn't moved.
+    if ( this.gameBoard[row][column].value == 11 ||  this.gameBoard[row][column].value == 12)
+      return;
+
+    // if(this.selectedCard.value != 9 && this.selectedCard.value != 0){
+    //    if (this.validatePosition(this.gameBoard[row][column].x, this.gameBoard[row][column].y) == false)
+    //      // this.trClick( row, column);
+    //    return;
+    // }
+
+    // this is where the attacks on the other cards happen.
     if (this.gameBoard[row][column].value != 0 && this.selectedCard.value != 0) {
       this.validateMove(row, column);
-    } else if (this.gameBoard[row][column].value != 0) {
+    }
+
+    else if (this.gameBoard[row][column].value != 0) {                                                // this is where the control comes just before attacking some card or moving (basically when you select a card).
+      console.log("Inside TrClick, else if part", this.selectedCard, this.gameBoard[row][column]);
       this.addGreen(row, column);
       this.selectedCard = this.gameBoard[row][column];
       this.gameBoard[row][column] = this.emptyCard(row, column)
-    } else {
+    }
+
+    // this else part deals with moving the card to another empty space.
+    else {
+
+      console.log("Inside TrClick, else part", this.selectedCard, this.gameBoard[row][column]);
+
+      // this.validatePosition(this.selectedCard.x, this.selectedCard.y);
       this.removeGreen(this.selectedCard.x, this.selectedCard.y);
       this.gameBoard[row][column] = this.selectedCard;
       this.gameBoard[row][column].x = row;
@@ -203,38 +222,44 @@ export class GameComponent implements OnInit {
 
   }
 
-  // validatePosition(row, col){
-  //
-  //   this.selectedCard
-  //
-  // }
+  validatePosition(row, col){
+
+    if(((row+1) == this.selectedCard.x || (row - 1) == this.selectedCard.x)
+        && ((col+1) == this.selectedCard.y || (col-1) == this.selectedCard.y))
+      return true;
+
+    console.log("Card can only move one block away");
+    return false;
+  }
 
   validateMove(row, column) {
-
-    let selectedCard = this.selectedCard;
-
-    let cardInHand = this.gameBoard[row][column];
-    console.log("in validate move", this.selectedCard, cardInHand);
+    console.log("in validate move", this.selectedCard, this.gameBoard[row][column]);
 
 
-    // if the position selected is not in one of the four positions then the move is considered to be invalid.
-    if((selectedCard.x != row-1 ||  selectedCard.x != row+1) && (selectedCard.y != column+1 || selectedCard.y != column-1))
-      return;
-
-    // flag and the bomb isn't moved.
-    if(selectedCard.value == 11 || selectedCard.value == 12)
-      return;
+    if (this.selectedCard.color != this.gameBoard[row][column].color) {
 
 
+      if (this.selectedCard.value < this.gameBoard[row][column].value) {            // if the card in hand is
+        console.log("in validate move, if", this.selectedCard, this.gameBoard[row][column]);
 
-
-    if (selectedCard.color != otherCard.color) {
-
-      if (selectedCard.value < otherCard.value && otherCard.value != 11) { // cannot attack if the the other card is a bomb.
-        otherCard = selectedCard;
-        this.redArr.push(selectedCard);
+        this.removeGreen(this.selectedCard.x, this.selectedCard.y);
+        this.gameBoard[row][column] = this.selectedCard;
         this.selectedCard = this.emptyCard(0, 0);
-        this.showAttackPossibility(row, column, 0);
+      }
+
+      else if (this.selectedCard.value == this.gameBoard[row][column].value) {    // if the card values are equal destroy both.
+        console.log("in validate move, else if", this.selectedCard, this.gameBoard[row][column]);
+
+        this.removeGreen(this.selectedCard.x, this.selectedCard.y);
+        this.selectedCard = this.emptyCard(0, 0);
+        this.gameBoard[row][column] = this.emptyCard(0, 0);
+      }
+
+      else {
+        console.log("in validate move, else", this.selectedCard, this.gameBoard[row][column]);
+
+        this.removeGreen(this.selectedCard.x, this.selectedCard.y);
+        this.selectedCard = this.emptyCard(0, 0);
       }
 
 
@@ -347,7 +372,7 @@ export class GameComponent implements OnInit {
       x = row + 1;
       y = column;
       this.showOptions(x, y, 0);
-    }else if ((row + 1) <= 9 && this.gameBoard[row + 1][column].color != this.gameBoard[row][column].color) {
+    } else if ((row + 1) <= 9 && this.gameBoard[row + 1][column].color != this.gameBoard[row][column].color) {
       x = row + 1;
       y = column;
       this.showAttackPossibility(x, y, 0);
