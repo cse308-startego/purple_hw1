@@ -151,7 +151,6 @@ export class GameComponent implements OnInit {
       card.x = 0;
       card.y = 0;
 
-      (i);
       if (i == 1 || i == 2 || i == 10 || i == 12) {
         card.color = color;
         card.value = i;
