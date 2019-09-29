@@ -2,8 +2,8 @@
 <project version="4">
   <component name="ChangeListManager">
     <list default="true" id="c85f458d-abd3-48cc-9f42-3efba92ae66a" name="Default Changelist" comment="">
+      <change afterPath="$PROJECT_DIR$/cse308-stratego/src/assets/grass.png" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/cse308-stratego/src/app/game/game.component.html" beforeDir="false" afterPath="$PROJECT_DIR$/cse308-stratego/src/app/game/game.component.html" afterDir="false" />
     </list>
     <option name="EXCLUDED_CONVERTED_TO_IGNORED" value="true" />
     <option name="SHOW_DIALOG" value="false" />
@@ -93,7 +93,7 @@
       <workItem from="1569359295160" duration="269000" />
       <workItem from="1569362036198" duration="2121000" />
       <workItem from="1569372964849" duration="811000" />
-      <workItem from="1569389940027" duration="52858000" />
+      <workItem from="1569389940027" duration="55058000" />
     </task>
     <task id="LOCAL-00001" summary="pulled kishore repo">
       <created>1569367056157</created>
@@ -186,7 +186,21 @@
       <option name="project" value="LOCAL" />
       <updated>1569785017245</updated>
     </task>
-    <option name="localTasksCounter" value="14" />
+    <task id="LOCAL-00014" summary="Nice UI now updated">
+      <created>1569785517134</created>
+      <option name="number" value="00014" />
+      <option name="presentableId" value="LOCAL-00014" />
+      <option name="project" value="LOCAL" />
+      <updated>1569785517134</updated>
+    </task>
+    <task id="LOCAL-00015" summary="Nice UI now updated, added lakes in middle">
+      <created>1569787312433</created>
+      <option name="number" value="00015" />
+      <option name="presentableId" value="LOCAL-00015" />
+      <option name="project" value="LOCAL" />
+      <updated>1569787312433</updated>
+    </task>
+    <option name="localTasksCounter" value="16" />
     <servers />
   </component>
   <component name="TypeScriptGeneratedFilesManager">
@@ -218,6 +232,7 @@
     <MESSAGE value="Nice UI now" />
     <MESSAGE value="added background" />
     <MESSAGE value="Nice UI now updated" />
-    <option name="LAST_COMMIT_MESSAGE" value="Nice UI now updated" />
+    <MESSAGE value="Nice UI now updated, added lakes in middle" />
+    <option name="LAST_COMMIT_MESSAGE" value="Nice UI now updated, added lakes in middle" />
   </component>
 </project>
