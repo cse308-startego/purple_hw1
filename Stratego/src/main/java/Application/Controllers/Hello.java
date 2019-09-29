@@ -9,8 +9,8 @@ import org.springframework.web.bind.annotation.*;
 public class Hello {
     @CrossOrigin
     @RequestMapping(value = "login", method = RequestMethod.GET)
-    public ResponseEntity<String> loginAttempt() {
-        System.out.println("Came here");
+    public ResponseEntity<String> loginAttempt() { // yaha she fir doc check karo
+        System.out.println("Came here");            // agar ye userid & passwrd exist krta hai to frontend me true bhej nahi to false
         String hi = "hello";
         return new ResponseEntity<String>(hi, HttpStatus.OK);
     }

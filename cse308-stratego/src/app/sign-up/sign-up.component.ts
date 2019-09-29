@@ -30,6 +30,7 @@ export class SignUpComponent implements OnInit {
       errors.push("Passwords do not match")
     }
 
+
     // if(errors.length > 0) {
     //   this.service.login().subscribe((data: string) => {
     //     console.log(data);
@@ -38,6 +39,7 @@ export class SignUpComponent implements OnInit {
     //     }
     //   });
     // }
+    
     console.log(email, password)
   }
 }
