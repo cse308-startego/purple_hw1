@@ -89,7 +89,7 @@ export class GameComponent implements OnInit {
     for (let i = 1; i <= 12; i++) {
       let card: Card = new Card();
 
-      // Initially every card has a position of 0,0 regradless
+      // Initially every card has a position of 0,0 regardless
       card.x = 0;
       card.y = 0;
 
@@ -148,12 +148,13 @@ export class GameComponent implements OnInit {
     }
 
     for (let i = 0; i < 2; i++) {
-      let cd = new Card();
-      cd.color = "purple";
-      cd.value = 0;
-      cd.path = "";
-      cd = this.setPos(cd, 0, 0);
-      this.gameBoard.push([cd, cd, cd, cd, cd, cd, cd, cd, cd, cd])
+
+      let cd = this.createEmptyCard();
+      let unplayable = this.createEmptyCard();
+
+      unplayable.path = "../assets/green_box.PNG";
+
+      this.gameBoard.push([cd, cd, unplayable, unplayable, cd, cd, unplayable, unplayable, cd, cd])
     }
 
     s = 4;
@@ -162,6 +163,18 @@ export class GameComponent implements OnInit {
       s--;
     }
     console.log(this.gameBoard);
+  }
+
+  createEmptyCard(){
+
+    let cd = new Card();
+
+    cd.color = "";
+    cd.value = 0;
+    cd.path = "";
+    cd = this.setPos(cd, 0, 0);
+
+    return cd;
   }
 
   setPositions() {
@@ -182,34 +195,54 @@ export class GameComponent implements OnInit {
 
   private selectedCard: Card = new Card();
 
-
   trClick(row, column) {
     let num =0;
     if (this.gameBoard[row][column].value != 0) {
-      while(num !=4)
-      {
+      // while(num !=4)
+      // {
         let x =0;
         let y = 0;
-        if (this.gameBoard[row - 1][column].path == "") {
+        if (this.gameBoard[row - 1][column].path == "" ) {
           console.log("yessss");
           x =row-1;
           y = column;
+          const id: string = String(x) + String(y);
+          const el = (document.getElementById(id) as HTMLTableRowElement);
+          console.log(x,y);
+          el.classList.add("options");
+
         }
         else if (this.gameBoard[row + 1][column].path == "") {
           console.log("yessss");
           x =row+1;
           y = column;
+          const id: string = String(x) + String(y);
+          const el = (document.getElementById(id) as HTMLTableRowElement);
+          console.log(x,y);
+          el.classList.add("options");
+
         }
         else  if (this.gameBoard[row][column - 1].path == "") {
           console.log("yessss");
           x =row;
           y = column-1;
+          const id: string = String(x) + String(y);
+          const el = (document.getElementById(id) as HTMLTableRowElement);
+          console.log(x,y);
+          el.classList.add("options");
+
         }
         else  if (this.gameBoard[row][column + 1].path == "") {
           console.log("yessss");
           x =row;
           y = column+1;
+          const id: string = String(x) + String(y);
+          const el = (document.getElementById(id) as HTMLTableRowElement);
+          console.log(x,y);
+          el.classList.add("options");
         }
+
+
 
         const id: string = String(x) + String(y);
         const el = (document.getElementById(id) as HTMLTableRowElement);
@@ -220,7 +253,7 @@ export class GameComponent implements OnInit {
 
         num= num +1;
 
-      }
+      // }
 
       this.selectedCard = this.gameBoard[row][column];
       this.gameBoard[row][column] = new Card();
