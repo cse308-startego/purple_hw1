@@ -30,10 +30,10 @@ export class GameComponent implements OnInit {
 
     let board = new Board();
     board.board = this.gameBoard;
-
-    this.service.arrayManipulation(board).subscribe((data: string) => {
-      console.log(data)
-    });
+    //
+    // this.service.arrayManipulation(board).subscribe((data: string) => {
+    //   console.log(data)
+    // });
 
 
   }

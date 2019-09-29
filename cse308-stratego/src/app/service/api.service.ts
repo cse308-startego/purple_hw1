@@ -10,9 +10,14 @@ export class ApiService {
 
   constructor(private http: HttpClient) { }
   baseUrl: string = 'http://localhost:8080/stratego/';
+  baseUrl2: string = 'http://localhost:8080/';
 
-  login(){  //pass username & passwrd here jay
-    return this.http.get(this.baseUrl + "login", {responseType: 'text'}); //paper padh rohit ka question mark
+  login(email, password){
+    return this.http.get(this.baseUrl + "login?email="+email+"&password="+password, {responseType: 'text'}); //paper padh rohit ka question mark
+  }
+
+  signUp(){
+    return this.http.get(this.baseUrl2 + "signUp", {responseType: 'text'});
   }
 
   arrayManipulation(gameBoard: Board) {

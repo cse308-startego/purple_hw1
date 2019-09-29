@@ -8,6 +8,7 @@ import {ApiService} from "../service/api.service";
   styleUrls: ['./sign-up.component.css']
 })
 export class SignUpComponent implements OnInit {
+
   public password;
   public confirm_password;
   ngOnInit() {
@@ -20,7 +21,6 @@ export class SignUpComponent implements OnInit {
     const errors = [];
     const target = event.target;
     const fullname = target.querySelector('#fullname').value;
-    console.log(fullname);
     const email = target.querySelector('#email').value;
     const password = target.querySelector('#password').value;
     const cpassword = target.querySelector('#confirm_password').value;
@@ -31,15 +31,15 @@ export class SignUpComponent implements OnInit {
     }
 
 
-    // if(errors.length > 0) {
-    //   this.service.login().subscribe((data: string) => {
-    //     console.log(data);
-    //     if(data.success) {
-    //       this.router.navigateByUrl('/game');
-    //     }
-    //   });
-    // }
-
+    if(errors.length >= 0) {
+      this.service.signUp().subscribe((data: string) => {
+        console.log(data);
+        // if(data.success) {
+        //   this.router.navigateByUrl('/game');
+        // }
+      });
+      this.router.navigateByUrl('/game');
+    }
     console.log(email, password)
   }
 }
