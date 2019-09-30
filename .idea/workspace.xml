@@ -1,0 +1,191 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<project version="4">
+  <component name="ChangeListManager">
+    <list default="true" id="c85f458d-abd3-48cc-9f42-3efba92ae66a" name="Default Changelist" comment="September 28, 5.25PM">
+      <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/cse308-stratego/src/app/login-component/login-page.component.ts" beforeDir="false" afterPath="$PROJECT_DIR$/cse308-stratego/src/app/login-component/login-page.component.ts" afterDir="false" />
+    </list>
+    <option name="EXCLUDED_CONVERTED_TO_IGNORED" value="true" />
+    <option name="SHOW_DIALOG" value="false" />
+    <option name="HIGHLIGHT_CONFLICTS" value="true" />
+    <option name="HIGHLIGHT_NON_ACTIVE_CHANGELIST" value="false" />
+    <option name="LAST_RESOLUTION" value="IGNORE" />
+  </component>
+  <component name="FavoritesManager">
+    <favorites_list name="purple_hw1" />
+  </component>
+  <component name="Git.Settings">
+    <option name="RECENT_GIT_ROOT_PATH" value="$PROJECT_DIR$" />
+  </component>
+  <component name="IgnoredFileRootStore">
+    <option name="generatedRoots">
+      <set>
+        <option value="C:\Users\Kishore Thamilvanan\Desktop\kishes point\Stony Brook Academics\VI semester\CSE 308\purple_hw1\.idea" />
+      </set>
+    </option>
+  </component>
+  <component name="ProjectId" id="1RD9zpA3By9jMFVrky2J0W7ZTUa" />
+  <component name="ProjectLevelVcsManager">
+    <ConfirmationsSetting value="2" id="Add" />
+  </component>
+  <component name="PropertiesComponent">
+    <property name="ASKED_ADD_EXTERNAL_FILES" value="true" />
+    <property name="SHARE_PROJECT_CONFIGURATION_FILES" value="true" />
+    <property name="WebServerToolWindowFactoryState" value="false" />
+    <property name="aspect.path.notification.shown" value="true" />
+    <property name="last_opened_file_path" value="$PROJECT_DIR$" />
+    <property name="node.js.detected.package.eslint" value="true" />
+    <property name="node.js.path.for.package.eslint" value="project" />
+    <property name="node.js.path.for.package.tslint" value="project" />
+    <property name="node.js.selected.package.eslint" value="(autodetect)" />
+    <property name="node.js.selected.package.tslint" value="(autodetect)" />
+    <property name="nodejs_interpreter_path.stuck_in_default_project" value="undefined stuck path" />
+    <property name="nodejs_npm_path_reset_for_default_project" value="true" />
+    <property name="project.structure.last.edited" value="Project" />
+    <property name="project.structure.proportion" value="0.0" />
+    <property name="project.structure.side.proportion" value="0.0" />
+    <property name="settings.editor.selected.configurable" value="Errors" />
+    <property name="ts.external.directory.path" value="$PROJECT_DIR$/cse308-stratego/node_modules/typescript/lib" />
+  </component>
+  <component name="RunDashboard">
+    <option name="ruleStates">
+      <list>
+        <RuleState>
+          <option name="name" value="ConfigurationTypeDashboardGroupingRule" />
+        </RuleState>
+        <RuleState>
+          <option name="name" value="StatusDashboardGroupingRule" />
+        </RuleState>
+      </list>
+    </option>
+  </component>
+  <component name="RunManager">
+    <configuration name="App" type="Application" factoryName="Application" temporary="true" nameIsGenerated="true">
+      <option name="MAIN_CLASS_NAME" value="Application.App" />
+      <module name="purple_hw1" />
+      <extension name="coverage">
+        <pattern>
+          <option name="PATTERN" value="Application.*" />
+          <option name="ENABLED" value="true" />
+        </pattern>
+      </extension>
+      <method v="2">
+        <option name="Make" enabled="true" />
+      </method>
+    </configuration>
+    <recent_temporary>
+      <list>
+        <item itemvalue="Application.App" />
+      </list>
+    </recent_temporary>
+  </component>
+  <component name="SvnConfiguration">
+    <configuration />
+  </component>
+  <component name="TaskManager">
+    <task active="true" id="Default" summary="Default task">
+      <changelist id="c85f458d-abd3-48cc-9f42-3efba92ae66a" name="Default Changelist" comment="" />
+      <created>1569191065262</created>
+      <option name="number" value="Default" />
+      <option name="presentableId" value="Default" />
+      <updated>1569191065262</updated>
+      <workItem from="1569191068263" duration="30000" />
+      <workItem from="1569359295160" duration="269000" />
+      <workItem from="1569362036198" duration="2121000" />
+      <workItem from="1569372964849" duration="811000" />
+      <workItem from="1569389940027" duration="41119000" />
+    </task>
+    <task id="LOCAL-00001" summary="pulled kishore repo">
+      <created>1569367056157</created>
+      <option name="number" value="00001" />
+      <option name="presentableId" value="LOCAL-00001" />
+      <option name="project" value="LOCAL" />
+      <updated>1569367056157</updated>
+    </task>
+    <task id="LOCAL-00002" summary="updated till rohits pull">
+      <created>1569373587548</created>
+      <option name="number" value="00002" />
+      <option name="presentableId" value="LOCAL-00002" />
+      <option name="project" value="LOCAL" />
+      <updated>1569373587548</updated>
+    </task>
+    <task id="LOCAL-00003" summary="This is most updated project">
+      <created>1569373655899</created>
+      <option name="number" value="00003" />
+      <option name="presentableId" value="LOCAL-00003" />
+      <option name="project" value="LOCAL" />
+      <updated>1569373655899</updated>
+    </task>
+    <task id="LOCAL-00004" summary="This is most updated project">
+      <created>1569452645906</created>
+      <option name="number" value="00004" />
+      <option name="presentableId" value="LOCAL-00004" />
+      <option name="project" value="LOCAL" />
+      <updated>1569452645906</updated>
+    </task>
+    <task id="LOCAL-00005" summary="Adding images to board">
+      <created>1569532507551</created>
+      <option name="number" value="00005" />
+      <option name="presentableId" value="LOCAL-00005" />
+      <option name="project" value="LOCAL" />
+      <updated>1569532507551</updated>
+    </task>
+    <task id="LOCAL-00006" summary="front end seems ok">
+      <created>1569537994238</created>
+      <option name="number" value="00006" />
+      <option name="presentableId" value="LOCAL-00006" />
+      <option name="project" value="LOCAL" />
+      <updated>1569537994238</updated>
+    </task>
+    <task id="LOCAL-00007" summary="I changed color">
+      <created>1569616847412</created>
+      <option name="number" value="00007" />
+      <option name="presentableId" value="LOCAL-00007" />
+      <option name="project" value="LOCAL" />
+      <updated>1569616847412</updated>
+    </task>
+    <task id="LOCAL-00008" summary="I changed color">
+      <created>1569617084643</created>
+      <option name="number" value="00008" />
+      <option name="presentableId" value="LOCAL-00008" />
+      <option name="project" value="LOCAL" />
+      <updated>1569617084643</updated>
+    </task>
+    <task id="LOCAL-00009" summary="September 28, 5.25PM">
+      <created>1569705940680</created>
+      <option name="number" value="00009" />
+      <option name="presentableId" value="LOCAL-00009" />
+      <option name="project" value="LOCAL" />
+      <updated>1569705940680</updated>
+    </task>
+    <option name="localTasksCounter" value="10" />
+    <servers />
+  </component>
+  <component name="TypeScriptGeneratedFilesManager">
+    <option name="version" value="1" />
+  </component>
+  <component name="Vcs.Log.Tabs.Properties">
+    <option name="TAB_STATES">
+      <map>
+        <entry key="MAIN">
+          <value>
+            <State>
+              <option name="COLUMN_ORDER" />
+            </State>
+          </value>
+        </entry>
+      </map>
+    </option>
+  </component>
+  <component name="VcsManagerConfiguration">
+    <option name="ADD_EXTERNAL_FILES_SILENTLY" value="true" />
+    <MESSAGE value="pulled kishore repo" />
+    <MESSAGE value="updated till rohits pull" />
+    <MESSAGE value="This is most updated project" />
+    <MESSAGE value="Adding images to board" />
+    <MESSAGE value="front end seems ok" />
+    <MESSAGE value="I changed color" />
+    <MESSAGE value="September 28, 5.25PM" />
+    <option name="LAST_COMMIT_MESSAGE" value="September 28, 5.25PM" />
+  </component>
+</project>
