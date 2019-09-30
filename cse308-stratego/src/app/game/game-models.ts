@@ -11,6 +11,7 @@ export class Card {
   private _path: string;
   x: number;
   y: number;
+  revealedToAI: boolean;
 
 }
 
