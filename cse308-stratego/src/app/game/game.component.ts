@@ -33,6 +33,7 @@ export class GameComponent implements OnInit {
     this.initializeCards();
     this.setupGameBoard();
     this.setPositions();
+    // this.makethingsunclickable();
     console.log(this.gameBoard);
 
     let board = new Board();
@@ -263,15 +264,14 @@ export class GameComponent implements OnInit {
 
   trClick(row, column) {
 
-    // if(this.gameBoard[row][column].color == 'red' && this.selectedCard.value == 0) {
-    //   return;
-    // }
-
     // creating the unplayable areas.
     if (row == 4 || row == 5)
       if (column == 2 || column == 3 || column == 6 || column == 7)
         return;
 
+    if(this.gameBoard[row][column].value == 11 || this.gameBoard[row][column].value == 12){
+      return;
+    }
 
     // this is where the attacks on the other cards happen.
     if (this.gameBoard[row][column].value != 0 && this.selectedCard.value != 0) {
@@ -279,15 +279,14 @@ export class GameComponent implements OnInit {
         this.validateMove(row, column);
       }
 
-      // place the card back in the same place.
-      // else{
-      //       //
-      //       //   let t = this.gameBoard[row][column];
-      //       //   this.gameBoard[row][column] = this.selectedCard;
-      //       //
-      //       // }
     } else if (this.gameBoard[row][column].value != 0) {         // this is where the control comes just before attacking some card or moving (basically when you select a card).
       console.log("Inside TrClick, else if part", this.selectedCard, this.gameBoard[row][column]);
+
+      // if the current card is a bomb then, please dont more or do shit.
+      if(this.selectedCard.value == 11){
+        return;
+      }
+
       this.addGreen(row, column);
       this.selectedCard = this.gameBoard[row][column];
       this.gameBoard[row][column] = this.emptyCard(row, column)
@@ -295,7 +294,6 @@ export class GameComponent implements OnInit {
 
     // this else part deals with moving the card to another empty space.
     else {
-
       console.log("Inside TrClick, else part", this.selectedCard, this.gameBoard[row][column]);
       if (this.validatePosition(row, column) == true) {
         this.removeGreen(this.selectedCard.x, this.selectedCard.y);
@@ -391,6 +389,7 @@ export class GameComponent implements OnInit {
 
     const id: string = String(x) + String(y);
     const el = (document.getElementById(id) as HTMLTableRowElement);
+
     console.log(x, y)
 
     if (yes)
@@ -553,31 +552,4 @@ export class GameComponent implements OnInit {
     }
   }
 
-  setimage() {
-
-    this.gameBoard[4][2].path = this.imagelake.get(1);
-    this.gameBoard[4][3].path = this.imagelake.get(2);
-    this.gameBoard[5][2].path = this.imagelake.get(3);
-    this.gameBoard[5][3].path = this.imagelake.get(4);
-
-  }
-
-
 }
-
-
-// private selectedCard: Card = new Card();
-//
-// trClick(row, column) {
-//   if(this.gameBoard[row][column].value != 0) {
-//     this.selectedCard = this.gameBoard[row][column];
-//     this.gameBoard[row][column] = new Card();
-//     this.emptyCard(this.gameBoard[row][column], row, column)
-//   }
-//   else {
-//     this.gameBoard[row][column] = this.selectedCard;
-//     this.selectedCard = new Card();
-//   }
-// }
-//
-
