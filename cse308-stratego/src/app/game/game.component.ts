@@ -159,10 +159,12 @@ export class GameComponent implements OnInit {
         card.value = i;
 
         if (color == 'red') {
-          card.path = this.imageMapred.get(i);
+          card.path = "../assets/emptylaal.png";
+          card.revealedToAI = true;
           this.redArr.push(card);
         } else {
           card.path = this.imageMapblue.get(i);
+          card.revealedToAI = false;
           this.blueArr.push(card);
         }
       } else if (i == 3) {
@@ -189,10 +191,12 @@ export class GameComponent implements OnInit {
       temp.color = color;
       temp.value = val;
       if (color == 'red') {
-        temp.path = this.imageMapred.get(val);
+        temp.path = "../assets/emptylaal.png";
+        temp.revealedToAI = true;
         this.redArr.push(temp);
       } else {
         temp.path = this.imageMapblue.get(val);
+        temp.revealedToAI = false;
         this.blueArr.push(temp);
       }
     }
@@ -304,10 +308,15 @@ export class GameComponent implements OnInit {
         if (this.gameBoard[i][j].color == 'red') {
           arr.push(this.gameBoard[i][j]);
         } else if(this.gameBoard[i][j].color == 'Blue') {
-          let crd = this.emptyCard(i, j);
-          crd.color = 'Blue';
-          crd.value = -1;
-          arr.push(crd);
+          if(this.gameBoard[i][j].revealedToAI == true) {
+            arr.push(this.gameBoard[i][j]);
+          }
+          else {
+            let crd = this.emptyCard(i, j);
+            crd.color = 'Blue';
+            crd.value = -1;
+            arr.push(crd);
+          }
         }
         else {
           arr.push(this.emptyCard(i, j));
@@ -360,7 +369,7 @@ export class GameComponent implements OnInit {
           }
 
           if ((i - 1) >= 0 && this.AIBoard[i - 1][j].value != -1 && this.AIBoard[i - 1][j].value != 0 && this.AIBoard[i - 1][j].color == 'Blue') {
-            if(this.AIBoard[i - 1][j].value < this.AIBoard[i][j].value) {
+            if(this.AIBoard[i - 1][j].value > this.AIBoard[i][j].value) {
               canKillArr.push(this.AIBoard[i - 1][j]);
             }
             else {
@@ -368,7 +377,7 @@ export class GameComponent implements OnInit {
             }
           }
           if ((i + 1) <= 9 && this.AIBoard[i + 1][j].value != -1 && this.AIBoard[i + 1][j].value != 0 && this.AIBoard[i + 1][j].color == 'Blue') {
-            if(this.AIBoard[i - 1][j].value < this.AIBoard[i][j].value) {
+            if(this.AIBoard[i - 1][j].value > this.AIBoard[i][j].value) {
               canKillArr.push(this.AIBoard[i + 1][j]);
             }
             else {
@@ -376,7 +385,7 @@ export class GameComponent implements OnInit {
             }
           }
           if ((j - 1) >= 0 && this.AIBoard[i][j - 1].value != -1 && this.AIBoard[i][j - 1].value != 0 && this.AIBoard[i][j - 1].color == 'Blue') {
-            if(this.AIBoard[i][j - 1].value < this.AIBoard[i][j].value) {
+            if(this.AIBoard[i][j - 1].value > this.AIBoard[i][j].value) {
               canKillArr.push(this.AIBoard[i][j - 1]);
             }
             else {
@@ -384,7 +393,7 @@ export class GameComponent implements OnInit {
             }
           }
           if ((j + 1) <= 9 && this.AIBoard[i][j + 1].value != -1 && this.AIBoard[i][j + 1].value != 0 && this.AIBoard[i][j + 1].color == 'Blue') {
-            if(this.AIBoard[i][j + 1].value < this.AIBoard[i][j].value) {
+            if(this.AIBoard[i][j + 1].value > this.AIBoard[i][j].value) {
               canKillArr.push(this.AIBoard[i][j + 1]);
 
             }
@@ -406,10 +415,13 @@ export class GameComponent implements OnInit {
     console.log(this.canKillMap);
     console.log(this.randomKillMap);
     console.log(this.inDangerMap);
+    console.log(this.gameBoard);
+    console.log(this.AIBoard);
 
   }
 
   killKnown() {
+
   }
 
   defendPlayer() {
@@ -491,7 +503,12 @@ export class GameComponent implements OnInit {
         this.gameBoard[row][column] = this.emptyCard(row, column);
       } else { //VALUE IS GREATER SO SELECT CARD DIES
         console.log('in validate move, else', this.selectedCard, this.gameBoard[row][column]);
-
+        if(this.gameBoard[row][column].color == 'Blue') {
+          this.gameBoard[row][column].revealedToAI = true;
+        }
+        if(this.gameBoard[row][column].color == 'red'){
+          this.gameBoard[row][column].path = this.imageMapred.get(this.gameBoard[row][column].value);
+        }
         this.removeGreen(this.selectedCard.x, this.selectedCard.y);
         this.selectedCard = this.emptyCard(0, 0);
       }
