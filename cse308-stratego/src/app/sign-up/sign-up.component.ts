@@ -29,17 +29,19 @@ export class SignUpComponent implements OnInit {
       confirm("Passwords do not match. Try Again.")
       errors.push("Passwords do not match")
     }
-
-
-    if(errors.length >= 0) {
-      this.service.signUp().subscribe((data: string) => {
-        console.log(data);
-        // if(data.success) {
-        //   this.router.navigateByUrl('/game');
-        // }
-      });
-      this.router.navigateByUrl('/game');
+    else if(fullname == "") {
+      confirm("Full Name cannot be empty.")
     }
-    console.log(email, password)
+    else if(email == "") {
+      confirm("Email cannot be empty.")
+    }
+    else if(password == "") {
+      confirm("Password cannot be empty.")
+    }
+    else {
+      this.service.signUp(fullname, email, password).subscribe((data: string) => {
+        this.router.navigateByUrl('/login');
+      })
+    }
   }
 }

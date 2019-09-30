@@ -8,12 +8,12 @@ public class Users {
 
     @Id
     private String email;
-    private String fullName;
+    private String fullname;
     private String password;
 
-    public Users(String email, String fullName, String password) {
+    public Users(String email, String fullname, String password) {
         this.email = email;
-        this.fullName = fullName;
+        this.fullname = fullname;
         this.password = password;
     }
 
@@ -33,11 +33,11 @@ public class Users {
         this.password = password;
     }
 
-    public String getFullName() {
-        return fullName;
+    public String getFullname() {
+        return fullname;
     }
 
-    public void setFullName(String fullName) {
-        this.fullName = fullName;
+    public void setFullname(String fullname) {
+        this.fullname = fullname;
     }
 }

@@ -20,13 +20,12 @@ public class Hello {
     @CrossOrigin
     @RequestMapping(value = "login", method = RequestMethod.GET)
     public ResponseEntity<String> loginAttempt(@RequestParam(name = "email") String email, @RequestParam(name = "password") String password) {
-        System.out.println(email);
-        System.out.println(password);
         List<Users> all_users = usersRepository.findAll();
         String hi = "";
         for (Users user:all_users) {
-            if(user.getEmail().equals(email)) {
+            if(user.getPassword().equals(password) && user.getEmail().equals(email)) {
                 hi = "true";
+                return new ResponseEntity<String>(hi, HttpStatus.OK);
             }
             else {
                 hi = "false";
@@ -36,11 +35,32 @@ public class Hello {
     }
 
     @CrossOrigin
-    @RequestMapping(value = "array", method = RequestMethod.POST)
-    public ResponseEntity<String> arrayManipulation(@RequestBody String obj) {
-
-        System.out.println(obj);
-        String hi = "hello";
+    @RequestMapping(value = "signUp", method = RequestMethod.POST)
+    public ResponseEntity<String> signUpAttempt(@RequestParam(name = "fullname") String fullname, @RequestParam(name = "email") String email, @RequestParam(name = "password") String password) {
+        System.out.println(fullname);
+        System.out.println(email);
+        System.out.println(password);
+        System.out.println("SUCCESS");
+        usersRepository.save(new Users(email, fullname, password));
+//        List<Users> all_users = usersRepository.findAll();
+        String hi = "true";
+//        for (Users user:all_users) {
+//            if(user.getPassword().equals(password) && user.getEmail().equals(email)) {
+//                hi = "true";
+//            }
+//            else {
+//                hi = "false";
+//            }
+//        }
         return new ResponseEntity<String>(hi, HttpStatus.OK);
     }
+//
+//    @CrossOrigin
+//    @RequestMapping(value = "array", method = RequestMethod.POST)
+//    public ResponseEntity<String> arrayManipulation(@RequestBody String obj) {
+//
+//        System.out.println(obj);
+//        String hi = "hello";
+//        return new ResponseEntity<String>(hi, HttpStatus.OK);
+//    }
 }

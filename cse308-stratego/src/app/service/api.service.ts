@@ -10,20 +10,19 @@ export class ApiService {
 
   constructor(private http: HttpClient) { }
   baseUrl: string = 'http://localhost:8080/stratego/';
-  baseUrl2: string = 'http://localhost:8080/';
 
   login(email, password){
-    return this.http.get(this.baseUrl + "login?email="+email+"&password="+password, {responseType: 'text'}); //paper padh rohit ka question mark
+    return this.http.get(this.baseUrl + "login?email="+email+"&password="+password, {responseType: 'text'});
   }
 
-  signUp(){
-    return this.http.get(this.baseUrl2 + "signUp", {responseType: 'text'});
+  signUp(fullname, email, password){
+    return this.http.post(this.baseUrl + "signUp?fullname="+fullname+"&email="+email+"&password="+password, {responseType: 'text'});
   }
 
-  arrayManipulation(gameBoard: Board) {
-    let json = JSON.stringify(gameBoard);
-    return this.http.post(this.baseUrl + "array", json,{responseType: 'text'});
-  }
+  // arrayManipulation(gameBoard: Board) {
+  //   let json = JSON.stringify(gameBoard);
+  //   return this.http.post(this.baseUrl + "array", json,{responseType: 'text'});
+  // }
 
 
 }

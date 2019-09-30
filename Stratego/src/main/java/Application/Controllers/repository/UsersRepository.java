@@ -6,5 +6,4 @@ import org.springframework.data.mongodb.repository.MongoRepository;
 import java.util.List;
 
 public interface UsersRepository extends MongoRepository<Users, Integer> {
-//    List<Users> findByEmail(String email);
 }
