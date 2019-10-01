@@ -156,7 +156,7 @@ export class GameComponent implements OnInit {
         card.value = i;
 
         if (color == "red") {
-          card.path = this.imageMapred.get(i);
+          card.path = this.imageMapred.get(i);// "../assets/emptylaal.png";
           this.redArr.push(card);
         }else {
           card.path = this.imageMapblue.get(i);
@@ -186,7 +186,7 @@ export class GameComponent implements OnInit {
       temp.color = color;
       temp.value = val;
       if (color == "red") {
-        temp.path = this.imageMapred.get(val);
+        temp.path = this.imageMapred.get(val);// "../assets/emptylaal.png";
         this.redArr.push(temp);
       } else {
         temp.path = this.imageMapblue.get(val);
@@ -377,7 +377,7 @@ export class GameComponent implements OnInit {
             }
           }
           if ((i + 1) <= 9 && this.AIBoard[i + 1][j].value != -1 && this.AIBoard[i + 1][j].value != 0 && this.AIBoard[i + 1][j].color == 'Blue') {
-            if(this.AIBoard[i - 1][j].value > this.AIBoard[i][j].value) {
+            if(this.AIBoard[i + 1][j].value > this.AIBoard[i][j].value) {
               canKillArr.push(this.AIBoard[i + 1][j]);
             }
             else {
@@ -410,16 +410,57 @@ export class GameComponent implements OnInit {
 
         }
       }
+
+      this.AIMove()
     }
-    console.log(this.movablesArr);
-    console.log(this.canKillMap);
-    console.log(this.randomKillMap);
-    console.log(this.inDangerMap);
-    console.log(this.gameBoard);
-    console.log(this.AIBoard);
+    console.log("Movable Array",this.movablesArr);
+    console.log("Kill Map",this.canKillMap);
+    console.log("RandomKill map ", this.randomKillMap);
+    console.log("Danger Map", this.inDangerMap);
+    //console.log("Gameboard Array", this.gameBoard);
+    console.log("AI Board Array", this.AIBoard);
 
   }
 
+  AIMove() {
+    if(this.canKillMap.size > 0) {
+      //KILL
+      var value : Card[]= [];
+      let bestKill : Card = this.emptyCard(0,0);
+      bestKill.value = 10000;
+
+      let selectCard : Card;
+      let killedCard : Card;
+
+       let arr : IterableIterator<Card> = this.canKillMap.keys();
+       for(let key of arr) {
+         value = this.canKillMap.get(key);
+         for(let i = 0; i < value.length; i++) {
+           if(value[i].value < bestKill.value) {
+             selectCard = key;
+             killedCard = value[i];
+             bestKill = value[i];
+           }
+         }
+       }
+      this.AIBoard[selectCard.x][selectCard.y] = this.emptyCard(selectCard.x, selectCard.y);
+      this.gameBoard[selectCard.x][selectCard.y] = this.emptyCard(selectCard.x, selectCard.y);
+       selectCard.x = killedCard.x;
+       selectCard.y = killedCard.y;
+
+      this.AIBoard[killedCard.x][killedCard.y] = selectCard;
+      this.gameBoard[killedCard.x][killedCard.y] = selectCard;
+    }
+    else if(this.inDangerMap.size > 0) {
+      //Move AWAY
+    }
+    else if(this.randomKillMap.size > 0) {
+      //KILL RANDOMLY BY HIGHEST RANK PLAYER
+    }
+    else if(this.movablesArr.length > 0) {
+      //JUST MOVE
+    }
+  }
   killKnown() {
 
   }
@@ -589,7 +630,7 @@ export class GameComponent implements OnInit {
       x = row - 1;
       y = column;
       this.showOptions(x, y, 1);
-    } else if (this.gameBoard[row - 1][column].color != this.gameBoard[row][column].color) {
+    } else if ((row - 1) >= 0 && this.gameBoard[row - 1][column].color != this.gameBoard[row][column].color) {
       x = row - 1;
       y = column;
       this.showAttackPossibility(x, y, 1);
