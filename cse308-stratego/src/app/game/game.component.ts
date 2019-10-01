@@ -261,12 +261,7 @@ export class GameComponent implements OnInit {
     return tcard;
   }
 
-
   trClick(row, column) {
-
-    // if(this.gameBoard[row][column].color == 'red' && this.selectedCard.value == 0) {
-    //   return;
-    // }
 
     // creating the unplayable areas.
     if (row == 4 || row == 5)
@@ -280,17 +275,14 @@ export class GameComponent implements OnInit {
 
     // this is where the attacks on the other cards happen.
     if (this.gameBoard[row][column].value != 0 && this.selectedCard.value != 0) {
+      console.log("inside the trClick", this.selectedCard, this.gameBoard[row][column]);
+
+      if (this.selectedCard.value == 9)
+        return;
+
       if (this.validatePosition(row, column) == true) {
         this.validateMove(row, column);
       }
-
-      // place the card back in the same place.
-      // else{
-      //       //
-      //       //   let t = this.gameBoard[row][column];
-      //       //   this.gameBoard[row][column] = this.selectedCard;
-      //       //
-      //       // }
     } else if (this.gameBoard[row][column].value != 0) {         // this is where the control comes just before attacking some card or moving (basically when you select a card).
       console.log("Inside TrClick, else if part", this.selectedCard, this.gameBoard[row][column]);
 
@@ -307,10 +299,14 @@ export class GameComponent implements OnInit {
     else {
       console.log("Inside TrClick, else part", this.selectedCard, this.gameBoard[row][column]);
 
-      // if(this.selectedCard.value==9)
-
       if (this.validatePosition(row, column) == true) {
-        this.removeGreen(this.selectedCard.x, this.selectedCard.y);
+        // if(this.validateScoutPosition(row, column, this.selectedCard.x, this.selectedCard.y))
+
+        if (this.selectedCard.value != 9)
+          this.removeGreen(this.selectedCard.x, this.selectedCard.y);
+        else
+          this.showScoutgreen(this.selectedCard.x, this.selectedCard.y, 0);
+
         this.gameBoard[row][column] = this.selectedCard;
         this.gameBoard[row][column] = this.setPos(this.gameBoard[row][column], row, column);
         this.selectedCard = this.emptyCard(0, 0);
@@ -318,21 +314,47 @@ export class GameComponent implements OnInit {
     }
   }
 
-  validateScoutPosition(row, col) {
-
-    if (row == this.selectedCard.x || col == this.selectedCard) {
-
-    }
-
-    console.log("invalid scout position")
-    return false;
-  }
-
   validatePosition(row, col) {
 
+    if (this.selectedCard.value == 9) {
+
+      // if the new position is in the same column we just check by going up and down.
+      if (col == this.selectedCard.y) {
+        if (this.selectedCard.x < row) {
+          for (let i = this.selectedCard.x + 1; i < row; i++) {
+            if (this.gameBoard[i][col].value != 0 || !this.lakeCheck(i, col))
+              return false;
+          }
+          return true;
+        } else {
+          for (let i = this.selectedCard.x - 1; i > row; i--) {
+            if (this.gameBoard[i][col].value != 0 || !this.lakeCheck(i, col))
+              return false;
+          }
+          return true;
+        }
+      } else if (row == this.selectedCard.x) {
+
+        if (this.selectedCard.y < col) {
+          for (let i = this.selectedCard.y + 1; i < col; i++) {
+            if (this.gameBoard[row][i].value != 0 || !this.lakeCheck(row, i))
+              return false;
+          }
+          return true;
+        } else {
+          for (let i = this.selectedCard.y - 1; i > col; i--) {
+            if (this.gameBoard[row][i].value != 0 || !this.lakeCheck(row, i))
+              return false;
+          }
+          return true;
+        }
+      }
+    }
+
     if ((((row + 1) == this.selectedCard.x || (row - 1) == this.selectedCard.x) && col == this.selectedCard.y)
-      || (((col + 1) == this.selectedCard.y || (col - 1) == this.selectedCard.y) && row == this.selectedCard.x))
+      || (((col + 1) == this.selectedCard.y || (col - 1) == this.selectedCard.y) && row == this.selectedCard.x)) {
       return true;
+    }
 
     console.log("Card can only move one block away");
     return false;
@@ -391,7 +413,6 @@ export class GameComponent implements OnInit {
     }
   }
 
-
   specialMoves(row, column) {
 
     // if the opponent captures the opponents flag.
@@ -434,19 +455,13 @@ export class GameComponent implements OnInit {
       el.classList.remove("attack_possibility");
   }
 
-  lakeCheck(row, col, rowkicol) {
+  lakeCheck(row, col) {
 
-    if (rowkicol) {
-      if (row == 4 || row == 5)
-        if (col == 2 || col == 3 || col == 6 || col == 7)
-          return false;
-    } else{
-      if (col == 2 || col == 3 || col == 6 || col == 7) {
-        if (row == 4 || row == 5)
-          return false;
-      }
-    }
-          return true;
+    if (row == 4 || row == 5)
+      if (col == 2 || col == 3 || col == 6 || col == 7)
+        return false;
+
+    return true;
   }
 
   showScoutgreen(row, column, yes) {
@@ -456,7 +471,7 @@ export class GameComponent implements OnInit {
       if (this.gameBoard[i][column].value != 0)
         break;
 
-      if(this.lakeCheck(i, column, 1)==false)
+      if (this.lakeCheck(i, column) == false)
         break;
 
       this.showOptions(i, column, yes);
@@ -467,19 +482,19 @@ export class GameComponent implements OnInit {
       if (this.gameBoard[i][column].value != 0)
         break;
 
-      if(this.lakeCheck(i, column, 1)==false)
+      if (this.lakeCheck(i, column) == false)
         break;
 
       this.showOptions(i, column, yes);
     }
 
     // we are looping through columns left
-    for (let i = column+1; i < 10; i++) {
+    for (let i = column + 1; i < 10; i++) {
       if (this.gameBoard[row][i].value != 0)
         break;
 
 
-      if(this.lakeCheck(row, i, 1)==false)
+      if (this.lakeCheck(row, i) == false)
         break;
 
       this.showOptions(row, i, yes);
@@ -491,7 +506,7 @@ export class GameComponent implements OnInit {
         break;
 
 
-      if(this.lakeCheck(row, i, 1)==false)
+      if (this.lakeCheck(row, i) == false)
         break;
 
       this.showOptions(row, i, yes);
