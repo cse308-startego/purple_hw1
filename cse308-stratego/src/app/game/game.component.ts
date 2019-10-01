@@ -151,13 +151,12 @@ export class GameComponent implements OnInit {
       card.x = 0;
       card.y = 0;
 
-      (i);
       if (i == 1 || i == 2 || i == 10 || i == 12) {
         card.color = color;
         card.value = i;
 
         if (color == "red") {
-          card.path = this.imageMapred.get(i);
+          card.path = this.imageMapred.get(i);// "../assets/emptylaal.png";
           this.redArr.push(card);
         }else {
           card.path = this.imageMapblue.get(i);
@@ -187,7 +186,7 @@ export class GameComponent implements OnInit {
       temp.color = color;
       temp.value = val;
       if (color == "red") {
-        temp.path = this.imageMapred.get(val);
+        temp.path = this.imageMapred.get(val);// "../assets/emptylaal.png";
         this.redArr.push(temp);
       } else {
         temp.path = this.imageMapblue.get(val);
@@ -209,30 +208,34 @@ export class GameComponent implements OnInit {
       s--;
     }
 
-  
+    let lake = new Array<Card>(4);
 
+    for (let k = 1; k < 5; k++) {
+      lake[k] = new Card();
+      lake[k].color = "empty card, no color.";
+      lake[k].value = 0;
+      lake[k].path = "../assets/" + k + ".png";
+      lake[k] = this.setPos(lake[k], 0, 0);
+    }
 
     for (let i = 0; i < 2; i++) {
       let cd = new Card();
-      cd.color = "purple";
+      cd.color = "empty card, no color.";
       cd.value = 0;
-      cd.path = "";
+      cd.path = "../assets/grass.png";
       cd = this.setPos(cd, 0, 0);
-      // @ts-ignore
-      const temp = [cd, cd, cd, cd, cd, cd, cd, cd, cd, cd];
-      if (i==0) {
-        temp[2].path = this.imagelake.get(1);
-        // temp[3].path = this.imagelake.get(2);
-        // temp[6].path = this.imagelake.get(1);
-        // temp[7].path = this.imagelake.get(2);
-      }else {
-        temp[2].path = this.imagelake.get(3);
-        // temp[3].path = this.imagelake.get(4);
-        // temp[6].path = this.imagelake.get(3);
-        // temp[7].path = this.imagelake.get(4);
+      if (i == 0) {
+        // @ts-ignore
+        const temp = [cd, cd, lake[1], lake[2], cd, cd, lake[1], lake[2], cd, cd];
+        this.gameBoard.push(temp);
+
+      } else {
+        // @ts-ignore
+        const temp = [cd, cd, lake[3], lake[4], cd, cd, lake[3], lake[4], cd, cd];
+        this.gameBoard.push(temp);
+
       }
-      console.log(temp);
-      this.gameBoard.push(temp);
+
     }
 
     s = 4;
@@ -259,17 +262,237 @@ export class GameComponent implements OnInit {
   }
 
 
+  gamePlay() {
+    while (1) {
+      let move: number = 1;
+      if (move) {
+        this.updateAIBoard();
+        this.AIGameplay();
+      }
+
+    }
+  }
+
+  private movablesArr: Card[] = [];
+  private inDangerMap: Map<Card, Card[]> = new Map<Card, Card[]>();
+  private canKillMap: Map<Card, Card[]> = new Map<Card, Card[]>();
+  private randomKillMap: Map<Card, Card[]> = new Map<Card, Card[]>();
+
+  private AIBoard: Card[][] = [];
+
+  AIGameplay() {
+    this.updateAIBoard();
+    this.checkNeighbors();
+
+    // if (this.canKillMap.size == 0 && this.inDangerMap.size == 0) {
+    //   this.moveHighest();
+    // } else {
+    //   if (this.canKillMap.size > 0) {
+    //     this.killKnown();
+    //   } else if (this.inDangerMap.size > 0) {
+    //     this.defendPlayer();
+    //   } else {
+    //     this.killRandom();
+    //   }
+    //
+    //
+    // }
+
+  }
+
+  updateAIBoard() {
+    this.AIBoard = [];
+    for (let i = 0; i < this.gameBoard.length; i++) {
+      let arr = [];
+      for (let j = 0; j < this.gameBoard[0].length; j++) {
+        if (this.gameBoard[i][j].color == 'red') {
+          arr.push(this.gameBoard[i][j]);
+        } else if(this.gameBoard[i][j].color == 'Blue') {
+          if(this.gameBoard[i][j].revealedToAI == true) {
+            arr.push(this.gameBoard[i][j]);
+          }
+          else {
+            let crd = this.emptyCard(i, j);
+            crd.color = 'Blue';
+            crd.value = -1;
+            arr.push(crd);
+          }
+        }
+        else {
+          arr.push(this.emptyCard(i, j));
+        }
+      }
+      this.AIBoard.push(arr);
+    }
+    console.log(this.AIBoard);
+  }
+
+  checkNeighbors() {
+    this.movablesArr = [];
+    this.inDangerMap = new Map<Card, Card[]>();
+    this.canKillMap = new Map<Card, Card[]>();
+    this.randomKillMap = new Map<Card, Card[]>();
+
+    let inDangerArr : Card[]= [];
+    let canKillArr : Card[]= [];
+    let randomKillArr : Card[]= [];
+
+    for (let i = 0; i < this.AIBoard.length; i++) {
+      for (let j = 0; j < this.AIBoard[i].length; j++) {
+        randomKillArr = [];
+        canKillArr = [];
+        inDangerArr = [];
+        if (this.AIBoard[i][j].color == 'red') {
+          let x = 0;
+          let y = 0;
+          if ((i - 1) >= 0 && this.AIBoard[i - 1][j].value == 0) {
+            this.movablesArr.push(this.AIBoard[i][j]);
+          } else if ((i + 1) <= 9 && this.AIBoard[i + 1][j].value == 0) {
+            this.movablesArr.push(this.AIBoard[i][j]);
+          } else if ((j - 1) >= 0 && this.AIBoard[i][j - 1].value == 0) {
+            this.movablesArr.push(this.AIBoard[i][j]);
+          } else if ((j + 1) <= 9 && this.AIBoard[i][j + 1].value == 0) {
+            this.movablesArr.push(this.AIBoard[i][j]);
+          }
+
+          if ((i - 1) >= 0 && this.AIBoard[i - 1][j].value == -1) {
+            randomKillArr.push(this.AIBoard[i - 1][j]);
+          }
+          if ((i + 1) <= 9 && this.AIBoard[i + 1][j].value == -1) {
+            randomKillArr.push(this.AIBoard[i + 1][j]);
+          }
+          if ((j - 1) >= 0 && this.AIBoard[i][j - 1].value == -1) {
+            randomKillArr.push(this.AIBoard[i][j - 1]);
+          }
+          if ((j + 1) <= 9 && this.AIBoard[i][j + 1].value == -1) {
+            randomKillArr.push(this.AIBoard[i][j + 1]);
+          }
+
+          if ((i - 1) >= 0 && this.AIBoard[i - 1][j].value != -1 && this.AIBoard[i - 1][j].value != 0 && this.AIBoard[i - 1][j].color == 'Blue') {
+            if(this.AIBoard[i - 1][j].value > this.AIBoard[i][j].value) {
+              canKillArr.push(this.AIBoard[i - 1][j]);
+            }
+            else {
+              inDangerArr.push(this.AIBoard[i - 1][j]);
+            }
+          }
+          if ((i + 1) <= 9 && this.AIBoard[i + 1][j].value != -1 && this.AIBoard[i + 1][j].value != 0 && this.AIBoard[i + 1][j].color == 'Blue') {
+            if(this.AIBoard[i + 1][j].value > this.AIBoard[i][j].value) {
+              canKillArr.push(this.AIBoard[i + 1][j]);
+            }
+            else {
+              inDangerArr.push(this.AIBoard[i + 1][j]);
+            }
+          }
+          if ((j - 1) >= 0 && this.AIBoard[i][j - 1].value != -1 && this.AIBoard[i][j - 1].value != 0 && this.AIBoard[i][j - 1].color == 'Blue') {
+            if(this.AIBoard[i][j - 1].value > this.AIBoard[i][j].value) {
+              canKillArr.push(this.AIBoard[i][j - 1]);
+            }
+            else {
+              inDangerArr.push(this.AIBoard[i][j - 1]);
+            }
+          }
+          if ((j + 1) <= 9 && this.AIBoard[i][j + 1].value != -1 && this.AIBoard[i][j + 1].value != 0 && this.AIBoard[i][j + 1].color == 'Blue') {
+            if(this.AIBoard[i][j + 1].value > this.AIBoard[i][j].value) {
+              canKillArr.push(this.AIBoard[i][j + 1]);
+
+            }
+            else {
+              inDangerArr.push(this.AIBoard[i][j + 1]);
+            }
+          }
+          if(randomKillArr.length > 0)
+            this.randomKillMap.set(this.AIBoard[i][j], randomKillArr);
+          if(canKillArr.length > 0)
+            this.canKillMap.set(this.AIBoard[i][j], canKillArr);
+          if(inDangerArr.length > 0)
+            this.inDangerMap.set(this.AIBoard[i][j], inDangerArr);
+
+        }
+      }
+
+      this.AIMove()
+    }
+    console.log("Movable Array",this.movablesArr);
+    console.log("Kill Map",this.canKillMap);
+    console.log("RandomKill map ", this.randomKillMap);
+    console.log("Danger Map", this.inDangerMap);
+    //console.log("Gameboard Array", this.gameBoard);
+    console.log("AI Board Array", this.AIBoard);
+
+  }
+
+  AIMove() {
+    if(this.canKillMap.size > 0) {
+      //KILL
+      var value : Card[]= [];
+      let bestKill : Card = this.emptyCard(0,0);
+      bestKill.value = 10000;
+
+      let selectCard : Card;
+      let killedCard : Card;
+
+       let arr : IterableIterator<Card> = this.canKillMap.keys();
+       for(let key of arr) {
+         value = this.canKillMap.get(key);
+         for(let i = 0; i < value.length; i++) {
+           if(value[i].value < bestKill.value) {
+             selectCard = key;
+             killedCard = value[i];
+             bestKill = value[i];
+           }
+         }
+       }
+      this.AIBoard[selectCard.x][selectCard.y] = this.emptyCard(selectCard.x, selectCard.y);
+      this.gameBoard[selectCard.x][selectCard.y] = this.emptyCard(selectCard.x, selectCard.y);
+       selectCard.x = killedCard.x;
+       selectCard.y = killedCard.y;
+
+      this.AIBoard[killedCard.x][killedCard.y] = selectCard;
+      this.gameBoard[killedCard.x][killedCard.y] = selectCard;
+    }
+    else if(this.inDangerMap.size > 0) {
+      //Move AWAY
+    }
+    else if(this.randomKillMap.size > 0) {
+      //KILL RANDOMLY BY HIGHEST RANK PLAYER
+    }
+    else if(this.movablesArr.length > 0) {
+      //JUST MOVE
+    }
+  }
+  killKnown() {
+
+  }
+
+  defendPlayer() {
+  }
+
+  killRandom() {
+  }
+
+  moveHighest() {
+  }
+
   trClick(row, column) {
+
+    // if(this.gameBoard[row][column].color == 'red' && this.selectedCard.value == 0) {
+    //   return;
+    // }
+
+    // creating the unplayable areas.
+    if (row == 4 || row == 5)
+      if (column == 2 || column == 3 || column == 6 || column == 7)
+        return;
+
 
     // this is where the attacks on the other cards happen.
     if (this.gameBoard[row][column].value != 0 && this.selectedCard.value != 0) {
       if(this.validatePosition(row, column) == true) {
         this.validateMove(row, column);
       }
-    }
-
-    else if (this.gameBoard[row][column].value != 0) {         // this is where the control comes just before attacking some card or moving (basically when you select a card).
-      console.log("Inside TrClick, else if part", this.selectedCard, this.gameBoard[row][column]);
+    } else if (this.gameBoard[row][column].value != 0) {         // this is where the control comes just before attacking some card or moving (basically when you select a card).
+      console.log('Inside TrClick, else if part', this.selectedCard, this.gameBoard[row][column]);
       this.addGreen(row, column);
       this.selectedCard = this.gameBoard[row][column];
       this.gameBoard[row][column] = this.emptyCard(row, column)
@@ -277,29 +500,23 @@ export class GameComponent implements OnInit {
 
     // this else part deals with moving the card to another empty space.
     else {
-
-      console.log("Inside TrClick, else part", this.selectedCard, this.gameBoard[row][column]);
-      if(this.validatePosition(row, column) == true) {
+      console.log('Inside TrClick, else part', this.selectedCard, this.gameBoard[row][column]);
+      if (this.validatePosition(row, column) == true) {
         this.removeGreen(this.selectedCard.x, this.selectedCard.y);
         this.gameBoard[row][column] = this.selectedCard;
         this.gameBoard[row][column] = this.setPos(this.gameBoard[row][column],row,column);
         this.selectedCard = this.emptyCard(0, 0);
       }
     }
+    this.AIGameplay();
   }
 
-  // initiallySelecting(row, column) {
-  //   if ( this.gameBoard[row][column].value == 11 ||  this.gameBoard[row][column].value == 12 || this.gameBoard[row][column].value == 0)
-  //     return;
-  //
-  //
-  // }
 
-  validatePosition(row, col){
-
-    if((((row+1) == this.selectedCard.x || (row - 1) == this.selectedCard.x) && col == this.selectedCard.y)
-      || (((col+1) == this.selectedCard.y || (col-1) == this.selectedCard.y) && row == this.selectedCard.x))
+  validatePosition(row, col) {
+    if ((((row + 1) == this.selectedCard.x || (row - 1) == this.selectedCard.x) && col == this.selectedCard.y)
+      || (((col + 1) == this.selectedCard.y || (col - 1) == this.selectedCard.y) && row == this.selectedCard.x)) {
       return true;
+    }
 
     console.log("Card can only move one block away");
     return false;
@@ -312,14 +529,23 @@ export class GameComponent implements OnInit {
     if (this.selectedCard.color != this.gameBoard[row][column].color) { //if it is a player of different color
 
       // game end logic.
-      // if the opponent grabs the flag, then send an alert and end the game.
-      if(this.gameBoard[row][column].value == 12){
-        this.removeGreen(this.selectedCard.x, this.selectedCard.y);
-        this.gameBoard[row][column] = this.selectedCard;
-        this.gameBoard[row][column] = this.setPos(this.gameBoard[row][column], row, column);
-        this.selectedCard = this.emptyCard(0, 0);
-        alert(""+ this.gameBoard[row][column].color + ", you won!");
-        document.location.reload();
+      this.specialMoves(row, column);
+
+      // if the selected card is a bomb and the current card isnt a miner then current card dies.
+      if (this.gameBoard[row][column].value == 11) {
+        if (this.selectedCard.value != 8) {
+          console.log("inside the non miner if");
+          this.removeGreen(this.selectedCard.x, this.selectedCard.y);
+          this.selectedCard = this.emptyCard(0, 0);
+          return;
+        } else {
+          console.log("inside the non miner else");
+          this.removeGreen(this.selectedCard.x, this.selectedCard.y);
+          this.gameBoard[row][column] = this.selectedCard;
+          this.gameBoard[row][column] = this.setPos(this.gameBoard[row][column], row, column);
+          this.selectedCard = this.emptyCard(0, 0);
+          return;
+        }
       }
 
       if (this.selectedCard.value < this.gameBoard[row][column].value) {            // MARSHALL 1 can KILL Scout 9
@@ -329,19 +555,20 @@ export class GameComponent implements OnInit {
         this.gameBoard[row][column] = this.selectedCard;
         this.gameBoard[row][column] = this.setPos(this.gameBoard[row][column], row, column);
         this.selectedCard = this.emptyCard(0, 0);
-      }
-
-      else if (this.selectedCard.value == this.gameBoard[row][column].value) {    // if the card values are equal destroy both.
-        console.log("in validate move, else if", this.selectedCard, this.gameBoard[row][column]);
+      } else if (this.selectedCard.value == this.gameBoard[row][column].value) {    // if the card values are equal destroy both.
+        console.log('in validate move, else if', this.selectedCard, this.gameBoard[row][column]);
 
         this.removeGreen(this.selectedCard.x, this.selectedCard.y);
         this.selectedCard = this.emptyCard(0, 0);
         this.gameBoard[row][column] = this.emptyCard(row, column);
-      }
-
-      else { //VALUE IS GREATER SO SELECT CARD DIES
-        console.log("in validate move, else", this.selectedCard, this.gameBoard[row][column]);
-
+      } else { //VALUE IS GREATER SO SELECT CARD DIES
+        console.log('in validate move, else', this.selectedCard, this.gameBoard[row][column]);
+        if(this.gameBoard[row][column].color == 'Blue') {
+          this.gameBoard[row][column].revealedToAI = true;
+        }
+        if(this.gameBoard[row][column].color == 'red'){
+          this.gameBoard[row][column].path = this.imageMapred.get(this.gameBoard[row][column].value);
+        }
         this.removeGreen(this.selectedCard.x, this.selectedCard.y);
         this.selectedCard = this.emptyCard(0, 0);
       }
@@ -355,9 +582,24 @@ export class GameComponent implements OnInit {
 
   specialMoves(row, column){
 
+    // if the opponent captures the opponents flag.
+    if (this.gameBoard[row][column].value == 12) {
+      this.removeGreen(this.selectedCard.x, this.selectedCard.y);
+      this.gameBoard[row][column] = this.selectedCard;
+      this.gameBoard[row][column] = this.setPos(this.gameBoard[row][column], row, column);
+      this.selectedCard = this.emptyCard(0, 0);
+      alert("" + this.gameBoard[row][column].color + ", you won!");
+      document.location.reload();
+    }
+
   }
 
   showOptions(x, y, yes) {
+
+    if (x == 4 || x == 5)
+      if (y == 2 || y == 3 || y == 6 || y == 7)
+        return;
+
     const id: string = String(x) + String(y);
     const el = (document.getElementById(id) as HTMLTableRowElement);
     console.log(x, y)
@@ -388,7 +630,7 @@ export class GameComponent implements OnInit {
       x = row - 1;
       y = column;
       this.showOptions(x, y, 1);
-    } else if (this.gameBoard[row - 1][column].color != this.gameBoard[row][column].color) {
+    } else if ((row - 1) >= 0 && this.gameBoard[row - 1][column].color != this.gameBoard[row][column].color) {
       x = row - 1;
       y = column;
       this.showAttackPossibility(x, y, 1);
@@ -491,9 +733,9 @@ export class GameComponent implements OnInit {
 
   emptyCard(row, column) {
     let cd = new Card();
-    cd.color = "Blank Baba bakchod";
+    cd.color = "Blank card";
     cd.value = 0;
-    cd.path = "../assets/2.png";
+    cd.path = "../assets/grass.png";
     cd = this.setPos(cd, row, column);
     return cd;
   }
@@ -522,14 +764,14 @@ export class GameComponent implements OnInit {
     }
   }
 
-  // setimage(){
-  //
-  //   this.gameBoard[4][2].path=this.imagelake.get(1);
-  //   this.gameBoard[4][3].path=this.imagelake.get(2);
-  //   this.gameBoard[5][2].path=this.imagelake.get(3);
-  //   this.gameBoard[5][3].path=this.imagelake.get(4);
-  //
-  // }
+  setimage() {
+
+    this.gameBoard[4][2].path = this.imagelake.get(1);
+    this.gameBoard[4][3].path = this.imagelake.get(2);
+    this.gameBoard[5][2].path = this.imagelake.get(3);
+    this.gameBoard[5][3].path = this.imagelake.get(4);
+
+  }
 
 
 }
