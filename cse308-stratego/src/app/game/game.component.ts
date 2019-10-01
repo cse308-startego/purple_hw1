@@ -551,7 +551,7 @@ export class GameComponent implements OnInit {
     if(this.movablesArr.length > 0) {
       //JUST MOVE
       for(let i = 0; i < this.movablesArr.length; i++) {
-        
+
       }
     }
   }
