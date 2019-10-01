@@ -18,11 +18,12 @@ export class GameComponent implements OnInit {
   private imageMapred: Map<number, string> = new Map<number, string>();
   private imageMapblue: Map<number, string> = new Map<number, string>();
   private imagelake: Map<number, string> = new Map<number, string>();
-  private imageMap: Map<number, string> = new Map<number, string>();
+  // private imageMap: Map<number, string> = new Map<number, string>();
   private selectedCard: Card = this.emptyCard(0, 0);
 
 
   constructor(private service: ApiService) {
+    service;
   }
 
 
@@ -202,7 +203,6 @@ export class GameComponent implements OnInit {
 
   setupGameBoard() {
     let s = 4;
-    let random = Math.floor((Math.random() * 11) + 1);
     while (s > 0) {
       this.gameBoard.push(this.redArr.splice(0, 10));
       s--;
@@ -294,21 +294,21 @@ export class GameComponent implements OnInit {
     } else if (this.gameBoard[row][column].value != 0) {         // this is where the control comes just before attacking some card or moving (basically when you select a card).
       console.log("Inside TrClick, else if part", this.selectedCard, this.gameBoard[row][column]);
 
-      // if the current card is a bomb then, please dont more or do shit.
-      if (this.selectedCard.value == 11) {
-        return;
-      }
+      if (this.gameBoard[row][column].value == 9)
+        this.showScoutgreen(row, column, 1);
+      else
+        this.addGreen(row, column);
 
-      this.addGreen(row, column);
       this.selectedCard = this.gameBoard[row][column];
       this.gameBoard[row][column] = this.emptyCard(row, column);
     }
 
     // this else part deals with moving the card to another empty space.
     else {
-
-
       console.log("Inside TrClick, else part", this.selectedCard, this.gameBoard[row][column]);
+
+      // if(this.selectedCard.value==9)
+
       if (this.validatePosition(row, column) == true) {
         this.removeGreen(this.selectedCard.x, this.selectedCard.y);
         this.gameBoard[row][column] = this.selectedCard;
@@ -318,15 +318,15 @@ export class GameComponent implements OnInit {
     }
   }
 
-  // validateScoutPosition(row, col){
-  //
-  //   if(row == this.selectedCard.x){
-  //
-  //   }
-  //
-  //   console.log("invalid scout position")
-  //   return false;
-  // }
+  validateScoutPosition(row, col) {
+
+    if (row == this.selectedCard.x || col == this.selectedCard) {
+
+    }
+
+    console.log("invalid scout position")
+    return false;
+  }
 
   validatePosition(row, col) {
 
@@ -414,7 +414,7 @@ export class GameComponent implements OnInit {
 
     const id: string = String(x) + String(y);
     const el = (document.getElementById(id) as HTMLTableRowElement);
-    console.log(x, y)
+    console.log(x, y);
 
     if (yes)
       el.classList.add("options");
@@ -434,15 +434,70 @@ export class GameComponent implements OnInit {
       el.classList.remove("attack_possibility");
   }
 
-  showScoutgreen(row, column){
+  lakeCheck(row, col, rowkicol) {
 
-    let x=0;
-    let y=0;
-
-    // we are looping through
-    // for(let i=row;i)
-
+    if (rowkicol) {
+      if (row == 4 || row == 5)
+        if (col == 2 || col == 3 || col == 6 || col == 7)
+          return false;
+    } else{
+      if (col == 2 || col == 3 || col == 6 || col == 7) {
+        if (row == 4 || row == 5)
+          return false;
+      }
+    }
+          return true;
   }
+
+  showScoutgreen(row, column, yes) {
+
+    // we are looping through rows down
+    for (let i = row + 1; i < 10; i++) {
+      if (this.gameBoard[i][column].value != 0)
+        break;
+
+      if(this.lakeCheck(i, column, 1)==false)
+        break;
+
+      this.showOptions(i, column, yes);
+    }
+
+    // we are looping through rows above
+    for (let i = row - 1; i > -1; i--) {
+      if (this.gameBoard[i][column].value != 0)
+        break;
+
+      if(this.lakeCheck(i, column, 1)==false)
+        break;
+
+      this.showOptions(i, column, yes);
+    }
+
+    // we are looping through columns left
+    for (let i = column+1; i < 10; i++) {
+      if (this.gameBoard[row][i].value != 0)
+        break;
+
+
+      if(this.lakeCheck(row, i, 1)==false)
+        break;
+
+      this.showOptions(row, i, yes);
+    }
+
+    // we are looping through columns right
+    for (let i = column - 1; i > -1; i--) {
+      if (this.gameBoard[row][i].value != 0)
+        break;
+
+
+      if(this.lakeCheck(row, i, 1)==false)
+        break;
+
+      this.showOptions(row, i, yes);
+    }
+  }
+
   addGreen(row, column) {
     let x = 0;
     let y = 0;
@@ -563,8 +618,7 @@ export class GameComponent implements OnInit {
 
   hide() {
 
-    let i = 0;
-    for (i = 0; i < 10; i++) {
+    for (let i = 0; i < 10; i++) {
       const id: string = String(0) + String(i);
 
       const el = (document.getElementById(id) as HTMLTableRowElement);
@@ -575,8 +629,7 @@ export class GameComponent implements OnInit {
 
   unhide() {
 
-    let i = 0;
-    for (i = 0; i < 10; i++) {
+    for (let i = 0; i < 10; i++) {
       const id: string = String(0) + String(i);
 
       const el = (document.getElementById(id) as HTMLTableRowElement);
