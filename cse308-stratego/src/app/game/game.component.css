@@ -51,18 +51,12 @@ table {
   height: 50px;
 }
 
-/*tr:nth-child(odd) td:nth-child(even),*/
-/*tr:nth-child(even) td:nth-child(odd){*/
-/*  background-color: #FFA5A2;*/
-/*}*/
-
-/*tr:nth-child(even) td:nth-child(even),*/
-/*tr:nth-child(odd) td:nth-child(odd){*/
-/*  background-color: #EB5B52;*/
-/*}*/
-
 .options{
-  background-color: #03338E;
+  transition: background-color 0.5s ease-in;
+  background: #195AFF;  /* fallback for old browsers */
+
+  /*background: linear-gradient(to bottom, #feb47b, #ff7e5f); !* W3C, IE 10+/ Edge, Firefox 16+, Chrome 26+, Opera 12+, Safari 7+ *!*/
+
 }
 .displayNone{
   display: none;
@@ -129,4 +123,3 @@ ul {
 .box:hover::after {
   opacity: 1;
 }
-

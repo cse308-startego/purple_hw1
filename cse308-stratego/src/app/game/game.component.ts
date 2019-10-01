@@ -1,12 +1,29 @@
 import {Component, OnInit} from '@angular/core';
 import {Block, Board, Card} from './game-models';
 import {ApiService} from '../service/api.service';
+import { trigger,style,transition,animate,keyframes,query,stagger } from '@angular/animations';
+
 
 @Component({
   // tslint:disable-next-line:component-selector
   selector: 'game-page',
   templateUrl: 'game.component.html',
-  styleUrls: ['game.component.css']
+  styleUrls: ['game.component.css'],
+  animations: [
+    trigger('listAnimation', [
+      transition('* => *', [
+
+        query(':enter', style({ opacity: 0 }), {optional: true}),
+
+        query(':enter', stagger('300ms', [
+          animate('1s ease-out', keyframes([
+            style({opacity: 0, transform: 'translateY(-75%)', offset: 0}),
+            style({opacity: 1, transform: 'translateY(0)',     offset: 1.0}),
+          ]))]), {optional: true})
+      ])
+    ])
+
+  ]
 
 })
 export class GameComponent implements OnInit {
@@ -797,5 +814,6 @@ export class GameComponent implements OnInit {
       el.classList.remove('displayNone');
     }
   }
+
 
 }

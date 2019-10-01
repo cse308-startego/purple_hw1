@@ -10,7 +10,8 @@
     <div class="  ">
 
       <div class=" flex items-center justify-center pt-4">
-        <table id="chessBoard">
+        <table id="chessBoard" [@listAnimation]="gameBoard.length">
+
           <tr *ngFor="let row of columns">
             <td class=" p-2  " *ngFor="let cell of rows " (click)="trClick(row,cell)"
                 id='{{row}}{{cell}}'>
@@ -23,12 +24,14 @@
 
     <div class="block w-1/2 ">
 
-        <h1 id="scoreblue" class="inline-block text-2xl text-center font-bold px-4 pt-4 text-blue-800">Player Blue: {{scoreBlue}}</h1>
-        <h1 id = "scorered" class="inline-block text-2xl text-center font-bold text-red-800">Player Red: {{scoreRed}}</h1>
+      <h1 id="scoreblue" class="inline-block text-2xl text-center font-bold px-4 pt-4 text-blue-800">Player
+        Blue: {{scoreBlue}}</h1>
+      <h1 id="scorered" class="inline-block text-2xl text-center font-bold text-red-800">Player Red: {{scoreRed}}</h1>
 
-<!--      <h1 class="text-2xl text-center font-bold py-2">Character Description </h1>-->
-      <div class="flex justify-center font-bold text-left pt-24">
+      <!--      <h1 class="text-2xl text-center font-bold py-2">Character Description </h1>-->
+      <div class="flex justify-center font-bold text-left pt-24 text-lg pl-4">
 
+        <div class="w-1/4"></div>
         <div class=" w-1/4 ">
           <li class="list-none py-2"> Bomb<img class="imageSize" src="../assets/bomb.png" alt="bomb"></li>
           <li class="list-none py-2"> Captain <img class="imageSize" src="../assets/captain.png" alt="captain"></li>
@@ -51,14 +54,14 @@
           <li class="list-none py-2"> Miner <img class="imageSize" src="../assets/miner.png" alt="Miner"></li>
         </div>
       </div>
-      <div class=" flex justify-between pt-24 px-10">
+      <div class=" flex justify-between pt-24 px-4">
 
         <button
-          class="bg-transparent hover:bg-blue-500 text-blue-700 font-semibold hover:text-white py-2 px-2 border border-blue-500 hover:border-transparent rounded">
+          class="bg-transparent hover:bg-blue-900 text-blue-700 font-semibold hover:text-white py-2 px-2 border border-blue-500 hover:border-transparent rounded">
           Randomise Turn
         </button>
       </div>
-      <h1 class="text-xl px-10 font-bold py-2 text-blue-600"><a
+      <h1 class="text-xl px-10 font-bold py-2 text-blue-900"><a
         href="https://www.ultraboardgames.com/stratego/game-rules.php">Looking for rules ?</a></h1>
 
     </div>
