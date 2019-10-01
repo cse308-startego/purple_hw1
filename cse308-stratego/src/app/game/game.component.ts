@@ -273,8 +273,8 @@ export class GameComponent implements OnInit {
       if (column == 2 || column == 3 || column == 6 || column == 7)
         return;
 
-    if(this.gameBoard[row][column].value == 11 || this.gameBoard[row][column].value == 12){
-      if(this.selectedCard.value ==0)
+    if (this.gameBoard[row][column].value == 11 || this.gameBoard[row][column].value == 12) {
+      if (this.selectedCard.value == 0)
         return;
     }
 
@@ -295,7 +295,7 @@ export class GameComponent implements OnInit {
       console.log("Inside TrClick, else if part", this.selectedCard, this.gameBoard[row][column]);
 
       // if the current card is a bomb then, please dont more or do shit.
-      if(this.selectedCard.value == 11){
+      if (this.selectedCard.value == 11) {
         return;
       }
 
@@ -307,6 +307,7 @@ export class GameComponent implements OnInit {
     // this else part deals with moving the card to another empty space.
     else {
 
+
       console.log("Inside TrClick, else part", this.selectedCard, this.gameBoard[row][column]);
       if (this.validatePosition(row, column) == true) {
         this.removeGreen(this.selectedCard.x, this.selectedCard.y);
@@ -317,6 +318,15 @@ export class GameComponent implements OnInit {
     }
   }
 
+  // validateScoutPosition(row, col){
+  //
+  //   if(row == this.selectedCard.x){
+  //
+  //   }
+  //
+  //   console.log("invalid scout position")
+  //   return false;
+  // }
 
   validatePosition(row, col) {
 
@@ -354,7 +364,8 @@ export class GameComponent implements OnInit {
         }
       }
 
-      if (this.selectedCard.value < this.gameBoard[row][column].value) {            // MARSHALL 1 can KILL Scout 9
+      if ((this.selectedCard.value < this.gameBoard[row][column].value) ||
+        (this.gameBoard[row][column].value == 1 && this.selectedCard.value == 10)) {            // MARSHALL 1 can KILL Scout 9
         console.log("in validate move, if", this.selectedCard, this.gameBoard[row][column]);
 
         this.removeGreen(this.selectedCard.x, this.selectedCard.y);
@@ -423,6 +434,15 @@ export class GameComponent implements OnInit {
       el.classList.remove("attack_possibility");
   }
 
+  showScoutgreen(row, column){
+
+    let x=0;
+    let y=0;
+
+    // we are looping through
+    // for(let i=row;i)
+
+  }
   addGreen(row, column) {
     let x = 0;
     let y = 0;
