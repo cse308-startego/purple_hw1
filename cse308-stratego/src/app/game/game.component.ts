@@ -209,6 +209,9 @@ export class GameComponent implements OnInit {
       s--;
     }
 
+  
+
+
     for (let i = 0; i < 2; i++) {
       let cd = new Card();
       cd.color = "purple";
@@ -219,14 +222,14 @@ export class GameComponent implements OnInit {
       const temp = [cd, cd, cd, cd, cd, cd, cd, cd, cd, cd];
       if (i==0) {
         temp[2].path = this.imagelake.get(1);
-        temp[3].path = this.imagelake.get(2);
-        temp[6].path = this.imagelake.get(1);
-        temp[7].path = this.imagelake.get(2);
+        // temp[3].path = this.imagelake.get(2);
+        // temp[6].path = this.imagelake.get(1);
+        // temp[7].path = this.imagelake.get(2);
       }else {
         temp[2].path = this.imagelake.get(3);
-        temp[3].path = this.imagelake.get(4);
-        temp[6].path = this.imagelake.get(3);
-        temp[7].path = this.imagelake.get(4);
+        // temp[3].path = this.imagelake.get(4);
+        // temp[6].path = this.imagelake.get(3);
+        // temp[7].path = this.imagelake.get(4);
       }
       console.log(temp);
       this.gameBoard.push(temp);
