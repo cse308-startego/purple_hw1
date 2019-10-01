@@ -21,6 +21,8 @@ export class GameComponent implements OnInit {
   private imageMap: Map<number, string> = new Map<number, string>();
   private selectedCard: Card = this.emptyCard(0, 0);
 
+  public turn : boolean = false; //false = AI true = Player
+
 
   constructor(private service: ApiService) {
   }
@@ -33,7 +35,12 @@ export class GameComponent implements OnInit {
     this.initializeCards();
     this.setupGameBoard();
     this.setPositions();
-    //console.log(this.gameBoard);
+    console.log(this.gameBoard);
+    this.updateAIBoard();
+    console.log(this.AIBoard);
+
+
+
 
     let board = new Board();
     board.board = this.gameBoard;
@@ -44,6 +51,8 @@ export class GameComponent implements OnInit {
 
 
   }
+  startgame() {this.AIGameplay();}
+
 
   populateImageMap() {
 
@@ -262,16 +271,16 @@ export class GameComponent implements OnInit {
   }
 
 
-  gamePlay() {
-    while (1) {
-      let move: number = 1;
-      if (move) {
-        this.updateAIBoard();
-        this.AIGameplay();
-      }
-
-    }
-  }
+  // gamePlay() {
+  //   while (1) {
+  //     let move: number = 1;
+  //     if (move) {
+  //       this.updateAIBoard();
+  //       this.AIGameplay();
+  //     }
+  //
+  //   }
+  // }
 
   private movablesArr: Card[] = [];
   private inDangerMap: Map<Card, Card[]> = new Map<Card, Card[]>();
@@ -281,23 +290,7 @@ export class GameComponent implements OnInit {
   private AIBoard: Card[][] = [];
 
   AIGameplay() {
-    this.updateAIBoard();
     this.checkNeighbors();
-
-    // if (this.canKillMap.size == 0 && this.inDangerMap.size == 0) {
-    //   this.moveHighest();
-    // } else {
-    //   if (this.canKillMap.size > 0) {
-    //     this.killKnown();
-    //   } else if (this.inDangerMap.size > 0) {
-    //     this.defendPlayer();
-    //   } else {
-    //     this.killRandom();
-    //   }
-    //
-    //
-    // }
-
   }
 
   updateAIBoard() {
@@ -410,7 +403,6 @@ export class GameComponent implements OnInit {
             this.canKillMap.set(this.AIBoard[i][j], canKillArr);
           if(inDangerArr.length > 0)
             this.inDangerMap.set(this.AIBoard[i][j], inDangerArr);
-
         }
       }
     }
@@ -421,11 +413,20 @@ export class GameComponent implements OnInit {
     console.log("Danger Map", this.inDangerMap);
     console.log("Gameboard Array", this.gameBoard);
     console.log("AI Board Array", this.AIBoard);
-
+    return;
   }
 
   AIMove() {
-    this.killKnown();
+    if(this.canKillMap.size > 0)
+      this.killKnown();
+    else if(this.inDangerMap.size > 0)
+      this.defendPlayer();
+    else if(this.randomKillMap.size > 0) {
+      this.killRandom();
+    }
+    else if(this.movablesArr.length > 0)
+      this.moveHighest();
+    return;
   }
 
   killKnown() {
@@ -457,7 +458,8 @@ export class GameComponent implements OnInit {
       this.AIBoard[killedCard.x][killedCard.y] = selectCard;
       this.gameBoard[killedCard.x][killedCard.y] = selectCard;
     }
-    else{this.defendPlayer()}
+    this.turn = true;
+    return;
   }
 
   defendPlayer() {
@@ -510,13 +512,13 @@ export class GameComponent implements OnInit {
           this.AIBoard[x][y + 1].x = expensivePlayer.x;
           this.AIBoard[x][y + 1].y = expensivePlayer.y + 1;
         }
-      }else if(this.randomKillMap.has(expensivePlayer)) {
-        return;
+      }
+      else{
+        this.killRandom();
       }
     }
-    else {
-      this.killRandom();
-    }
+    this.turn = true;
+    return;
   }
 
 
@@ -537,6 +539,7 @@ export class GameComponent implements OnInit {
       this.sleep(700);
       this.trClick(dier.x, dier.y)
     }
+    return;
 
   }
 
@@ -550,10 +553,33 @@ export class GameComponent implements OnInit {
   moveHighest() {
     if(this.movablesArr.length > 0) {
       //JUST MOVE
+      let mover : Card = this.emptyCard(0, 0);
       for(let i = 0; i < this.movablesArr.length; i++) {
+        if((mover.value < this.movablesArr[i].value) && !(this.movablesArr[i].y < mover.y)) {
+          mover = this.movablesArr[i];
+        }
+      }
+      let move = this.moveRandom(mover);
 
+      if(move == 0) {
+        this.trClick(mover.x, mover.y);
+        this.sleep(700);
+        this.trClick(mover.x - 1, mover.y);
+      }else if(move == 1) {
+        this.trClick(mover.x, mover.y);
+        this.sleep(700);
+        this.trClick(mover.x + 1, mover.y);
+      }else if(move == 2) {
+        this.trClick(mover.x, mover.y);
+        this.sleep(700);
+        this.trClick(mover.x, mover.y - 1);
+      }else if(move == 3) {
+        this.trClick(mover.x, mover.y);
+        this.sleep(700);
+        this.trClick(mover.x, mover.y + 1);
       }
     }
+    return
   }
 
   checkAvailablePos(player: Card) {
@@ -576,9 +602,30 @@ export class GameComponent implements OnInit {
     else {
       return -1;
     }
-
-
   }
+
+  moveRandom(player : Card) {
+    let i: number = player.x;
+    let j: number = player.y;
+
+
+    if ((i + 1) <= 9 && this.AIBoard[i + 1][j].value == 0) {
+      return 1;
+    }
+    else if ((j - 1) >= 0 && this.AIBoard[i][j - 1].value == 0) {
+      return 2;
+    }
+    else if ((j + 1) <= 9 && this.AIBoard[i][j + 1].value == 0) {
+      return 3;
+    }
+    else if ((i - 1) >= 0 && this.AIBoard[i - 1][j].value == 0) {
+      return 0;
+    }
+    else {
+      return -1;
+    }
+  }
+
   isMovable(card : Card) {
     let contains = false;
     for(let i = 0; i < this.movablesArr.length; i++) {
@@ -589,7 +636,6 @@ export class GameComponent implements OnInit {
     }
     return contains;
   }
-
 
   trClick(row, column) {
 
@@ -613,7 +659,6 @@ export class GameComponent implements OnInit {
       console.log(this.gameBoard[row][column]);
       this.addGreen(row, column);
       this.selectedCard = this.gameBoard[row][column];
-
       this.gameBoard[row][column] = this.emptyCard(row, column);
     }
 
@@ -625,11 +670,19 @@ export class GameComponent implements OnInit {
         this.gameBoard[row][column] = this.selectedCard;
         this.gameBoard[row][column] = this.setPos(this.gameBoard[row][column],row,column);
         this.selectedCard = this.emptyCard(0, 0);
+        if(this.turn == false) {
+          this.turn = true;
+        }
+        else{
+          this.turn = false;
+        }
+        if(this.turn == false) {
+          this.updateAIBoard();
+          this.AIGameplay();
+        }
       }
+
     }
-    this.updateAIBoard();
-    this.AIGameplay();
-    this.updateAIBoard();
   }
 
 
@@ -646,71 +699,101 @@ export class GameComponent implements OnInit {
   validateMove(row, column) {
     //console.log("in validate move", this.selectedCard, this.gameBoard[row][column]);
 
-
+    let specialMove = false;
     if (this.selectedCard.color != this.gameBoard[row][column].color) { //if it is a player of different color
 
       // game end logic.
       this.specialMoves(row, column);
 
       // if the selected card is a bomb and the current card isnt a miner then current card dies.
-      if (this.gameBoard[row][column].value == 11) {
+      if (this.gameBoard[row][column].value == 11 && this.selectedCard.value != 0) {
         if (this.selectedCard.value != 8) {
           //console.log("inside the non miner if");
           this.removeGreen(this.selectedCard.x, this.selectedCard.y);
           this.selectedCard = this.emptyCard(0, 0);
-          if(this.gameBoard[row][column].color == 'Blue') {
+          if (this.gameBoard[row][column].color == 'Blue') {
             this.gameBoard[row][column].revealedToAI = true;
           }
-          if(this.gameBoard[row][column].color == 'red'){
+          if (this.gameBoard[row][column].color == 'red') {
             this.gameBoard[row][column].path = this.imageMapred.get(this.gameBoard[row][column].value);
           }
-          return;
+          if (this.turn == false) {
+            this.turn = true;
+          } else {
+            this.turn = false;
+          }
         } else {
           //console.log("inside the non miner else");
           this.removeGreen(this.selectedCard.x, this.selectedCard.y);
           this.gameBoard[row][column] = this.selectedCard;
           this.gameBoard[row][column] = this.setPos(this.gameBoard[row][column], row, column);
           this.selectedCard = this.emptyCard(0, 0);
-          if(this.gameBoard[row][column].color == 'Blue') {
+          if (this.gameBoard[row][column].color == 'Blue') {
             this.gameBoard[row][column].revealedToAI = true;
           }
-          if(this.gameBoard[row][column].color == 'red'){
+          if (this.gameBoard[row][column].color == 'red') {
             this.gameBoard[row][column].path = this.imageMapred.get(this.gameBoard[row][column].value);
           }
-          return;
+          if (this.turn == false) {
+            this.turn = true;
+          } else {
+            this.turn = false;
+          }
         }
+        specialMove = true;
       }
 
-      if (this.selectedCard.value < this.gameBoard[row][column].value) {            // MARSHALL 1 can KILL Scout 9
-        //console.log("in validate move, if", this.selectedCard, this.gameBoard[row][column]);
+      if (specialMove == false) {
+        if (this.selectedCard.value < this.gameBoard[row][column].value) {            // MARSHALL 1 can KILL Scout 9
+          //console.log("in validate move, if", this.selectedCard, this.gameBoard[row][column]);
 
-        this.removeGreen(this.selectedCard.x, this.selectedCard.y);
-        this.gameBoard[row][column] = this.selectedCard;
-        this.gameBoard[row][column] = this.setPos(this.gameBoard[row][column], row, column);
-        this.selectedCard = this.emptyCard(0, 0);
-      } else if (this.selectedCard.value == this.gameBoard[row][column].value) {    // if the card values are equal destroy both.
-        //console.log('in validate move, else if', this.selectedCard, this.gameBoard[row][column]);
+          this.removeGreen(this.selectedCard.x, this.selectedCard.y);
+          this.gameBoard[row][column] = this.selectedCard;
+          this.gameBoard[row][column] = this.setPos(this.gameBoard[row][column], row, column);
+          this.selectedCard = this.emptyCard(0, 0);
+          if (this.turn == false) {
+            this.turn = true;
+          } else {
+            this.turn = false;
+          }
+        } else if (this.selectedCard.value == this.gameBoard[row][column].value) {    // if the card values are equal destroy both.
+          //console.log('in validate move, else if', this.selectedCard, this.gameBoard[row][column]);
 
-        this.removeGreen(this.selectedCard.x, this.selectedCard.y);
-        this.selectedCard = this.emptyCard(0, 0);
-        this.gameBoard[row][column] = this.emptyCard(row, column);
-      } else { //VALUE IS GREATER SO SELECT CARD DIES
-        //console.log('in validate move, else', this.selectedCard, this.gameBoard[row][column]);
-        if(this.gameBoard[row][column].color == 'Blue') {
-          this.gameBoard[row][column].revealedToAI = true;
+          this.removeGreen(this.selectedCard.x, this.selectedCard.y);
+          this.selectedCard = this.emptyCard(0, 0);
+          this.gameBoard[row][column] = this.emptyCard(row, column);
+          if (this.turn == false) {
+            this.turn = true;
+          } else {
+            this.turn = false;
+          }
+        } else { //VALUE IS GREATER SO SELECT CARD DIES
+          //console.log('in validate move, else', this.selectedCard, this.gameBoard[row][column]);
+          if (this.gameBoard[row][column].color == 'Blue') {
+            this.gameBoard[row][column].revealedToAI = true;
+          }
+          if (this.gameBoard[row][column].color == 'red') {
+            this.gameBoard[row][column].path = this.imageMapred.get(this.gameBoard[row][column].value);
+          }
+          this.removeGreen(this.selectedCard.x, this.selectedCard.y);
+          this.selectedCard = this.emptyCard(0, 0);
+          if (this.turn == false) {
+            this.turn = true;
+          } else {
+            this.turn = false;
+          }
         }
-        if(this.gameBoard[row][column].color == 'red'){
-          this.gameBoard[row][column].path = this.imageMapred.get(this.gameBoard[row][column].value);
-        }
+      }
+    }else {
+        this.gameBoard[this.selectedCard.x][this.selectedCard.y] = this.selectedCard;
         this.removeGreen(this.selectedCard.x, this.selectedCard.y);
         this.selectedCard = this.emptyCard(0, 0);
       }
-    } else {
-      this.gameBoard[this.selectedCard.x][this.selectedCard.y] = this.selectedCard;
-      this.removeGreen(this.selectedCard.x, this.selectedCard.y);
-      this.selectedCard = this.emptyCard(0, 0);
+    if(this.turn == false) {
+      this.updateAIBoard();
+      this.AIGameplay();
     }
-  }
+    }
 
 
   specialMoves(row, column){
@@ -733,9 +816,10 @@ export class GameComponent implements OnInit {
       if (y == 2 || y == 3 || y == 6 || y == 7)
         return;
 
+    console.log(x, y);
     const id: string = String(x) + String(y);
     const el = (document.getElementById(id) as HTMLTableRowElement);
-    //console.log(x, y);
+    console.log(x, y);
 
     if (yes)
       el.classList.add("options");
@@ -874,7 +958,6 @@ export class GameComponent implements OnInit {
   }
 
   hide() {
-
     let i = 0;
     for (i = 0; i < 10; i++) {
       const id: string = String(0) + String(i);
