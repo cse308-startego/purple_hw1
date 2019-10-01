@@ -6,15 +6,15 @@
   <!--  </div>-->
 
 
-  <div class="flex mb-4">
+  <div class="flex mb-4 ">
     <div class="  ">
 
       <div class=" flex items-center justify-center pt-4">
         <table id="chessBoard">
           <tr *ngFor="let row of columns">
-            <td class=" p-2 border-4 border-black " *ngFor="let cell of rows " (click)="trClick(row,cell)"
+            <td class=" p-2  " *ngFor="let cell of rows " (click)="trClick(row,cell)"
                 id='{{row}}{{cell}}'>
-              <img class="  box" src="{{gameBoard[row][cell].path}}">
+              <img class="box" src="{{gameBoard[row][cell].path}}">
             </td>
           </tr>
         </table>
