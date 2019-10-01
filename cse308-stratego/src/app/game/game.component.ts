@@ -42,7 +42,6 @@ export class GameComponent implements OnInit {
     //   console.log(data)
     // });
 
-
   }
 
   populateImageMap() {
@@ -485,6 +484,10 @@ export class GameComponent implements OnInit {
       if (column == 2 || column == 3 || column == 6 || column == 7)
         return;
 
+    if (this.gameBoard[row][column].value == 11 || this.gameBoard[row][column].value == 12) {
+      if (this.selectedCard.value == 0)
+        return;
+    }
 
     // this is where the attacks on the other cards happen.
     if (this.gameBoard[row][column].value != 0 && this.selectedCard.value != 0) {
@@ -493,9 +496,16 @@ export class GameComponent implements OnInit {
       }
     } else if (this.gameBoard[row][column].value != 0) {         // this is where the control comes just before attacking some card or moving (basically when you select a card).
       console.log('Inside TrClick, else if part', this.selectedCard, this.gameBoard[row][column]);
+      console.log("Inside TrClick, else if part", this.selectedCard, this.gameBoard[row][column]);
+
+      // if the current card is a bomb then, please dont more or do shit.
+      if (this.selectedCard.value == 11) {
+        return;
+      }
+
       this.addGreen(row, column);
       this.selectedCard = this.gameBoard[row][column];
-      this.gameBoard[row][column] = this.emptyCard(row, column)
+      this.gameBoard[row][column] = this.emptyCard(row, column);
     }
 
     // this else part deals with moving the card to another empty space.
@@ -513,11 +523,11 @@ export class GameComponent implements OnInit {
 
 
   validatePosition(row, col) {
+
     if ((((row + 1) == this.selectedCard.x || (row - 1) == this.selectedCard.x) && col == this.selectedCard.y)
       || (((col + 1) == this.selectedCard.y || (col - 1) == this.selectedCard.y) && row == this.selectedCard.x)) {
       return true;
     }
-
     console.log("Card can only move one block away");
     return false;
   }
@@ -548,7 +558,8 @@ export class GameComponent implements OnInit {
         }
       }
 
-      if (this.selectedCard.value < this.gameBoard[row][column].value) {            // MARSHALL 1 can KILL Scout 9
+      if ((this.selectedCard.value < this.gameBoard[row][column].value) ||
+        (this.gameBoard[row][column].value == 1 && this.selectedCard.value == 10)) {            // MARSHALL 1 can KILL Scout 9
         console.log("in validate move, if", this.selectedCard, this.gameBoard[row][column]);
 
         this.removeGreen(this.selectedCard.x, this.selectedCard.y);
@@ -556,19 +567,14 @@ export class GameComponent implements OnInit {
         this.gameBoard[row][column] = this.setPos(this.gameBoard[row][column], row, column);
         this.selectedCard = this.emptyCard(0, 0);
       } else if (this.selectedCard.value == this.gameBoard[row][column].value) {    // if the card values are equal destroy both.
-        console.log('in validate move, else if', this.selectedCard, this.gameBoard[row][column]);
+        console.log("in validate move, else if", this.selectedCard, this.gameBoard[row][column]);
 
         this.removeGreen(this.selectedCard.x, this.selectedCard.y);
         this.selectedCard = this.emptyCard(0, 0);
         this.gameBoard[row][column] = this.emptyCard(row, column);
       } else { //VALUE IS GREATER SO SELECT CARD DIES
-        console.log('in validate move, else', this.selectedCard, this.gameBoard[row][column]);
-        if(this.gameBoard[row][column].color == 'Blue') {
-          this.gameBoard[row][column].revealedToAI = true;
-        }
-        if(this.gameBoard[row][column].color == 'red'){
-          this.gameBoard[row][column].path = this.imageMapred.get(this.gameBoard[row][column].value);
-        }
+        console.log("in validate move, else", this.selectedCard, this.gameBoard[row][column]);
+
         this.removeGreen(this.selectedCard.x, this.selectedCard.y);
         this.selectedCard = this.emptyCard(0, 0);
       }
@@ -580,7 +586,7 @@ export class GameComponent implements OnInit {
   }
 
 
-  specialMoves(row, column){
+  specialMoves(row, column) {
 
     // if the opponent captures the opponents flag.
     if (this.gameBoard[row][column].value == 12) {
@@ -622,6 +628,15 @@ export class GameComponent implements OnInit {
       el.classList.remove("attack_possibility");
   }
 
+  showScoutgreen(row, column){
+
+    let x=0;
+    let y=0;
+
+    // we are looping through
+    // for(let i=row;i)
+
+  }
   addGreen(row, column) {
     let x = 0;
     let y = 0;
@@ -764,14 +779,7 @@ export class GameComponent implements OnInit {
     }
   }
 
-  setimage() {
-
-    this.gameBoard[4][2].path = this.imagelake.get(1);
-    this.gameBoard[4][3].path = this.imagelake.get(2);
-    this.gameBoard[5][2].path = this.imagelake.get(3);
-    this.gameBoard[5][3].path = this.imagelake.get(4);
-
-  }
+}
 
 
 }
