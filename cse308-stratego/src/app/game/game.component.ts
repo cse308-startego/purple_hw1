@@ -1,16 +1,34 @@
 import {Component, OnInit} from '@angular/core';
 import {Block, Board, Card} from './game-models';
 import {ApiService} from '../service/api.service';
+import { trigger,style,transition,animate,keyframes,query,stagger } from '@angular/animations';
 
 @Component({
   selector: 'game-page',
   templateUrl: 'game.component.html',
-  styleUrls: ['game.component.css']
+  styleUrls: ['game.component.css'],
+  animations: [
+    trigger('listAnimation', [
+      transition('* => *', [
+
+        query(':enter', style({ opacity: 0 }), {optional: true}),
+
+        query(':enter', stagger('300ms', [
+          animate('1s ease-out', keyframes([
+            style({opacity: 0, transform: 'translateY(-75%)', offset: 0}),
+            style({opacity: 1, transform: 'translateY(0)',     offset: 1.0}),
+          ]))]), {optional: true})
+      ])
+    ])
+
+  ]
 
 })
 export class GameComponent implements OnInit {
   columns: number[] = [0, 1, 2, 3, 4, 5, 6, 7, 8, 9];
   rows: number[] = [0, 1, 2, 3, 4, 5, 6, 7, 8, 9];
+  public scoreRed:number =0;
+  public  scoreBlue: number=0;
 
   private gameBoard: Card[][] = [];
   private redArr: Card[] = [];
@@ -746,7 +764,7 @@ export class GameComponent implements OnInit {
       if (specialMove == false) {
         if (this.selectedCard.value < this.gameBoard[row][column].value) {            // MARSHALL 1 can KILL Scout 9
           //console.log("in validate move, if", this.selectedCard, this.gameBoard[row][column]);
-
+          this.scoreBlue++;                   // MARSHALL 1 can KILL Scout 9
           this.removeGreen(this.selectedCard.x, this.selectedCard.y);
           this.gameBoard[row][column] = this.selectedCard;
           this.gameBoard[row][column] = this.setPos(this.gameBoard[row][column], row, column);
@@ -758,7 +776,8 @@ export class GameComponent implements OnInit {
           }
         } else if (this.selectedCard.value == this.gameBoard[row][column].value) {    // if the card values are equal destroy both.
           //console.log('in validate move, else if', this.selectedCard, this.gameBoard[row][column]);
-
+          this.scoreRed++;
+          this.scoreBlue++;
           this.removeGreen(this.selectedCard.x, this.selectedCard.y);
           this.selectedCard = this.emptyCard(0, 0);
           this.gameBoard[row][column] = this.emptyCard(row, column);
@@ -777,6 +796,8 @@ export class GameComponent implements OnInit {
           }
           this.removeGreen(this.selectedCard.x, this.selectedCard.y);
           this.selectedCard = this.emptyCard(0, 0);
+          this.scoreRed++;
+
           if (this.turn == false) {
             this.turn = true;
           } else {
