@@ -1,0 +1,56 @@
+<h1 class="block text-5xl px-10 font-bold py-2 text-blue-900>Old Scores py-6 text-center"> Score Board</h1>
+
+
+<body class="flex justify-center">
+<div class="container ">
+
+  <table class=" block w-full flex flex-row flex-no-wrap sm:bg-white rounded-lg overflow-hidden sm:shadow-lg my-5 text-2xl">
+
+    <thead class="text-white text-center">
+    <tr class="bg-blue-400 flex flex-col flex-no wrap sm:table-row rounded-l-lg sm:rounded-none mb-2 sm:mb-0">
+      <th class="p-3 text-left text-center ">Computer</th>
+      <th class="p-3 text-left text-center">You</th>
+    </tr>
+    <tr class="bg-teal-400 flex flex-col flex-no wrap sm:table-row rounded-l-lg sm:rounded-none mb-2 sm:mb-0">
+      <th class="p-3 text-left text-center">Computer</th>
+      <th class="p-3 text-left text-center">You</th>
+    </tr>
+    </thead>
+    <tbody class="flex-1 sm:flex-none text-center">
+    <tr class="flex flex-col  sm:table-row ">
+      <td class="border-grey-light border hover:bg-gray-100 p-3">Win</td>
+      <td class="border-grey-light border hover:bg-gray-100 p-3 truncate">Loss</td>
+    </tr>
+    <tr class="flex flex-col  sm:table-row ">
+      <td class="border-grey-light border hover:bg-gray-100 p-3">Loss</td>
+      <td class="border-grey-light border hover:bg-gray-100 p-3 truncate">Win</td>
+    </tr>
+    </tbody>
+  </table>
+</div>
+</body>
+
+<style>
+  html,
+  body {
+    height: 100%;
+  }
+
+  @media (min-width: 640px) {
+    table {
+      display: inline-table !important;
+    }
+
+    thead tr:not(:first-child) {
+      display: none;
+    }
+  }
+
+  td:not(:last-child) {
+    border-bottom: 0;
+  }
+
+  th:not(:last-child) {
+    border-bottom: 2px solid rgba(0, 0, 0, .1);
+  }
+</style>

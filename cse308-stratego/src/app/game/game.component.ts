@@ -2,6 +2,7 @@ import {Component, OnInit} from '@angular/core';
 import {Block, Board, Card} from './game-models';
 import {ApiService} from '../service/api.service';
 import { trigger,style,transition,animate,keyframes,query,stagger } from '@angular/animations';
+import {Router} from "@angular/router";
 
 @Component({
   selector: 'game-page',
@@ -42,7 +43,7 @@ export class GameComponent implements OnInit {
   public turn : boolean = false; //false = AI true = Player
 
 
-  constructor(private service: ApiService) {
+  constructor(private service: ApiService, private router: Router) {
   }
 
 
@@ -1010,6 +1011,11 @@ export class GameComponent implements OnInit {
     this.gameBoard[4][3].path = this.imagelake.get(2);
     this.gameBoard[5][2].path = this.imagelake.get(3);
     this.gameBoard[5][3].path = this.imagelake.get(4);
+
+  }
+
+  showScores() {
+    this.router.navigateByUrl('/score');
 
   }
 

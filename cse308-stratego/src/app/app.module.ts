@@ -13,6 +13,7 @@ import {FormsModule} from "@angular/forms";
 // @ts-ignore
 import { AngularDraggableModule } from 'angular2-draggable';
 import {BrowserAnimationsModule} from "@angular/platform-browser/animations";
+import { ScoreBoardComponent } from './score-board/score-board.component';
 
 
 
@@ -22,6 +23,7 @@ import {BrowserAnimationsModule} from "@angular/platform-browser/animations";
     LoginPageComponent,
     GameComponent,
     SignUpComponent,
+    ScoreBoardComponent,
   ],
   imports: [
     BrowserModule,

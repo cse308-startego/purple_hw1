@@ -1,13 +1,17 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <project version="4">
   <component name="ChangeListManager">
-    <list default="true" id="c85f458d-abd3-48cc-9f42-3efba92ae66a" name="Default Changelist" comment="">
-      <change afterPath="$PROJECT_DIR$/.idea/misc.xml" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/.idea/modules.xml" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/.idea/purple_hw1.iml" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/.idea/vcs.xml" afterDir="false" />
+    <list default="true" id="c85f458d-abd3-48cc-9f42-3efba92ae66a" name="Default Changelist" comment="Rohit and Kishore code mixed and working">
+      <change afterPath="$PROJECT_DIR$/cse308-stratego/src/app/score-board/score-board.component.css" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/cse308-stratego/src/app/score-board/score-board.component.html" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/cse308-stratego/src/app/score-board/score-board.component.spec.ts" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/cse308-stratego/src/app/score-board/score-board.component.ts" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/inspectionProfiles/Project_Default.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/inspectionProfiles/Project_Default.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/misc.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/misc.xml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/cse308-stratego/src/app/app-routing.module.ts" beforeDir="false" afterPath="$PROJECT_DIR$/cse308-stratego/src/app/app-routing.module.ts" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/cse308-stratego/src/app/app.module.ts" beforeDir="false" afterPath="$PROJECT_DIR$/cse308-stratego/src/app/app.module.ts" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/cse308-stratego/src/app/game/game.component.html" beforeDir="false" afterPath="$PROJECT_DIR$/cse308-stratego/src/app/game/game.component.html" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/cse308-stratego/src/app/game/game.component.ts" beforeDir="false" afterPath="$PROJECT_DIR$/cse308-stratego/src/app/game/game.component.ts" afterDir="false" />
     </list>
     <option name="EXCLUDED_CONVERTED_TO_IGNORED" value="true" />
@@ -15,6 +19,20 @@
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
     <option name="HIGHLIGHT_NON_ACTIVE_CHANGELIST" value="false" />
     <option name="LAST_RESOLUTION" value="IGNORE" />
+  </component>
+  <component name="DatabaseView">
+    <option name="SHOW_INTERMEDIATE" value="true" />
+    <option name="GROUP_DATA_SOURCES" value="true" />
+    <option name="GROUP_SCHEMA" value="true" />
+    <option name="GROUP_CONTENTS" value="false" />
+    <option name="SORT_POSITIONED" value="false" />
+    <option name="SHOW_EMPTY_GROUPS" value="false" />
+    <option name="AUTO_SCROLL_FROM_SOURCE" value="false" />
+    <option name="HIDDEN_KINDS">
+      <set />
+    </option>
+    <expand />
+    <select />
   </component>
   <component name="FavoritesManager">
     <favorites_list name="purple_hw1" />
@@ -27,6 +45,13 @@
       <set>
         <option value="C:\Users\Kishore Thamilvanan\Desktop\kishes point\Stony Brook Academics\VI semester\CSE 308\purple_hw1\.idea" />
       </set>
+    </option>
+  </component>
+  <component name="MavenImportPreferences">
+    <option name="importingSettings">
+      <MavenImportingSettings>
+        <option name="vmOptionsForImporter" value="-Xmx768m" />
+      </MavenImportingSettings>
     </option>
   </component>
   <component name="ProjectId" id="1RD9zpA3By9jMFVrky2J0W7ZTUa" />
@@ -50,8 +75,8 @@
     <property name="nodejs_package_manager_path" value="npm" />
     <property name="project.structure.last.edited" value="Project" />
     <property name="project.structure.proportion" value="0.0" />
-    <property name="project.structure.side.proportion" value="0.0" />
-    <property name="settings.editor.selected.configurable" value="Errors" />
+    <property name="project.structure.side.proportion" value="0.2" />
+    <property name="settings.editor.selected.configurable" value="MavenSettings" />
     <property name="ts.external.directory.path" value="$PROJECT_DIR$/cse308-stratego/node_modules/typescript/lib" />
   </component>
   <component name="RunDashboard">
@@ -124,7 +149,9 @@
       <workItem from="1569389940027" duration="41119000" />
       <workItem from="1569877217176" duration="492000" />
       <workItem from="1569890772484" duration="657000" />
-      <workItem from="1569891867277" duration="167000" />
+      <workItem from="1569891867277" duration="12633000" />
+      <workItem from="1569979795757" duration="47000" />
+      <workItem from="1569979947610" duration="2473000" />
     </task>
     <task id="LOCAL-00001" summary="pulled kishore repo">
       <created>1569367056157</created>
@@ -203,7 +230,70 @@
       <option name="project" value="LOCAL" />
       <updated>1569890803165</updated>
     </task>
-    <option name="localTasksCounter" value="12" />
+    <task id="LOCAL-00012" summary="before pulling rohit's code">
+      <created>1569892062400</created>
+      <option name="number" value="00012" />
+      <option name="presentableId" value="LOCAL-00012" />
+      <option name="project" value="LOCAL" />
+      <updated>1569892062400</updated>
+    </task>
+    <task id="LOCAL-00013" summary="added scores">
+      <created>1569896032575</created>
+      <option name="number" value="00013" />
+      <option name="presentableId" value="LOCAL-00013" />
+      <option name="project" value="LOCAL" />
+      <updated>1569896032575</updated>
+    </task>
+    <task id="LOCAL-00014" summary="Rohit and Kishore code mixed and working">
+      <created>1569905434482</created>
+      <option name="number" value="00014" />
+      <option name="presentableId" value="LOCAL-00014" />
+      <option name="project" value="LOCAL" />
+      <updated>1569905434482</updated>
+    </task>
+    <task id="LOCAL-00015" summary="before trying to add stagger">
+      <created>1569906888691</created>
+      <option name="number" value="00015" />
+      <option name="presentableId" value="LOCAL-00015" />
+      <option name="project" value="LOCAL" />
+      <updated>1569906888691</updated>
+    </task>
+    <task id="LOCAL-00016" summary="added animations">
+      <created>1569910610580</created>
+      <option name="number" value="00016" />
+      <option name="presentableId" value="LOCAL-00016" />
+      <option name="project" value="LOCAL" />
+      <updated>1569910610580</updated>
+    </task>
+    <task id="LOCAL-00017" summary="hover working">
+      <created>1569959004701</created>
+      <option name="number" value="00017" />
+      <option name="presentableId" value="LOCAL-00017" />
+      <option name="project" value="LOCAL" />
+      <updated>1569959004701</updated>
+    </task>
+    <task id="LOCAL-00018" summary="Commit with my rohits code">
+      <created>1569978269161</created>
+      <option name="number" value="00018" />
+      <option name="presentableId" value="LOCAL-00018" />
+      <option name="project" value="LOCAL" />
+      <updated>1569978269161</updated>
+    </task>
+    <task id="LOCAL-00019" summary="Rohit and Kishore code mixed and working">
+      <created>1569978510375</created>
+      <option name="number" value="00019" />
+      <option name="presentableId" value="LOCAL-00019" />
+      <option name="project" value="LOCAL" />
+      <updated>1569978510375</updated>
+    </task>
+    <task id="LOCAL-00020" summary="Rohit and Kishore code mixed and working">
+      <created>1569981518289</created>
+      <option name="number" value="00020" />
+      <option name="presentableId" value="LOCAL-00020" />
+      <option name="project" value="LOCAL" />
+      <updated>1569981518289</updated>
+    </task>
+    <option name="localTasksCounter" value="21" />
     <servers />
   </component>
   <component name="TypeScriptGeneratedFilesManager">
@@ -233,6 +323,12 @@
     <MESSAGE value="September 28, 5.25PM" />
     <MESSAGE value="MOST UPDATED KISHORE CODE" />
     <MESSAGE value="before pulling rohit's code" />
-    <option name="LAST_COMMIT_MESSAGE" value="before pulling rohit's code" />
+    <MESSAGE value="added scores" />
+    <MESSAGE value="before trying to add stagger" />
+    <MESSAGE value="added animations" />
+    <MESSAGE value="hover working" />
+    <MESSAGE value="Commit with my rohits code" />
+    <MESSAGE value="Rohit and Kishore code mixed and working" />
+    <option name="LAST_COMMIT_MESSAGE" value="Rohit and Kishore code mixed and working" />
   </component>
 </project>
