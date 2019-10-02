@@ -20,7 +20,7 @@ import { trigger,style,transition,animate,keyframes,query,stagger } from '@angul
           ]))]), {optional: true})
       ])
     ])
-
+  
   ]
 
 })
