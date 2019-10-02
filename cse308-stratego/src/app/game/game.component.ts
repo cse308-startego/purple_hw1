@@ -647,6 +647,7 @@ export class GameComponent implements OnInit {
       }
     } else if (this.gameBoard[row][column].value != 0) {         // this is where the control comes just before attacking some card or moving (basically when you select a card).
       //console.log('Inside TrClick, else if part', this.selectedCard, this.gameBoard[row][column]);
+
       console.log(this.gameBoard[row][column]);
       this.addGreen(row, column);
       console.log("Inside TrClick, else if part", this.selectedCard, this.gameBoard[row][column]);
@@ -674,6 +675,7 @@ export class GameComponent implements OnInit {
         this.gameBoard[row][column] = this.selectedCard;
         this.gameBoard[row][column] = this.setPos(this.gameBoard[row][column], row, column);
         this.selectedCard = this.emptyCard(0, 0);
+
         if (this.turn == false) {
           this.turn = true;
         } else {
