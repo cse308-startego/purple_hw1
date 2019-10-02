@@ -579,7 +579,7 @@ export class GameComponent implements OnInit {
         this.trClick(mover.x, mover.y + 1);
       }
     }
-    return
+    return;
   }
 
   checkAvailablePos(player: Card) {
