@@ -22,7 +22,7 @@ export class LoginPageComponent {
   onLogin(event) {
     event.preventDefault();
 
-    this.router.navigateByUrl('/game');
+     this.router.navigateByUrl('/game');
 
     // const errors = [];
     // const target = event.target;

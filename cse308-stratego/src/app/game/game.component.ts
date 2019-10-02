@@ -20,7 +20,7 @@ import { trigger,style,transition,animate,keyframes,query,stagger } from '@angul
           ]))]), {optional: true})
       ])
     ])
-  
+
   ]
 
 })
@@ -665,7 +665,10 @@ export class GameComponent implements OnInit {
     if (row == 4 || row == 5)
       if (column == 2 || column == 3 || column == 6 || column == 7)
         return;
-
+    if (this.gameBoard[row][column].value == 11 || this.gameBoard[row][column].value == 12) {
+      if (this.selectedCard.value == 0)
+        return;
+    }
 
     // this is where the attacks on the other cards happen.
     if (this.gameBoard[row][column].value != 0 && this.selectedCard.value != 0) {
