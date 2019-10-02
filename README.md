@@ -1,1 +1,1 @@
-![](demo.mov)
+!()[demo.gif]
