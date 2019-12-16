@@ -3,10 +3,11 @@
 @import url(tailwindStyle.css);
 
 html, body {
+
 }
 body { margin: 0; font-family: Roboto, "Helvetica Neue", sans-serif; }
 
 
-@tailwind base;
-@tailwind components;
-@tailwind utilities;
+/*@tailwind base;*/
+/*@tailwind components;*/
+/*@tailwind utilities;*/

@@ -1,188 +1,109 @@
 <div class="container mx-auto px-4">
-  <div class="flex items-center justify-center py-6 ">
-    <a href="#" class="text-gray-800 text-sm font-bold hover:text-purple-600 mx-4 ">Home</a>
-    <a href="#" class="text-gray-800 text-sm font-bold hover:text-purple-600 mx-4 ">New Game</a>
-    <a href="#" class="text-gray-800 text-sm font-bold hover:text-purple-600 mx-4 ">History</a>
+  <div class="flex items-center justify-betweenc py-6 ">
+    <a href="#" class="text-gray-800 text-sm font-bold hover:text-purple-600 mx-4 text-3xl">Home</a>
+    <a href="#" class="text-gray-800 text-sm font-bold hover:text-purple-600 mx-4 text-3xl">New Game</a>
+    <a href="#" class="text-gray-800 text-sm font-bold hover:text-purple-600 mx-4 text-3xl">History</a>
+    <div *ngIf="turn == true"> BLUES TURN</div>
+    <div *ngIf="turn == false"> REDS TURN</div>
   </div>
 
-  <div class="bg-gray-200 font-sans w-full min-h-screen m-0">
-
-    <div class="container content-center ">
-      <div class="table border-black border-4 rounded shadow-2xl">
-        <div class="table-row  ">
-          <div class="table-cell bg-green-200 text-gray-700 px-6 py-6 text-sm border-2 border-black m-4 "></div>
-          <div class="table-cell bg-green-500 text-gray-700 px-6 py-6 text-sm border-2 border-black m-4 "></div>
-          <div class="table-cell bg-green-200 text-gray-700 px-6 py-6 text-sm border-2 border-black m-4 "></div>
-          <div class="table-cell bg-green-500 text-gray-700 px-6 py-6 text-sm border-2 border-black m-4 "></div>
-          <div class="table-cell bg-green-200 text-gray-700 px-6 py-6 text-sm border-2 border-black m-4 "></div>
-          <div class="table-cell bg-green-500 text-gray-700 px-6 py-6 text-sm border-2 border-black m-4 "></div>
-          <div class="table-cell bg-green-200 text-gray-700 px-6 py-6 text-sm border-2 border-black m-4 "></div>
-          <div class="table-cell bg-green-500 text-gray-700 px-6 py-6 text-sm border-2 border-black m-4 "></div>
-          <div class="table-cell bg-green-200 text-gray-700 px-6 py-6 text-sm border-2 border-black m-4 "></div>
-          <div class="table-cell bg-green-500 text-gray-700 px-6 py-6 text-sm border-2 border-black m-4 "></div>
-
-        </div>
-        <div class="table-row">
-          <div class="table-cell bg-green-500 text-gray-700 px-6 py-6 text-sm border-2 border-black m-4 "></div>
-          <div class="table-cell bg-green-200 text-gray-700 px-6 py-6 text-sm border-2 border-black m-4 "></div>
-          <div class="table-cell bg-green-500 text-gray-700 px-6 py-6 text-sm border-2 border-black m-4 "></div>
-          <div class="table-cell bg-green-200 text-gray-700 px-6 py-6 text-sm border-2 border-black m-4 "></div>
-          <div class="table-cell bg-green-500 text-gray-700 px-6 py-6 text-sm border-2 border-black m-4 "></div>
-          <div class="table-cell bg-green-200 text-gray-700 px-6 py-6 text-sm border-2 border-black m-4 "></div>
-          <div class="table-cell bg-green-500 text-gray-700 px-6 py-6 text-sm border-2 border-black m-4 "></div>
-          <div class="table-cell bg-green-200 text-gray-700 px-6 py-6 text-sm border-2 border-black m-4 "></div>
-          <div class="table-cell bg-green-500 text-gray-700 px-6 py-6 text-sm border-2 border-black m-4 "></div>
-          <div class="table-cell bg-green-200 text-gray-700 px-6 py-6 text-sm border-2 border-black m-4 "></div>
-
-        </div>
-        <div class="table-row">
-          <div class="table-cell bg-green-200 text-gray-700 px-6 py-6 text-sm border-2 border-black m-4 "></div>
-          <div class="table-cell bg-green-500 text-gray-700 px-6 py-6 text-sm border-2 border-black m-4 "></div>
-          <div class="table-cell bg-green-200 text-gray-700 px-6 py-6 text-sm border-2 border-black m-4 "></div>
-          <div class="table-cell bg-green-500 text-gray-700 px-6 py-6 text-sm border-2 border-black m-4 "></div>
-          <div class="table-cell bg-green-200 text-gray-700 px-6 py-6 text-sm border-2 border-black m-4 "></div>
-          <div class="table-cell bg-green-500 text-gray-700 px-6 py-6 text-sm border-2 border-black m-4 "></div>
-          <div class="table-cell bg-green-200 text-gray-700 px-6 py-6 text-sm border-2 border-black m-4 "></div>
-          <div class="table-cell bg-green-500 text-gray-700 px-6 py-6 text-sm border-2 border-black m-4 "></div>
-          <div class="table-cell bg-green-200 text-gray-700 px-6 py-6 text-sm border-2 border-black m-4 "></div>
-          <div class="table-cell bg-green-500 text-gray-700 px-6 py-6 text-sm border-2 border-black m-4 "></div>
-
-        </div>
-        <div class="table-row">
-
-          <div class="table-cell bg-green-500 text-gray-700 px-6 py-6 text-sm border-2 border-black m-4 "></div>
-          <div class="table-cell bg-green-200 text-gray-700 px-6 py-6 text-sm border-2 border-black m-4 "></div>
-          <div class="table-cell bg-green-500 text-gray-700 px-6 py-6 text-sm border-2 border-black m-4 "></div>
-          <div class="table-cell bg-green-200 text-gray-700 px-6 py-6 text-sm border-2 border-black m-4 "></div>
-          <div class="table-cell bg-green-500 text-gray-700 px-6 py-6 text-sm border-2 border-black m-4 "></div>
-          <div class="table-cell bg-green-200 text-gray-700 px-6 py-6 text-sm border-2 border-black m-4 "></div>
-          <div class="table-cell bg-green-500 text-gray-700 px-6 py-6 text-sm border-2 border-black m-4 "></div>
-          <div class="table-cell bg-green-200 text-gray-700 px-6 py-6 text-sm border-2 border-black m-4 "></div>
-          <div class="table-cell bg-green-500 text-gray-700 px-6 py-6 text-sm border-2 border-black m-4 "></div>
-          <div class="table-cell bg-green-200 text-gray-700 px-6 py-6 text-sm border-2 border-black m-4 "></div>
-
-        </div>
 
 
-        <div class="table-row">
-          <div class="table-cell bg-green-200 text-gray-700 px-6 py-6 text-sm border-2 border-black m-4 "></div>
-          <div class="table-cell bg-green-500 text-gray-700 px-6 py-6 text-sm border-2 border-black m-4 "></div>
-          <div class="table-cell bg-green-800 text-gray-700 px-6 py-6 text-sm  m-4 "></div>
-          <div class="table-cell bg-green-800 text-gray-700 px-6 py-6 text-sm  m-4 "></div>
-          <div class="table-cell bg-green-200 text-gray-700 px-6 py-6 text-sm border-2 border-black m-4"></div>
-          <div class="table-cell bg-green-500 text-gray-700 px-6 py-6 text-sm border-2 border-black m-4"></div>
-          <div class="table-cell bg-green-800 text-gray-700 px-6 py-6 text-sm m-4 "></div>
-          <div class="table-cell bg-green-800 text-gray-700 px-6 py-6 text-sm m-4 "></div>
-          <div class="table-cell bg-green-200 text-gray-700 px-6 py-6 text-sm border-2 border-black m-4"></div>
-          <div class="table-cell bg-green-500 text-gray-700 px-6 py-6 text-sm border-2 border-black m-4"></div>
+  <div class="flex mb-4">
+    <div class=" w-1/2 ">
 
-        </div>
-        <div class="table-row">
-
-          <div class="table-cell bg-green-500 text-gray-700 px-6 py-6 text-sm border-2 border-black m-4 "></div>
-          <div class="table-cell bg-green-200 text-gray-700 px-6 py-6 text-sm border-2 border-black m-4 "></div>
-          <div class="table-cell bg-green-800 text-gray-700 px-6 py-6 text-sm m-4 "></div>
-          <div class="table-cell bg-green-800 text-gray-700 px-6 py-6 text-sm  m-4 "></div>
-          <div class="table-cell bg-green-500 text-gray-700 px-6 py-6 text-sm border-2 border-black m-4"></div>
-          <div class="table-cell bg-green-200 text-gray-700 px-6 py-6 text-sm border-2 border-black m-4"></div>
-          <div class="table-cell bg-green-800 text-gray-700 px-6 py-6 text-sm m-4 "></div>
-          <div class="table-cell bg-green-800 text-gray-700 px-6 py-6 text-sm m-4 "></div>
-          <div class="table-cell bg-green-500 text-gray-700 px-6 py-6 text-sm border-2 border-black m-4"></div>
-          <div class="table-cell bg-green-200 text-gray-700 px-6 py-6 text-sm border-2 border-black m-4"></div>
-
-        </div>
-
-
-        <div class="table-row">
-          <div class="table-cell bg-green-200 text-gray-700 px-6 py-6 text-sm border-2 border-black m-4 "></div>
-          <div class="table-cell bg-green-500 text-gray-700 px-6 py-6 text-sm border-2 border-black m-4 "></div>
-          <div class="table-cell bg-green-200 text-gray-700 px-6 py-6 text-sm border-2 border-black m-4 "></div>
-          <div class="table-cell bg-green-500 text-gray-700 px-6 py-6 text-sm border-2 border-black m-4 "></div>
-          <div class="table-cell bg-green-200 text-gray-700 px-6 py-6 text-sm border-2 border-black m-4 "></div>
-          <div class="table-cell bg-green-500 text-gray-700 px-6 py-6 text-sm border-2 border-black m-4 "></div>
-          <div class="table-cell bg-green-200 text-gray-700 px-6 py-6 text-sm border-2 border-black m-4 "></div>
-          <div class="table-cell bg-green-500 text-gray-700 px-6 py-6 text-sm border-2 border-black m-4 "></div>
-          <div class="table-cell bg-green-200 text-gray-700 px-6 py-6 text-sm border-2 border-black m-4 "></div>
-          <div class="table-cell bg-green-500 text-gray-700 px-6 py-6 text-sm border-2 border-black m-4 "></div>
-
-        </div>
-        <div class="table-row">
-
-          <div class="table-cell bg-green-500 text-gray-700 px-6 py-6 text-sm border-2 border-black m-4 "></div>
-          <div class="table-cell bg-green-200 text-gray-700 px-6 py-6 text-sm border-2 border-black m-4 "></div>
-          <div class="table-cell bg-green-500 text-gray-700 px-6 py-6 text-sm border-2 border-black m-4 "></div>
-          <div class="table-cell bg-green-200 text-gray-700 px-6 py-6 text-sm border-2 border-black m-4 "></div>
-          <div class="table-cell bg-green-500 text-gray-700 px-6 py-6 text-sm border-2 border-black m-4 "></div>
-          <div class="table-cell bg-green-200 text-gray-700 px-6 py-6 text-sm border-2 border-black m-4 "></div>
-          <div class="table-cell bg-green-500 text-gray-700 px-6 py-6 text-sm border-2 border-black m-4 "></div>
-          <div class="table-cell bg-green-200 text-gray-700 px-6 py-6 text-sm border-2 border-black m-4 "></div>
-          <div class="table-cell bg-green-500 text-gray-700 px-6 py-6 text-sm border-2 border-black m-4 "></div>
-          <div class="table-cell bg-green-200 text-gray-700 px-6 py-6 text-sm border-2 border-black m-4 "></div>
-
-        </div>
-        <div class="table-row">
-          <div class="table-cell bg-green-200 text-gray-700 px-6 py-6 text-sm border-2 border-black m-4 "></div>
-          <div class="table-cell bg-green-500 text-gray-700 px-6 py-6 text-sm border-2 border-black m-4 "></div>
-          <div class="table-cell bg-green-200 text-gray-700 px-6 py-6 text-sm border-2 border-black m-4 "></div>
-          <div class="table-cell bg-green-500 text-gray-700 px-6 py-6 text-sm border-2 border-black m-4 "></div>
-          <div class="table-cell bg-green-200 text-gray-700 px-6 py-6 text-sm border-2 border-black m-4 "></div>
-          <div class="table-cell bg-green-500 text-gray-700 px-6 py-6 text-sm border-2 border-black m-4 "></div>
-          <div class="table-cell bg-green-200 text-gray-700 px-6 py-6 text-sm border-2 border-black m-4 "></div>
-          <div class="table-cell bg-green-500 text-gray-700 px-6 py-6 text-sm border-2 border-black m-4 "></div>
-          <div class="table-cell bg-green-200 text-gray-700 px-6 py-6 text-sm border-2 border-black m-4 "></div>
-          <div class="table-cell bg-green-500 text-gray-700 px-6 py-6 text-sm border-2 border-black m-4 "></div>
-
-        </div>
-        <div class="table-row">
-
-          <div class="table-cell bg-green-500 text-gray-700 px-6 py-6 text-sm border-2 border-black m-4 "></div>
-          <div class="table-cell bg-green-200 text-gray-700 px-6 py-6 text-sm border-2 border-black m-4 "></div>
-          <div class="table-cell bg-green-500 text-gray-700 px-6 py-6 text-sm border-2 border-black m-4 "></div>
-          <div class="table-cell bg-green-200 text-gray-700 px-6 py-6 text-sm border-2 border-black m-4 "></div>
-          <div class="table-cell bg-green-500 text-gray-700 px-6 py-6 text-sm border-2 border-black m-4 "></div>
-          <div class="table-cell bg-green-200 text-gray-700 px-6 py-6 text-sm border-2 border-black m-4 "></div>
-          <div class="table-cell bg-green-500 text-gray-700 px-6 py-6 text-sm border-2 border-black m-4 "></div>
-          <div class="table-cell bg-green-200 text-gray-700 px-6 py-6 text-sm border-2 border-black m-4 "></div>
-          <div class="table-cell bg-green-500 text-gray-700 px-6 py-6 text-sm border-2 border-black m-4 "></div>
-          <div class="table-cell bg-green-200 text-gray-700 px-6 py-6 text-sm border-2 border-black m-4 "></div>
-
-        </div>
+      <div class=" flex items-center justify-center pt-4">
+        <table  id="chessBoard">
+          <tr *ngFor="let row of columns">
+            <td class=" p-1 border-2 border-black " *ngFor="let cell of rows " (click)="trClick(row,cell)"
+                id='{{row}}{{cell}}'>
+              <img class="  min-w-full " src="{{gameBoard[row][cell].path}}">
+            </td>
+          </tr>
+        </table>
       </div>
     </div>
-    <div class="flex flex-row px-4 py-2 m-2">
+    <!--    <div class="flex items-center w-1/2 ">-->
 
-      <li class="list-none px-2"> Bomb<img class="imageSize" src="../assets/bomb.png" alt="bomb" draggable="true"></li>
-      <li class="list-none px-2"> Captain <img class="imageSize" src="../assets/captain.png" alt="captain"
-                                               draggable="true"></li>
-      <li class="list-none px-2"> Colonel <img class="imageSize" src="../assets/colonel.png" alt="colonel"
-                                               draggable="true"></li>
-      <li class="list-none px-2"> Flag <img class="imageSize" src="../assets/flag.png" alt="flag" draggable="true"></li>
-      <li class="list-none px-2"> General <img class="imageSize" src="../assets/general.png" alt="general"
-                                               draggable="true"></li>
-      <li class="list-none px-2"> Lieutenant <img class="imageSize" src="../assets/lieutenant.png" alt="lieutenant"
-                                                  draggable="true"></li>
-      <li class="list-none px-2"> Major <img class="imageSize" src="../assets/major.png" alt="major" draggable="true">
-      </li>
-      <li class="list-none px-2"> Marshal <img class="imageSize" src="../assets/marshal.png" alt="marshal"
-                                               draggable="true"></li>
-      <li class="list-none px-2"> Scout <img class="imageSize" src="../assets/scout.png" alt="scout" draggable="true">
-      </li>
-      <li class="list-none px-2"> Sergeant <img class="imageSize" src="../assets/sergeant.png" alt="Sergeant"
-                                                draggable="true"></li>
-      <li class="list-none px-2"> Spy <img class="imageSize" src="../assets/spy.png" alt="spy" draggable="true"></li>
+    <!--      <div class="justify-center ">-->
+    <!--        <button-->
+    <!--          class="bg-blue-500 hover:bg-blue-400 text-white font-bold py-2 px-4 border-b-4 border-blue-700 hover:border-blue-500 rounded"-->
+    <!--          onclick="setup();">-->
+    <!--          Setup Game-->
+    <!--        </button>-->
+
+    <!--        <div role="alert">-->
+    <!--          <div class="flex justify-center bg-red-500 text-white font-bold rounded-t px-4 py-2">-->
+    <!--            Danger-->
+    <!--          </div>-->
+    <!--          <div class="border border-t-0 border-red-400 rounded-b bg-red-100 px-4 py-3 text-red-700">-->
+    <!--            <p>Illegal move for the player.</p>-->
+    <!--          </div>-->
+    <!--        </div>-->
+    <!--      </div>-->
+    <!--    </div>-->
+
+    <!--  </div>-->
+
+    <div class="block w-1/2 ">
+
+      <h1 class="text-2xl text-center font-bold py-2">Character Description </h1>
+      <div class="flex justify-center font-bold text-left">
+
+        <div class=" w-1/4 pl-8 ">
+          <li class="list-none py-2"> Bomb<img class="imageSize" src="../assets/bomb.png" alt="bomb" ></li>
+          <li class="list-none py-2"> Captain <img class="imageSize" src="../assets/captain.png" alt="captain"></li>
+          <li class="list-none py-2"> Colonel <img class="imageSize" src="../assets/colonel.png" alt="colonel"></li>
+          <li class="list-none py-2"> Flag <img class="imageSize" src="../assets/flag.png" alt="flag"></li>
+
+        </div>
+        <div class="w-1/4 pl-8">
+          <li class="list-none py-2"> Major <img class="imageSize" src="../assets/major.png" alt="major"></li>
+          <li class="list-none py-2"> Marshal <img class="imageSize" src="../assets/marshal.png" alt="marshal"></li>
+          <li class="list-none py-2"> Scout <img class="imageSize" src="../assets/scout.png" alt="scout"></li>
+          <li class="list-none py-2"> General <img class="imageSize" src="../assets/general.png" alt="general"></li>
+        </div>
+        <div class="w-1/4 pl-8">
+          <li class="list-none py-2"> Sergeant <img class="imageSize" src="../assets/sergeant.png" alt="Sergeant"></li>
+          <li class="list-none py-2"> Spy <img class="imageSize" src="../assets/spy.png" alt="spy" draggable="true">
+          </li>
+          <li class="list-none py-2"> Lieutenant <img class="imageSize" src="../assets/lieutenant.png" alt="Lieutenant"></li>
+          <li class="list-none py-2"> Miner <img class="imageSize" src="../assets/miner.png" alt="Miner"></li>
+        </div>
+      </div>
+      <div class="block flex justify-center py-4 px-2">
+        <button
+          class="bg-transparent hover:bg-blue-500 text-blue-700 font-semibold hover:text-white py-2 px-2 border border-blue-500 hover:border-transparent rounded">
+          Set Board
+        </button>
+
+        <button
+          class="bg-transparent hover:bg-blue-500 text-blue-700 font-semibold hover:text-white py-2 px-2 border border-blue-500 hover:border-transparent rounded"
+          (click)="startgame()">
+          Randomise Turn
+        </button>
+      </div>
+      <div class="block flex justify-center py-2 px-2">
+      <button
+        class="bg-transparent hover:bg-blue-500 text-blue-700 font-semibold hover:text-white py-2 px-2 border border-blue-500 hover:border-transparent rounded"
+        (click)="hide()">
+        Hide Opponent
+      </button>
+      <button
+        class="bg-transparent hover:bg-blue-500 text-blue-700 font-semibold hover:text-white py-2 px-2 border border-blue-500 hover:border-transparent rounded"
+        (click)="unhide()">
+        Unhide Opponent
+      </button>
+      </div>
+
+      <h1 class="text-xl text-center font-bold py-2 text-blue-600"><a
+        href="https://www.ultraboardgames.com/stratego/game-rules.php">Looking for rules ?</a></h1>
     </div>
 
-    <section class="bg-white py-8 w-full">
-    </section>
 
   </div>
 
-  <!--
-
-          <table id="chessBoard">
-            <tr *ngFor="let row of columns">
-              <td *ngFor="let cell of rows" (click)="trClick(row,columns)"></td>
-            </tr>
-                </table>
-                 -->
+</div>
+<!--<section class="bg-gray-300 py-8 w-full">-->
+<!--</section>-->
 

@@ -1,19 +1,80 @@
+/*#chessBoard{*/
+/*  border: 7px outset black;*/
+/*}*/
+/*#chessBoard td{*/
+
+/*}*/
+/*#chessBoard tr{*/
+/*  width: 32px;*/
+/*  height: 32px;*/
+/*}*/
+
+/*#chessBoard tr:nth-child(odd) td:nth-child(even),*/
+/*#chessBoard tr:nth-child(even) td:nth-child(odd){*/
+/*  background-color: #65C4AE;*/
+/*}*/
+
+/*#chessBoard tr:nth-child(even) td:nth-child(even),*/
+/*#chessBoard tr:nth-child(odd) td:nth-child(odd){*/
+/*  background-color: #488A7A;*/
+/*}*/
+
+/*ul {*/
+/*  flex-direction: row;*/
+/*  justify-content: center;*/
+/*}*/
+
+/*.imageSize {*/
+/*  height: 50px;*/
+
+/*}*/
+/*containsEverything{*/
+/*  height: 100%;*/
+/*}*/
+
+
+/*.imageSizeinsidetd{*/
+/*}*/
+
+table {
+  margin-left:auto;
+  margin-right:auto;
+}
 #chessBoard{
   border: 7px outset black;
 }
 #chessBoard td{
-  width: 60px;
-  height: 60px;
+
+}
+#chessBoard tr{
+  width: 50px;
+  height: 50px;
 }
 
-#chessBoard tr:nth-child(odd) td:nth-child(even),
-#chessBoard tr:nth-child(even) td:nth-child(odd){
-  background-color: #65C4AE;
+/*tr:nth-child(odd) td:nth-child(even),*/
+/*tr:nth-child(even) td:nth-child(odd){*/
+/*  background-color: #FFA5A2;*/
+/*}*/
+
+/*tr:nth-child(even) td:nth-child(even),*/
+/*tr:nth-child(odd) td:nth-child(odd){*/
+/*  background-color: #EB5B52;*/
+/*}*/
+
+.options{
+  background-color: #03338E;
+}
+.displayNone{
+  display: none;
+  /*background-image: url('/cse308-stratego/src/black.jpg');*/
+
 }
 
-#chessBoard tr:nth-child(even) td:nth-child(even),
-#chessBoard tr:nth-child(odd) td:nth-child(odd){
-  background-color: #488A7A;
+.putback{
+}
+
+.attack_possibility{
+  background-color: #FF7373;
 }
 
 ul {
@@ -22,9 +83,10 @@ ul {
 }
 
 .imageSize {
-  width: 35px;
-  height: 35px;
-  margin: 0px;
+  height: 75px;
+
 }
 
-
+#effect:hover td{
+  background-color: #1b959a;
+}
