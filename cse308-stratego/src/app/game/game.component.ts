@@ -20,8 +20,8 @@ export class GameComponent{
     }
   }
 
-  trClick(row,columns){
-    console.log(row,columns)
+  trClick(row, columns) {
+    console.log(row, columns);
   }
 
 }
